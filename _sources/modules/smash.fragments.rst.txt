@@ -1,0 +1,38 @@
+smash.fragments package
+=======================
+
+Submodules
+----------
+
+smash.fragments.circular module
+-------------------------------
+
+.. automodule:: smash.fragments.circular
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+smash.fragments.functionGroup module
+------------------------------------
+
+.. automodule:: smash.fragments.functionGroup
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+smash.fragments.path module
+---------------------------
+
+.. automodule:: smash.fragments.path
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+
+Module contents
+---------------
+
+.. automodule:: smash.fragments
+    :members:
+    :undoc-members:
+    :show-inheritance:

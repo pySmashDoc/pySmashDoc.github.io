@@ -1,0 +1,7 @@
+smash
+=====
+
+.. toctree::
+   :maxdepth: 4
+
+   smash

@@ -1,0 +1,30 @@
+.. pySmash documentation master file, created by
+   sphinx-quickstart on Wed Aug 12 15:40:59 2020.
+   You can adapt this file completely to your liking, but it should at least
+   contain the root `toctree` directive.
+
+Welcome to pySmash's documentation!
+===================================
+In the field of chemoinformatics, there is a saying that similar structures have similar properties. The main aim of chemoinformatics refers to analyzing the similarity among molecules, searching the molecules in the structural database, finding potential drug molecule and their property. To systematically obtain the relation between structure and property, we developed pySmash, a Python library designed for obtaining fragments, which are highly related to a specific endpoint conveniently and comprehensively. pySmash can smash molecules, which have certein property label, with three different algorithms, including **circular**-, **path**- and **function group**-based, and combined with statistical methods to a set of significant fragments. By using these fragments, the molecule with unknown label can got a predicted label. Besides, pySmash provides functionalities for the easy visualization of the derived fragments. The Python package pySmash is designed by `CBDD Group`_ (Computational Biology & Drug Design Group), Xiangya School of Pharmaceutical Sciences, Central South University.
+
+.. _`CBDD Group`: http://home.scbdd.com/index.php?s=/Home/Index.html&t=english
+
+
+.. toctree::
+   :maxdepth: 3
+
+   smash_tutorial
+   pysmash_gui
+   Application
+
+.. automodule::
+   :maxdepth: 3
+   
+   modules.rst
+
+Indices and tables
+==================
+
+* :ref:`genindex`
+* :ref:`modindex`
+* :ref:`search`

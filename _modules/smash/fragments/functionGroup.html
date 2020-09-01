@@ -1,0 +1,244 @@
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8" />
+    <title>smash.fragments.functionGroup &#8212; pySmash v0.1 documentation</title>
+    <link rel="stylesheet" href="../../../_static/sphinxdoc.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../_static/doctools.js"></script>
+    <script type="text/javascript" src="../../../_static/language_data.js"></script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true, "ignoreClass": "document", "processClass": "math|output_area"}})</script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../../index.html">pySmash v0.1 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../../index.html" >Module code</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="../../smash.html" >smash</a> &#187;</li>
+          <li class="nav-item nav-item-3"><a href="../fragments.html" accesskey="U">smash.fragments</a> &#187;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <h1>Source code for smash.fragments.functionGroup</h1><div class="highlight"><pre>
+<span></span><span class="c1"># -*- encoding: utf-8 -*-</span>
+<span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">Created on 2020/07/03 21:46:19</span>
+
+<span class="sd">@Author: Zhi-Jiang Yang, Dong-Sheng Cao</span>
+<span class="sd">@Institution: CBDD Group, Xiangya School of Pharmaceutical Science, CSU, China</span>
+<span class="sd">@Homepage: http://www.scbdd.com</span>
+<span class="sd">@Mail: yzjkid9@gmail.com; oriental-cds@163.com</span>
+<span class="sd">@Blog: https://blog.iamkotori.com</span>
+
+<span class="sd">♥I love Princess Zelda forever♥</span>
+<span class="sd">&#39;&#39;&#39;</span>
+
+
+<span class="c1">#  Original authors: Richard Hall and Guillaume Godin</span>
+<span class="c1">#  This file is part of the RDKit.</span>
+<span class="c1">#  The contents are covered by the terms of the BSD license</span>
+<span class="c1">#  which is included in the file license.txt, found at the root</span>
+<span class="c1">#  of the RDKit source tree.</span>
+
+<span class="c1">#</span>
+<span class="c1">#</span>
+<span class="c1"># Richard hall 2017</span>
+<span class="c1"># IFG main code</span>
+<span class="c1"># Guillaume Godin 2017</span>
+<span class="c1"># refine output function</span>
+<span class="c1"># astex_ifg: identify functional groups a la Ertl, J. Cheminform (2017) 9:36</span>
+
+
+<span class="kn">from</span> <span class="nn">rdkit</span> <span class="kn">import</span> <span class="n">Chem</span>
+<span class="kn">from</span> <span class="nn">rdkit.Chem.Draw</span> <span class="kn">import</span> <span class="n">rdMolDraw2D</span>
+<span class="kn">from</span> <span class="nn">rdkit.Chem</span> <span class="kn">import</span> <span class="n">rdDepictor</span>
+
+<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;GetFunctionGroupFragment&#39;</span><span class="p">]</span>
+
+
+<span class="n">subMolDic</span> <span class="o">=</span> <span class="p">{}</span>
+
+
+<span class="k">def</span> <span class="nf">_DisposedFgFragment</span><span class="p">(</span><span class="n">mol</span><span class="p">,</span> <span class="n">subMol</span><span class="p">,</span> <span class="n">molSize</span><span class="o">=</span><span class="p">(</span><span class="mi">150</span><span class="p">,</span> <span class="mi">150</span><span class="p">)):</span>
+    <span class="sd">&quot;&quot;&quot;Dispose the bitinfo retrived from GetFunctionGroupFragment</span>
+<span class="sd">    *internal only*</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">mol</span><span class="o">.</span><span class="n">GetNumConformers</span><span class="p">():</span>
+        <span class="n">rdDepictor</span><span class="o">.</span><span class="n">Compute2DCoords</span><span class="p">(</span><span class="n">mol</span><span class="p">)</span>
+
+    <span class="n">subMolDic</span><span class="p">[</span><span class="n">subMol</span><span class="p">]</span> <span class="o">=</span> <span class="n">Chem</span><span class="o">.</span><span class="n">MolFromSmarts</span><span class="p">(</span><span class="n">subMol</span><span class="p">)</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">atomToUsed</span> <span class="o">=</span> <span class="n">mol</span><span class="o">.</span><span class="n">GetSubstructMatch</span><span class="p">(</span><span class="n">subMolDic</span><span class="p">[</span><span class="n">subMol</span><span class="p">])</span>
+        <span class="n">amap</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="n">submol</span> <span class="o">=</span> <span class="n">Chem</span><span class="o">.</span><span class="n">PathToSubmol</span><span class="p">(</span><span class="n">mol</span><span class="p">,</span> <span class="n">atomToUsed</span><span class="p">,</span> <span class="n">atomMap</span><span class="o">=</span><span class="n">amap</span><span class="p">)</span>
+
+        <span class="n">Chem</span><span class="o">.</span><span class="n">FastFindRings</span><span class="p">(</span><span class="n">submol</span><span class="p">)</span>
+        <span class="n">conf</span> <span class="o">=</span> <span class="n">Chem</span><span class="o">.</span><span class="n">Conformer</span><span class="p">(</span><span class="n">submol</span><span class="o">.</span><span class="n">GetNumAtoms</span><span class="p">())</span>
+        <span class="n">confOri</span> <span class="o">=</span> <span class="n">mol</span><span class="o">.</span><span class="n">GetConformer</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">i1</span><span class="p">,</span> <span class="n">i2</span> <span class="ow">in</span> <span class="n">amap</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="n">conf</span><span class="o">.</span><span class="n">SetAtomPosition</span><span class="p">(</span><span class="n">i2</span><span class="p">,</span> <span class="n">confOri</span><span class="o">.</span><span class="n">GetAtomPosition</span><span class="p">(</span><span class="n">i1</span><span class="p">))</span>
+        <span class="n">submol</span><span class="o">.</span><span class="n">AddConformer</span><span class="p">(</span><span class="n">conf</span><span class="p">)</span>
+    <span class="k">except</span><span class="p">:</span>
+        <span class="n">submol</span> <span class="o">=</span> <span class="n">mol</span>
+        
+    <span class="n">drawer</span> <span class="o">=</span> <span class="n">rdMolDraw2D</span><span class="o">.</span><span class="n">MolDraw2DSVG</span><span class="p">(</span><span class="n">molSize</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">molSize</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+    <span class="n">drawopt</span> <span class="o">=</span> <span class="n">drawer</span><span class="o">.</span><span class="n">drawOptions</span><span class="p">()</span>
+    <span class="n">drawopt</span><span class="o">.</span><span class="n">continuousHighlight</span> <span class="o">=</span> <span class="kc">False</span>
+    <span class="n">drawer</span><span class="o">.</span><span class="n">DrawMolecule</span><span class="p">(</span><span class="n">submol</span><span class="p">)</span>
+    <span class="n">drawer</span><span class="o">.</span><span class="n">FinishDrawing</span><span class="p">()</span>
+
+    <span class="k">return</span> <span class="n">drawer</span><span class="o">.</span><span class="n">GetDrawingText</span><span class="p">()</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">)</span>
+
+
+<span class="k">def</span> <span class="nf">merge</span><span class="p">(</span><span class="n">mol</span><span class="p">,</span> <span class="n">marked</span><span class="p">,</span> <span class="n">aset</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;*internal only*</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">bset</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
+    <span class="k">for</span> <span class="n">idx</span> <span class="ow">in</span> <span class="n">aset</span><span class="p">:</span>
+        <span class="n">atom</span> <span class="o">=</span> <span class="n">mol</span><span class="o">.</span><span class="n">GetAtomWithIdx</span><span class="p">(</span><span class="n">idx</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">nbr</span> <span class="ow">in</span> <span class="n">atom</span><span class="o">.</span><span class="n">GetNeighbors</span><span class="p">():</span>
+            <span class="n">jdx</span> <span class="o">=</span> <span class="n">nbr</span><span class="o">.</span><span class="n">GetIdx</span><span class="p">()</span>
+            <span class="k">if</span> <span class="n">jdx</span> <span class="ow">in</span> <span class="n">marked</span><span class="p">:</span>
+                <span class="n">marked</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">jdx</span><span class="p">)</span>
+                <span class="n">bset</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">jdx</span><span class="p">)</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">bset</span><span class="p">:</span>
+        <span class="k">return</span>
+    <span class="n">merge</span><span class="p">(</span><span class="n">mol</span><span class="p">,</span> <span class="n">marked</span><span class="p">,</span> <span class="n">bset</span><span class="p">)</span>
+    <span class="n">aset</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">bset</span><span class="p">)</span>
+
+
+<span class="c1"># atoms connected by non-aromatic double or triple bond to any heteroatom</span>
+<span class="c1"># c=O should not match (see fig1, box 15).  I think using A instead of * should sort that out?</span>
+<span class="n">PATT_DOUBLE_TRIPLE</span> <span class="o">=</span> <span class="n">Chem</span><span class="o">.</span><span class="n">MolFromSmarts</span><span class="p">(</span><span class="s1">&#39;A=,#[!#6]&#39;</span><span class="p">)</span>
+<span class="c1"># atoms in non aromatic carbon-carbon double or triple bonds</span>
+<span class="n">PATT_CC_DOUBLE_TRIPLE</span> <span class="o">=</span> <span class="n">Chem</span><span class="o">.</span><span class="n">MolFromSmarts</span><span class="p">(</span><span class="s1">&#39;C=,#C&#39;</span><span class="p">)</span>
+<span class="c1"># acetal carbons, i.e. sp3 carbons connected to tow or more oxygens, nitrogens or sulfurs; these O, N or S atoms must have only single bonds</span>
+<span class="n">PATT_ACETAL</span> <span class="o">=</span> <span class="n">Chem</span><span class="o">.</span><span class="n">MolFromSmarts</span><span class="p">(</span><span class="s1">&#39;[CX4](-[O,N,S])-[O,N,S]&#39;</span><span class="p">)</span>
+<span class="c1"># all atoms in oxirane, aziridine and thiirane rings</span>
+<span class="n">PATT_OXIRANE_ETC</span> <span class="o">=</span> <span class="n">Chem</span><span class="o">.</span><span class="n">MolFromSmarts</span><span class="p">(</span><span class="s1">&#39;[O,N,S]1CC1&#39;</span><span class="p">)</span>
+
+<span class="n">PATT_TUPLE</span> <span class="o">=</span> <span class="p">(</span><span class="n">PATT_DOUBLE_TRIPLE</span><span class="p">,</span> <span class="n">PATT_CC_DOUBLE_TRIPLE</span><span class="p">,</span>
+              <span class="n">PATT_ACETAL</span><span class="p">,</span> <span class="n">PATT_OXIRANE_ETC</span><span class="p">)</span>
+
+
+<div class="viewcode-block" id="GetFunctionGroupFragment"><a class="viewcode-back" href="../../../modules/smash.fragments.html#smash.fragments.functionGroup.GetFunctionGroupFragment">[docs]</a><span class="k">def</span> <span class="nf">GetFunctionGroupFragment</span><span class="p">(</span><span class="n">mol</span><span class="p">,</span> <span class="n">svg</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Calculate function group fragment.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    mol : dkit.Chem.rdchem.Mol object</span>
+<span class="sd">        Compound to be Calculated</span>
+<span class="sd">    svg : bool, optional</span>
+<span class="sd">        Whether output with a svg image, by default False</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    ifgs : tuple of list</span>
+<span class="sd">        In each tuple element, the first element is the SMARTS of fragment</span>
+<span class="sd">        and the second one svg string (is svg set as True)</span>
+<span class="sd">    &quot;&quot;&quot;</span>    
+    <span class="n">marked</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
+<span class="c1"># mark all heteroatoms in a molecule, including halogens</span>
+    <span class="k">for</span> <span class="n">atom</span> <span class="ow">in</span> <span class="n">mol</span><span class="o">.</span><span class="n">GetAtoms</span><span class="p">():</span>
+        <span class="k">if</span> <span class="n">atom</span><span class="o">.</span><span class="n">GetAtomicNum</span><span class="p">()</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="mi">1</span><span class="p">):</span>  <span class="c1"># would we ever have hydrogen?</span>
+            <span class="n">marked</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">atom</span><span class="o">.</span><span class="n">GetIdx</span><span class="p">())</span>
+
+<span class="c1"># mark the four specific types of carbon atom</span>
+    <span class="k">for</span> <span class="n">patt</span> <span class="ow">in</span> <span class="n">PATT_TUPLE</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">path</span> <span class="ow">in</span> <span class="n">mol</span><span class="o">.</span><span class="n">GetSubstructMatches</span><span class="p">(</span><span class="n">patt</span><span class="p">):</span>
+            <span class="k">for</span> <span class="n">atomindex</span> <span class="ow">in</span> <span class="n">path</span><span class="p">:</span>
+                <span class="n">marked</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">atomindex</span><span class="p">)</span>
+
+<span class="c1"># merge all connected marked atoms to a single FG</span>
+    <span class="n">groups</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">while</span> <span class="n">marked</span><span class="p">:</span>
+        <span class="n">grp</span> <span class="o">=</span> <span class="nb">set</span><span class="p">([</span><span class="n">marked</span><span class="o">.</span><span class="n">pop</span><span class="p">()])</span>
+        <span class="n">merge</span><span class="p">(</span><span class="n">mol</span><span class="p">,</span> <span class="n">marked</span><span class="p">,</span> <span class="n">grp</span><span class="p">)</span>
+        <span class="n">groups</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">grp</span><span class="p">)</span>
+
+<span class="c1"># extract also connected unmarked carbon atoms</span>
+    <span class="n">ifgs</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">g</span> <span class="ow">in</span> <span class="n">groups</span><span class="p">:</span>
+        <span class="n">uca</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
+        <span class="k">for</span> <span class="n">atomidx</span> <span class="ow">in</span> <span class="n">g</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="n">mol</span><span class="o">.</span><span class="n">GetAtomWithIdx</span><span class="p">(</span><span class="n">atomidx</span><span class="p">)</span><span class="o">.</span><span class="n">GetNeighbors</span><span class="p">():</span>
+                <span class="k">if</span> <span class="n">n</span><span class="o">.</span><span class="n">GetAtomicNum</span><span class="p">()</span> <span class="o">==</span> <span class="mi">6</span><span class="p">:</span>
+                    <span class="n">uca</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">n</span><span class="o">.</span><span class="n">GetIdx</span><span class="p">())</span>
+        <span class="n">fg</span> <span class="o">=</span> <span class="n">Chem</span><span class="o">.</span><span class="n">MolFragmentToSmiles</span><span class="p">(</span><span class="n">mol</span><span class="p">,</span> <span class="n">g</span><span class="o">.</span><span class="n">union</span><span class="p">(</span><span class="n">uca</span><span class="p">),</span> <span class="n">canonical</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">fg</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">ifgs</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">svg</span><span class="p">:</span>
+                <span class="n">ifgs</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">fg</span><span class="p">,</span> <span class="n">_DisposedFgFragment</span><span class="p">(</span><span class="n">mol</span><span class="p">,</span> <span class="n">fg</span><span class="p">)))</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">ifgs</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">fg</span><span class="p">,</span> <span class="p">))</span>
+    
+    <span class="k">return</span> <span class="n">ifgs</span></div>
+
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+    <span class="kn">from</span> <span class="nn">rdkit</span> <span class="kn">import</span> <span class="n">Chem</span>
+    
+    <span class="n">mol</span> <span class="o">=</span> <span class="n">Chem</span><span class="o">.</span><span class="n">MolFromSmiles</span><span class="p">(</span><span class="s1">&#39;CN(C1=CC=C(C=C1)N=N/C2=CC=CC=C2)C&#39;</span><span class="p">)</span>
+    <span class="n">fragments</span> <span class="o">=</span> <span class="n">GetFunctionGroupFragment</span><span class="p">(</span><span class="n">mol</span><span class="p">,</span> <span class="n">svg</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">fragments</span><span class="p">)</span>
+</pre></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../../index.html">pySmash v0.1 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../../index.html" >Module code</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="../../smash.html" >smash</a> &#187;</li>
+          <li class="nav-item nav-item-3"><a href="../fragments.html" >smash.fragments</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2020, Kotori_y.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.3.0.
+    </div>
+  </body>
+</html>

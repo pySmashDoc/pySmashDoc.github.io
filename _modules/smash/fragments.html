@@ -1,0 +1,451 @@
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8" />
+    <title>smash.fragments &#8212; pySmash v0.1 documentation</title>
+    <link rel="stylesheet" href="../../_static/sphinxdoc.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <script type="text/javascript" src="../../_static/language_data.js"></script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true, "ignoreClass": "document", "processClass": "math|output_area"}})</script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">pySmash v0.1 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../index.html" >Module code</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="../smash.html" accesskey="U">smash</a> &#187;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <h1>Source code for smash.fragments</h1><div class="highlight"><pre>
+<span></span><span class="c1"># -*- coding: utf-8 -*-</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">Created on Sun Jun 14 15:12:50 2020</span>
+
+<span class="sd">@Author: Zhi-Jiang Yang, Dong-Sheng Cao</span>
+<span class="sd">@Institution: CBDD Group, Xiangya School of Pharmaceutical Science, CSU, China</span>
+<span class="sd">@Homepage: http://www.scbdd.com</span>
+<span class="sd">@Mail: yzjkid9@gmail.com; oriental-cds@163.com</span>
+<span class="sd">@Blog: https://blog.iamkotori.com</span>
+
+<span class="sd">♥I love Princess Zelda forever♥</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+
+<span class="kn">from</span> <span class="nn">collections</span> <span class="kn">import</span> <span class="n">ChainMap</span>
+<span class="kn">from</span> <span class="nn">functools</span> <span class="kn">import</span> <span class="n">partial</span>
+<span class="kn">from</span> <span class="nn">collections.abc</span> <span class="kn">import</span> <span class="n">Iterable</span>
+<span class="kn">from</span> <span class="nn">multiprocessing</span> <span class="kn">import</span> <span class="n">Pool</span>
+<span class="kn">from</span> <span class="nn">multiprocessing</span> <span class="kn">import</span> <span class="n">freeze_support</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+
+<span class="k">try</span><span class="p">:</span>
+    <span class="kn">from</span> <span class="nn">.path</span> <span class="kn">import</span> <span class="o">*</span>
+    <span class="kn">from</span> <span class="nn">.circular</span> <span class="kn">import</span> <span class="o">*</span>
+    <span class="kn">from</span> <span class="nn">.functionGroup</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="k">except</span><span class="p">:</span>
+    <span class="kn">from</span> <span class="nn">path</span> <span class="kn">import</span> <span class="o">*</span>
+    <span class="kn">from</span> <span class="nn">circular</span> <span class="kn">import</span> <span class="o">*</span>
+    <span class="kn">from</span> <span class="nn">functionGroup</span> <span class="kn">import</span> <span class="o">*</span>
+
+
+<div class="viewcode-block" id="Circular"><a class="viewcode-back" href="../../modules/smash.fragments.html#smash.fragments.Circular">[docs]</a><span class="k">class</span> <span class="nc">Circular</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;Calculte circular fragments and obtain matrix  </span>
+<span class="sd">    &quot;&quot;&quot;</span>    
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">minRadius</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">maxRadius</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> 
+                 <span class="n">nBits</span><span class="o">=</span><span class="mi">1024</span><span class="p">,</span> <span class="n">folded</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+                 <span class="n">maxFragment</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">nJobs</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Initialization</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        minRadius : int, optional</span>
+<span class="sd">            The probable minimum radius of circular fragment, by default 1</span>
+<span class="sd">        maxRadius : int, optional</span>
+<span class="sd">            The probable maximum radius of circular fragment, by default 2</span>
+<span class="sd">        nBits : int, optional</span>
+<span class="sd">            the number of bit of morgan, by default 1014</span>
+<span class="sd">            this param would be ignored, if the folded set as False.</span>
+<span class="sd">        folded : bool, optional</span>
+<span class="sd">            which generate fragment based on unfolded fingerprint, by default True.</span>
+<span class="sd">        maxFragment : bool, optional</span>
+<span class="sd">            Whether only return the maximum fragment at a center atom, by default True</span>
+<span class="sd">        nJobs : int, optional</span>
+<span class="sd">            The number of CPUs to use to do the computation, by default 1</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># self.mols = mols if isinstance(mols, Iterable) else (mols, )</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">nBits</span> <span class="o">=</span> <span class="n">nBits</span> <span class="k">if</span> <span class="n">folded</span> <span class="k">else</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">folded</span> <span class="o">=</span> <span class="n">folded</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">maxRadius</span> <span class="o">=</span> <span class="n">maxRadius</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">minRadius</span> <span class="o">=</span> <span class="n">minRadius</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">maxFragment</span> <span class="o">=</span> <span class="n">maxFragment</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">nJobs</span> <span class="o">=</span> <span class="n">nJobs</span> <span class="k">if</span> <span class="n">nJobs</span> <span class="o">&gt;=</span> <span class="mi">1</span> <span class="k">else</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">substructure</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">matrix</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">()</span>
+
+<div class="viewcode-block" id="Circular.GetCircularFragmentLib"><a class="viewcode-back" href="../../modules/smash.fragments.html#smash.fragments.Circular.GetCircularFragmentLib">[docs]</a>    <span class="k">def</span> <span class="nf">GetCircularFragmentLib</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mols</span><span class="p">,</span> <span class="n">svg</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Calculate circular fragments</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        mols : Iterable object, and each element is a rdkit.Chem.rdchem.Mol object.</span>
+<span class="sd">            The compounds used to obtain circular fragments.</span>
+<span class="sd">        svg : bool, optional</span>
+<span class="sd">            Whether output with a svg image, by default False</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        fragments : list</span>
+<span class="sd">            Fragments calculated, each element is a tuple </span>
+<span class="sd">            return from GetCircularFragment() function</span>
+<span class="sd">        &quot;&quot;&quot;</span>        
+        <span class="n">func</span> <span class="o">=</span> <span class="n">partial</span><span class="p">(</span><span class="n">GetCircularFragment</span><span class="p">,</span>
+                       <span class="n">minRadius</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">minRadius</span><span class="p">,</span>
+                       <span class="n">maxRadius</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">maxRadius</span><span class="p">,</span>
+                       <span class="n">nBits</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">nBits</span><span class="p">,</span>
+                       <span class="n">folded</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">folded</span><span class="p">,</span>
+                       <span class="n">maxFragment</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">maxFragment</span><span class="p">,</span>
+                       <span class="n">svg</span><span class="o">=</span><span class="n">svg</span><span class="p">)</span>
+
+        <span class="n">mols</span> <span class="o">=</span> <span class="n">mols</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">mols</span><span class="p">,</span> <span class="n">Iterable</span><span class="p">)</span> <span class="k">else</span> <span class="p">(</span><span class="n">mols</span><span class="p">,</span> <span class="p">)</span>
+
+        <span class="n">pool</span> <span class="o">=</span> <span class="n">Pool</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">nJobs</span><span class="p">)</span>
+        <span class="n">fragments</span> <span class="o">=</span> <span class="n">pool</span><span class="o">.</span><span class="n">map_async</span><span class="p">(</span><span class="n">func</span><span class="p">,</span> <span class="n">mols</span><span class="p">)</span><span class="o">.</span><span class="n">get</span><span class="p">()</span>
+        <span class="n">pool</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+        <span class="n">pool</span><span class="o">.</span><span class="n">join</span><span class="p">()</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">fragments</span> <span class="o">=</span> <span class="n">fragments</span>
+        <span class="k">return</span> <span class="n">fragments</span></div>
+
+<div class="viewcode-block" id="Circular.GetCircularMatrix"><a class="viewcode-back" href="../../modules/smash.fragments.html#smash.fragments.Circular.GetCircularMatrix">[docs]</a>    <span class="k">def</span> <span class="nf">GetCircularMatrix</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mols</span><span class="p">,</span> <span class="n">svg</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;return circular matrix</span>
+<span class="sd">    </span>
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        mols : Iterable object, and each element is a rdkit.Chem.rdchem.Mol object</span>
+<span class="sd">            The compounds used to obtain circular fragments matrix</span>
+<span class="sd">        svg : bool, optional</span>
+<span class="sd">            Whether output with a svg image, by default False</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        pandas.core.frame.DataFrame</span>
+<span class="sd">            The fragment matrix of molecules</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">fragments</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">GetCircularFragmentLib</span><span class="p">(</span><span class="n">mols</span><span class="p">,</span> <span class="n">svg</span><span class="o">=</span><span class="n">svg</span><span class="p">)</span>
+        <span class="c1"># pool.close()</span>
+        <span class="c1"># pool.join()</span>
+
+        <span class="n">unique</span> <span class="o">=</span> <span class="p">[</span><span class="n">bit</span> <span class="k">for</span> <span class="n">info</span> <span class="ow">in</span> <span class="n">fragments</span> <span class="k">for</span> <span class="n">bit</span> <span class="ow">in</span> <span class="n">info</span><span class="p">[</span><span class="mi">1</span><span class="p">]]</span>
+        <span class="n">unique</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="n">unique</span><span class="p">))</span>
+        <span class="n">dic</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="n">unique</span><span class="p">,</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">unique</span><span class="p">))))</span>
+
+        <span class="n">num</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">unique</span><span class="p">)</span>
+        <span class="n">matrix</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="nb">len</span><span class="p">(</span><span class="n">mols</span><span class="p">),</span> <span class="n">num</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">int8</span><span class="p">)</span>
+
+        <span class="k">for</span> <span class="n">idx</span><span class="p">,</span> <span class="n">arr</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">matrix</span><span class="p">):</span>
+            <span class="n">info</span> <span class="o">=</span> <span class="n">fragments</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span>
+            <span class="k">for</span> <span class="n">frag</span> <span class="ow">in</span> <span class="n">unique</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">frag</span> <span class="ow">in</span> <span class="n">info</span><span class="p">[</span><span class="mi">0</span><span class="p">]:</span>
+                    <span class="n">arr</span><span class="p">[</span><span class="n">dic</span><span class="p">[</span><span class="n">frag</span><span class="p">]]</span> <span class="o">=</span> <span class="mi">1</span>
+                    <span class="c1"># if frag not in self.substructure:</span>
+                        <span class="c1"># self.substructure[frag] = {&#39;SMARTS&#39;: info[1][0], &#39;SVG&#39;: info[1][1]} \</span>
+                        <span class="c1">#     if svg else {&#39;SMARTS&#39;: info[1]}</span>
+
+                        <span class="c1"># colDict = ChainMap(*[info[1] for info in bitInfo])</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">matrix</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">matrix</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="n">unique</span><span class="p">)</span>
+        <span class="n">fragments</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">fragments</span><span class="p">)</span>
+        <span class="n">substructure</span> <span class="o">=</span> <span class="p">{</span><span class="n">k</span><span class="p">:</span><span class="n">v</span> <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">fragments</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">values</span> <span class="k">for</span> <span class="n">k</span><span class="p">,</span><span class="n">v</span> <span class="ow">in</span> <span class="n">item</span><span class="o">.</span><span class="n">items</span><span class="p">()}</span>
+        <span class="n">idx</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;SMARTS&#39;</span><span class="p">]</span> <span class="k">if</span> <span class="ow">not</span> <span class="n">svg</span> <span class="k">else</span> <span class="p">[</span><span class="s1">&#39;SMARTS&#39;</span><span class="p">,</span> <span class="s1">&#39;Substructure&#39;</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">substructure</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">substructure</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="n">idx</span><span class="p">)</span><span class="o">.</span><span class="n">T</span>
+        
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">matrix</span></div></div>
+
+
+<div class="viewcode-block" id="Path"><a class="viewcode-back" href="../../modules/smash.fragments.html#smash.fragments.Path">[docs]</a><span class="k">class</span> <span class="nc">Path</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;Calculte path-based fragments and obtain matrix  </span>
+<span class="sd">    &quot;&quot;&quot;</span>    
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
+                 <span class="n">minPath</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">maxPath</span><span class="o">=</span><span class="mi">7</span><span class="p">,</span>
+                 <span class="n">nBits</span><span class="o">=</span><span class="mi">1024</span><span class="p">,</span> <span class="n">folded</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+                 <span class="n">maxFragment</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">nJobs</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
+        
+        <span class="sd">&quot;&quot;&quot;Initialization</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        minPath : int, optional</span>
+<span class="sd">            The probable minimum length of path-based fragment, by default 1</span>
+<span class="sd">        maxPath : int, optional</span>
+<span class="sd">            The probable maximum length of path-based fragment, by default 7</span>
+<span class="sd">        nBits : int, optional</span>
+<span class="sd">            the number of bit of morgan, by default 1014</span>
+<span class="sd">            this param would be ignored, if the folded set as False.</span>
+<span class="sd">        folded : bool, optional</span>
+<span class="sd">            which generate fragment based on unfolded fingerprint, by default True.</span>
+<span class="sd">        maxFragment : bool, optional</span>
+<span class="sd">            Whether only return the maximum fragment at a center atom, by default True</span>
+<span class="sd">        nJobs : int, optional</span>
+<span class="sd">            The number of CPUs to use to do the computation, by default 1</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">minPath</span> <span class="o">=</span> <span class="n">minPath</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">maxPath</span> <span class="o">=</span> <span class="n">maxPath</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">nBits</span> <span class="o">=</span> <span class="n">nBits</span> <span class="k">if</span> <span class="n">folded</span> <span class="k">else</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">folded</span> <span class="o">=</span> <span class="n">folded</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">nJobs</span> <span class="o">=</span> <span class="n">nJobs</span> <span class="k">if</span> <span class="n">nJobs</span> <span class="o">&gt;=</span> <span class="mi">1</span> <span class="k">else</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">maxFragment</span> <span class="o">=</span> <span class="n">maxFragment</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">substructure</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">matrix</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">()</span>
+
+<div class="viewcode-block" id="Path.GetPathFragmentLib"><a class="viewcode-back" href="../../modules/smash.fragments.html#smash.fragments.Path.GetPathFragmentLib">[docs]</a>    <span class="k">def</span> <span class="nf">GetPathFragmentLib</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mols</span><span class="p">,</span> <span class="n">svg</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Calculate path-based fragments</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        mols : Iterable object, and each element is a rdkit.Chem.rdchem.Mol object</span>
+<span class="sd">            The compounds used to obtain path-based fragment</span>
+<span class="sd">        svg : bool, optional</span>
+<span class="sd">            Whether output with a svg image, by default False</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        fragments : list</span>
+<span class="sd">            Fragments calculated, each element is returned from GetPathFragment() function</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">mols</span> <span class="o">=</span> <span class="n">mols</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">mols</span><span class="p">,</span> <span class="n">Iterable</span><span class="p">)</span> <span class="k">else</span> <span class="p">(</span><span class="n">mols</span><span class="p">,)</span>
+        <span class="n">func</span> <span class="o">=</span> <span class="n">partial</span><span class="p">(</span><span class="n">GetPathFragment</span><span class="p">,</span>
+                       <span class="n">minPath</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">minPath</span><span class="p">,</span>
+                       <span class="n">maxPath</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">maxPath</span><span class="p">,</span>
+                       <span class="n">nBits</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">nBits</span><span class="p">,</span>
+                       <span class="n">folded</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">folded</span><span class="p">,</span>
+                       <span class="n">maxFragment</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">maxFragment</span><span class="p">,</span>
+                       <span class="n">svg</span><span class="o">=</span><span class="n">svg</span><span class="p">)</span>
+
+        <span class="n">pool</span> <span class="o">=</span> <span class="n">Pool</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">nJobs</span><span class="p">)</span>
+        <span class="n">bitInfo</span> <span class="o">=</span> <span class="n">pool</span><span class="o">.</span><span class="n">map_async</span><span class="p">(</span><span class="n">func</span><span class="p">,</span> <span class="n">mols</span><span class="p">)</span><span class="o">.</span><span class="n">get</span><span class="p">()</span>
+        <span class="n">pool</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+        <span class="n">pool</span><span class="o">.</span><span class="n">join</span><span class="p">()</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">bitInfo</span> <span class="o">=</span> <span class="n">bitInfo</span>
+        <span class="k">return</span> <span class="n">bitInfo</span></div>
+
+<div class="viewcode-block" id="Path.GetPathMatrix"><a class="viewcode-back" href="../../modules/smash.fragments.html#smash.fragments.Path.GetPathMatrix">[docs]</a>    <span class="k">def</span> <span class="nf">GetPathMatrix</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mols</span><span class="p">,</span> <span class="n">svg</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;return path-based matrix</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        mols : Iterable object, and each element is a rdkit.Chem.rdchem.Mol object</span>
+<span class="sd">            The compounds used to obtain path-based matrix</span>
+<span class="sd">        svg : bool, optional</span>
+<span class="sd">            Whether output with a svg image, by default False</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        pandas.core.frame.DataFrame</span>
+<span class="sd">            the fragment matrix of molecules</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">fragments</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">GetPathFragmentLib</span><span class="p">(</span><span class="n">mols</span><span class="p">,</span> <span class="n">svg</span><span class="o">=</span><span class="n">svg</span><span class="p">)</span>
+        <span class="c1"># pool.close()</span>
+        <span class="c1"># pool.join()</span>
+
+        <span class="n">unique</span> <span class="o">=</span> <span class="p">[</span><span class="n">bit</span> <span class="k">for</span> <span class="n">info</span> <span class="ow">in</span> <span class="n">fragments</span> <span class="k">for</span> <span class="n">bit</span> <span class="ow">in</span> <span class="n">info</span><span class="p">[</span><span class="mi">1</span><span class="p">]]</span>
+        <span class="n">unique</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="n">unique</span><span class="p">))</span>
+        <span class="n">dic</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="n">unique</span><span class="p">,</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">unique</span><span class="p">))))</span>
+
+        <span class="n">num</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">unique</span><span class="p">)</span>
+        <span class="n">matrix</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="nb">len</span><span class="p">(</span><span class="n">mols</span><span class="p">),</span> <span class="n">num</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">int8</span><span class="p">)</span>
+
+        <span class="k">for</span> <span class="n">idx</span><span class="p">,</span> <span class="n">arr</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">matrix</span><span class="p">):</span>
+            <span class="n">info</span> <span class="o">=</span> <span class="n">fragments</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span>
+            <span class="k">for</span> <span class="n">frag</span> <span class="ow">in</span> <span class="n">unique</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">frag</span> <span class="ow">in</span> <span class="n">info</span><span class="p">[</span><span class="mi">0</span><span class="p">]:</span>
+                    <span class="n">arr</span><span class="p">[</span><span class="n">dic</span><span class="p">[</span><span class="n">frag</span><span class="p">]]</span> <span class="o">=</span> <span class="mi">1</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">matrix</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">matrix</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="n">unique</span><span class="p">)</span>
+        <span class="n">fragments</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">fragments</span><span class="p">)</span>
+        <span class="n">substructure</span> <span class="o">=</span> <span class="p">{</span><span class="n">k</span><span class="p">:</span><span class="n">v</span> <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">fragments</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">values</span> <span class="k">for</span> <span class="n">k</span><span class="p">,</span><span class="n">v</span> <span class="ow">in</span> <span class="n">item</span><span class="o">.</span><span class="n">items</span><span class="p">()}</span>
+        <span class="n">idx</span> <span class="o">=</span>  <span class="p">[</span><span class="s1">&#39;SMARTS&#39;</span><span class="p">]</span> <span class="k">if</span> <span class="ow">not</span> <span class="n">svg</span> <span class="k">else</span> <span class="p">[</span><span class="s1">&#39;SMARTS&#39;</span><span class="p">,</span> <span class="s1">&#39;Substructure&#39;</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">substructure</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">substructure</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="n">idx</span><span class="p">)</span><span class="o">.</span><span class="n">T</span>
+
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">matrix</span></div></div>
+
+
+<div class="viewcode-block" id="FunctionGroup"><a class="viewcode-back" href="../../modules/smash.fragments.html#smash.fragments.FunctionGroup">[docs]</a><span class="k">class</span> <span class="nc">FunctionGroup</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;Calculte function-group fragments and obtain matrix  </span>
+<span class="sd">    &quot;&quot;&quot;</span>    
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">nJobs</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Initialization</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        nJobs : int, optional</span>
+<span class="sd">            The number of CPUs to use to do the computation, by default 1</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">nJobs</span> <span class="o">=</span> <span class="n">nJobs</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">fgs</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">substructure</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">matrix</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">()</span>
+
+<div class="viewcode-block" id="FunctionGroup.GetFunctionGroupFragmentLib"><a class="viewcode-back" href="../../modules/smash.fragments.html#smash.fragments.FunctionGroup.GetFunctionGroupFragmentLib">[docs]</a>    <span class="k">def</span> <span class="nf">GetFunctionGroupFragmentLib</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mols</span><span class="p">,</span> <span class="n">svg</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Calculate function-group fragments</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        mols : Iterable object, and each element is a rdkit.Chem.rdchem.Mol object</span>
+<span class="sd">            The compounds used to obtain function-group fragment</span>
+<span class="sd">        svg : bool, optional</span>
+<span class="sd">            Whether output with a svg image, by default False</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        fragments : list</span>
+<span class="sd">            Fragments calculated, each element is rerurned from GetFunctionGroupFragment() function</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">mols</span> <span class="o">=</span> <span class="n">mols</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">mols</span><span class="p">,</span> <span class="n">Iterable</span><span class="p">)</span> <span class="k">else</span> <span class="p">(</span><span class="n">mols</span><span class="p">,)</span>
+        <span class="n">func</span> <span class="o">=</span> <span class="n">partial</span><span class="p">(</span><span class="n">GetFunctionGroupFragment</span><span class="p">,</span> <span class="n">svg</span><span class="o">=</span><span class="n">svg</span><span class="p">)</span>
+        <span class="n">pool</span> <span class="o">=</span> <span class="n">Pool</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">nJobs</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">fgs</span> <span class="o">=</span> <span class="n">pool</span><span class="o">.</span><span class="n">map_async</span><span class="p">(</span><span class="n">func</span><span class="p">,</span> <span class="n">mols</span><span class="p">)</span><span class="o">.</span><span class="n">get</span><span class="p">()</span>
+        <span class="n">pool</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+        <span class="n">pool</span><span class="o">.</span><span class="n">join</span><span class="p">()</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">fgs</span></div>
+
+<div class="viewcode-block" id="FunctionGroup.GetFunctionGroupsMatrix"><a class="viewcode-back" href="../../modules/smash.fragments.html#smash.fragments.FunctionGroup.GetFunctionGroupsMatrix">[docs]</a>    <span class="k">def</span> <span class="nf">GetFunctionGroupsMatrix</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mols</span><span class="p">,</span> <span class="n">svg</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;return function-group matrix</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        mols : Iterable object, and each element is a rdkit.Chem.rdchem.Mol object</span>
+<span class="sd">            The compounds used to obtain function-group matrix</span>
+<span class="sd">        svg : bool, optional</span>
+<span class="sd">            Whether output with a svg image, by default False</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        pandas.core.frame.DataFrame</span>
+<span class="sd">            the fragment matrix of molecules</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">fgs</span><span class="p">:</span>
+            <span class="n">fgs</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">GetFunctionGroupFragmentLib</span><span class="p">(</span><span class="n">mols</span><span class="p">,</span> <span class="n">svg</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">fgs</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">fgs</span>
+
+        <span class="n">unique</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="k">for</span> <span class="n">fg</span> <span class="ow">in</span> <span class="n">fgs</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">fg</span><span class="p">]</span>
+        <span class="n">unique</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="n">unique</span><span class="p">))</span>
+        <span class="n">dic</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="n">unique</span><span class="p">,</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">unique</span><span class="p">))))</span>
+
+        <span class="n">num</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">unique</span><span class="p">)</span>
+        <span class="n">matrix</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="nb">len</span><span class="p">(</span><span class="n">mols</span><span class="p">),</span> <span class="n">num</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">int8</span><span class="p">)</span>
+
+        <span class="k">for</span> <span class="n">idx</span><span class="p">,</span> <span class="n">arr</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">matrix</span><span class="p">):</span>
+            <span class="n">fg</span> <span class="o">=</span> <span class="n">fgs</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span>
+            <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">fg</span><span class="p">:</span>
+                <span class="n">arr</span><span class="p">[</span><span class="n">dic</span><span class="p">[</span><span class="n">item</span><span class="p">[</span><span class="mi">0</span><span class="p">]]]</span> <span class="o">=</span> <span class="mi">1</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">matrix</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">matrix</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="n">unique</span><span class="p">)</span>
+        <span class="n">cols</span> <span class="o">=</span>  <span class="p">[</span><span class="s1">&#39;SMARTS&#39;</span><span class="p">]</span> <span class="k">if</span> <span class="ow">not</span> <span class="n">svg</span> <span class="k">else</span> <span class="p">[</span><span class="s1">&#39;SMARTS&#39;</span><span class="p">,</span> <span class="s1">&#39;Substructure&#39;</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">substructure</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">([</span><span class="n">fg</span> <span class="k">for</span> <span class="n">fg</span> <span class="ow">in</span> <span class="nb">sum</span><span class="p">(</span><span class="n">fgs</span><span class="p">,[])],</span> <span class="n">columns</span><span class="o">=</span><span class="n">cols</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">substructure</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">substructure</span><span class="o">.</span><span class="n">drop_duplicates</span><span class="p">([</span><span class="s1">&#39;SMARTS&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">set_index</span><span class="p">(</span><span class="s1">&#39;SMARTS&#39;</span><span class="p">,</span> <span class="n">drop</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">matrix</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">matrix</span><span class="o">.</span><span class="n">reindex</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">substructure</span><span class="o">.</span><span class="n">SMARTS</span><span class="o">.</span><span class="n">values</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">matrix</span></div></div>
+
+
+<span class="k">if</span> <span class="s1">&#39;__main__&#39;</span> <span class="o">==</span> <span class="vm">__name__</span><span class="p">:</span>
+    <span class="n">freeze_support</span><span class="p">()</span>
+    <span class="kn">from</span> <span class="nn">rdkit</span> <span class="kn">import</span> <span class="n">Chem</span>
+
+    <span class="n">smis</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="s1">&#39;C1=CC=CC(C(Br)C)=C1&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;C1=CC2NC(=O)CC3C=2C(C(=O)C2C=CC=CC=23)=C1&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;C1=CC=C2C(=O)C3C=CNC=3C(=O)C2=C1&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;C1=NC(CCN)=CN1&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;C1CCCC(CCO)C1&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;C1=CC=C2N=C(O)C=CC2=C1&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;C(OC)1=C(C)C=C2OC[C@]([H])3OC4C(C)=C(OC)C=CC=4C(=O)[C@@]3([H])C2=C1C&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;C1=C2N=CC=NC2=C2N=CNC2=C1&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;C1=C(O)C=CC(O)=C1&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;C1=CC2NC(=O)CC3C=2C(C(=O)C2C=CC=CC=23)=C1&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;C1=CC=C2C(=O)C3C=CNC=3C(=O)C2=C1&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;C(OC)1=C(C)C=C2OC[C@]([H])3OC4C(C)=C(OC)C=CC=4C(=O)[C@@]3([H])C2=C1C&#39;</span><span class="p">,</span>
+    <span class="p">]</span>
+
+    <span class="n">mols</span> <span class="o">=</span> <span class="p">[</span><span class="n">Chem</span><span class="o">.</span><span class="n">MolFromSmiles</span><span class="p">(</span><span class="n">smi</span><span class="p">)</span> <span class="k">for</span> <span class="n">smi</span> <span class="ow">in</span> <span class="n">smis</span><span class="p">]</span>
+
+    <span class="n">circular</span> <span class="o">=</span> <span class="n">Circular</span><span class="p">(</span><span class="n">folded</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">maxRadius</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span>
+                        <span class="n">minRadius</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">maxFragment</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">fragments</span> <span class="o">=</span> <span class="n">circular</span><span class="o">.</span><span class="n">GetCircularFragmentLib</span><span class="p">(</span><span class="n">mols</span><span class="p">,</span> <span class="n">svg</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">circular_matrix</span> <span class="o">=</span> <span class="n">circular</span><span class="o">.</span><span class="n">GetCircularMatrix</span><span class="p">(</span><span class="n">mols</span><span class="p">,</span> <span class="n">svg</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+    <span class="c1"># path = Path(minPath=1, maxPath=3)</span>
+    <span class="c1"># path_frag = path.GetPathMatrix(mols, svg=True)</span>
+    <span class="c1"># print(path.substructure)</span>
+    <span class="c1"># path_matrix = path.GetPathMatrix()</span>
+    <span class="c1"># print(path_matrix.shape)</span>
+
+    <span class="c1"># funcgroup = FunctionGroup()</span>
+    <span class="c1"># print(funcgroup.GetFunctionGroupsMatrix(mols, svg=False))</span>
+    <span class="c1"># print(funcgroup.substructure)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Done!!&#39;</span><span class="p">)</span>
+</pre></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">pySmash v0.1 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../index.html" >Module code</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="../smash.html" >smash</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2020, Kotori_y.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.3.0.
+    </div>
+  </body>
+</html>
