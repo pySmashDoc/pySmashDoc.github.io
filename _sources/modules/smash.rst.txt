@@ -6,12 +6,12 @@ Subpackages
 
 .. toctree::
 
-    smash.fragments
+   smash.fragments
 
 Module contents
 ---------------
 
 .. automodule:: smash
-    :members:
-    :undoc-members:
-    :show-inheritance:
+   :members:
+   :undoc-members:
+   :show-inheritance:

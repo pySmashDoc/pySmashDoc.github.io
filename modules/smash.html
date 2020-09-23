@@ -4,7 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta charset="utf-8" />
-    <title>smash package &#8212; pySmash v0.1 documentation</title>
+    <title>smash package &#8212; PySmash v1.0 documentation</title>
     <link rel="stylesheet" href="../_static/sphinxdoc.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
     <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
@@ -16,7 +16,9 @@
     <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true, "ignoreClass": "document", "processClass": "math|output_area"}})</script>
     <link rel="index" title="Index" href="../genindex.html" />
-    <link rel="search" title="Search" href="../search.html" /> 
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="smash.fragments package" href="smash.fragments.html" />
+    <link rel="prev" title="pySmash API" href="../modules.html" /> 
   </head><body>
     <div class="related" role="navigation" aria-label="related navigation">
       <h3>Navigation</h3>
@@ -27,7 +29,14 @@
         <li class="right" >
           <a href="../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../index.html">pySmash v0.1 documentation</a> &#187;</li> 
+        <li class="right" >
+          <a href="smash.fragments.html" title="smash.fragments package"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="../modules.html" title="pySmash API"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">PySmash v1.0 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../modules.html" accesskey="U">pySmash API</a> &#187;</li> 
       </ul>
     </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
@@ -41,6 +50,12 @@
 </li>
 </ul>
 
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="../modules.html"
+                        title="previous chapter">pySmash API</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="smash.fragments.html"
+                        title="next chapter">smash.fragments package</a></p>
   <div role="note" aria-label="source link">
     <h3>This Page</h3>
     <ul class="this-page-menu">
@@ -91,46 +106,96 @@
 &#64;Homepage: <a class="reference external" href="http://www.scbdd.com">http://www.scbdd.com</a>
 &#64;Mail: <a class="reference external" href="mailto:yzjkid9&#37;&#52;&#48;gmail&#46;com">yzjkid9<span>&#64;</span>gmail<span>&#46;</span>com</a>; <a class="reference external" href="mailto:oriental-cds&#37;&#52;&#48;163&#46;com">oriental-cds<span>&#64;</span>163<span>&#46;</span>com</a>
 &#64;Blog: <a class="reference external" href="https://blog.iamkotori.com">https://blog.iamkotori.com</a></p>
-<p>♥I love Princess Zelda forever♥</p>
 <dl class="class">
 <dt id="smash.BaseLearner">
 <em class="property">class </em><code class="sig-prename descclassname">smash.</code><code class="sig-name descname">BaseLearner</code><a class="reference internal" href="../_modules/smash.html#BaseLearner"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#smash.BaseLearner" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.8)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
 <p>Base class for all learner in pysamsh.</p>
+<p class="rubric">Methods</p>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#smash.BaseLearner.GetMatrix" title="smash.BaseLearner.GetMatrix"><code class="xref py py-obj docutils literal notranslate"><span class="pre">GetMatrix</span></code></a>(mols, **kwgrs)</p></td>
+<td><p>Get the matrix of fragment of mol library.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#smash.BaseLearner.ShowFragment" title="smash.BaseLearner.ShowFragment"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ShowFragment</span></code></a>(mol, **kwgrs)</p></td>
+<td><p>Visulaizing fragments.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#smash.BaseLearner.fit" title="smash.BaseLearner.fit"><code class="xref py py-obj docutils literal notranslate"><span class="pre">fit</span></code></a>(mols, labels[, aimLabel, minNum, …])</p></td>
+<td><p>Learning from given database which have aspecific endpoint label.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#smash.BaseLearner.predict" title="smash.BaseLearner.predict"><code class="xref py py-obj docutils literal notranslate"><span class="pre">predict</span></code></a>(mols)</p></td>
+<td><p>Predict molecules without known label</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#smash.BaseLearner.saveModel" title="smash.BaseLearner.saveModel"><code class="xref py py-obj docutils literal notranslate"><span class="pre">saveModel</span></code></a>([file])</p></td>
+<td><p>Save fitted learner</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#smash.BaseLearner.savePvalue" title="smash.BaseLearner.savePvalue"><code class="xref py py-obj docutils literal notranslate"><span class="pre">savePvalue</span></code></a>(sigPvalue[, file])</p></td>
+<td><p>Save pvalue result</p></td>
+</tr>
+</tbody>
+</table>
 <dl class="method">
 <dt id="smash.BaseLearner.GetMatrix">
 <code class="sig-name descname">GetMatrix</code><span class="sig-paren">(</span><em class="sig-param">mols</em>, <em class="sig-param">**kwgrs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/smash.html#BaseLearner.GetMatrix"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#smash.BaseLearner.GetMatrix" title="Permalink to this definition">¶</a></dt>
 <dd><p>Get the matrix of fragment of mol library.</p>
-<dl class="simple">
-<dt>mols<span class="classifier">Iterable object, and each element is a rdkit.Chem.rdchem.Mol object.</span></dt><dd><p>compounds, which have aspecific endpoint label, used to obtain significant fragments.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>mols</strong><span class="classifier">Iterable object, and each element is a rdkit.Chem.rdchem.Mol object.</span></dt><dd><p>compounds, which have aspecific endpoint label, used to obtain significant fragments.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="smash.BaseLearner.ShowFragment">
+<code class="sig-name descname">ShowFragment</code><span class="sig-paren">(</span><em class="sig-param">mol</em>, <em class="sig-param">**kwgrs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/smash.html#BaseLearner.ShowFragment"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#smash.BaseLearner.ShowFragment" title="Permalink to this definition">¶</a></dt>
+<dd><p>Visulaizing fragments.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>mols</strong><span class="classifier">Iterable object, and each element is a rdkit.Chem.rdchem.Mol object.</span></dt><dd><p>compounds, which have aspecific endpoint label, used to obtain significant fragments.</p>
+</dd>
+</dl>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="method">
 <dt id="smash.BaseLearner.fit">
-<code class="sig-name descname">fit</code><span class="sig-paren">(</span><em class="sig-param">mols</em>, <em class="sig-param">labels</em>, <em class="sig-param">aimLabel=1</em>, <em class="sig-param">minNum=5</em>, <em class="sig-param">pCutoff=0.05</em>, <em class="sig-param">accCutoff=None</em>, <em class="sig-param">Bonferroni=False</em>, <em class="sig-param">svg=True</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/smash.html#BaseLearner.fit"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#smash.BaseLearner.fit" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">fit</code><span class="sig-paren">(</span><em class="sig-param">mols</em>, <em class="sig-param">labels</em>, <em class="sig-param">aimLabel=1</em>, <em class="sig-param">minNum=5</em>, <em class="sig-param">pCutoff=0.05</em>, <em class="sig-param">accCutoff=None</em>, <em class="sig-param">Bonferroni=False</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/smash.html#BaseLearner.fit"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#smash.BaseLearner.fit" title="Permalink to this definition">¶</a></dt>
 <dd><p>Learning from given database which have aspecific endpoint label.</p>
-<dl class="simple">
-<dt>mols<span class="classifier">Iterable object, and each element is a rdkit.Chem.rdchem.Mol object</span></dt><dd><p>Compounds, which have aspecific endpoint label, used to obtain significant fragments</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>mols</strong><span class="classifier">Iterable object, and each element is a rdkit.Chem.rdchem.Mol object</span></dt><dd><p>Compounds, which have aspecific endpoint label, used to obtain significant fragments</p>
 </dd>
-<dt>labels<span class="classifier">array-like of shape (len(mols),)</span></dt><dd><p>The target values (class labels in classification)</p>
+<dt><strong>labels</strong><span class="classifier">array-like of shape (len(mols),)</span></dt><dd><p>The target values (class labels in classification)</p>
 </dd>
-<dt>aimLabel<span class="classifier">any, optional</span></dt><dd><p>The label to be regarded as activity label (class labels in classification), by default 1</p>
+<dt><strong>aimLabel</strong><span class="classifier">any, optional</span></dt><dd><p>The label to be regarded as activity label (class labels in classification), by default 1</p>
 </dd>
-<dt>minNum<span class="classifier">int, optional</span></dt><dd><p>The minimum frequency a fragment required, by default 5</p>
+<dt><strong>minNum</strong><span class="classifier">int, optional</span></dt><dd><p>The minimum frequency a fragment required, by default 5</p>
 </dd>
-<dt>pCutoff<span class="classifier">float, optional</span></dt><dd><p>The pvalue cutoff, a fragment would be regarded as significant if its pvalue below pCutoff, by default 0.05</p>
+<dt><strong>pCutoff</strong><span class="classifier">float, optional</span></dt><dd><p>The pvalue cutoff, a fragment would be regarded as significant if its pvalue below pCutoff, by default 0.05</p>
 </dd>
-<dt>accCutoff<span class="classifier">float, optional</span></dt><dd><p>The minimum accraucy lead by a fragment judge, by default None</p>
+<dt><strong>accCutoff</strong><span class="classifier">float, optional</span></dt><dd><p>The minimum accraucy lead by a fragment judge, by default None</p>
 </dd>
-<dt>Bonferroni<span class="classifier">bool, optional</span></dt><dd><p>Whether use Bonferroni method to revised, by default False</p>
+<dt><strong>Bonferroni</strong><span class="classifier">bool, optional</span></dt><dd><p>Whether use Bonferroni method to revised, by default False</p>
 </dd>
-<dt>svg<span class="classifier">bool, optional</span></dt><dd><p>Whether output with a svg image, by default True</p>
+<dt><strong>svg</strong><span class="classifier">bool, optional</span></dt><dd><p>Whether output with a svg image, by default True</p>
 </dd>
 </dl>
-<dl class="simple">
-<dt>smash.BaseLearner</dt><dd><p>A fitted learner, used predict() method can predict molecules without known label</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><dl class="simple">
+<dt><strong>smash.BaseLearner</strong></dt><dd><p>A fitted learner, used predict() method can predict molecules without known label</p>
+</dd>
+</dl>
 </dd>
 </dl>
 </dd></dl>
@@ -139,18 +204,26 @@
 <dt id="smash.BaseLearner.predict">
 <code class="sig-name descname">predict</code><span class="sig-paren">(</span><em class="sig-param">mols</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/smash.html#BaseLearner.predict"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#smash.BaseLearner.predict" title="Permalink to this definition">¶</a></dt>
 <dd><p>Predict molecules without known label</p>
-<dl class="simple">
-<dt>mols<span class="classifier">Iterable object, and each element is a rdkit.Chem.rdchem.Mol object</span></dt><dd><p>Compounds to be predicted</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>mols</strong><span class="classifier">Iterable object, and each element is a rdkit.Chem.rdchem.Mol object</span></dt><dd><p>Compounds to be predicted</p>
 </dd>
 </dl>
-<dl class="simple">
-<dt>y_pred<span class="classifier">ndarray of shape (len(mols),)</span></dt><dd><p>The predicted label</p>
 </dd>
-<dt>predMatrix<span class="classifier">pandas.core.frame.DataFrame</span></dt><dd><p>The predictd matrix</p>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><dl class="simple">
+<dt><strong>y_pred</strong><span class="classifier">ndarray of shape (len(mols),)</span></dt><dd><p>The predicted label</p>
+</dd>
+<dt><strong>predMatrix</strong><span class="classifier">pandas.core.frame.DataFrame</span></dt><dd><p>The predictd matrix</p>
 </dd>
 </dl>
-<dl class="simple">
-<dt>NotFittedError</dt><dd><p>Judge a learner whether was fitted</p>
+</dd>
+<dt class="field-odd">Raises</dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>NotFittedError</strong></dt><dd><p>Judge a learner whether was fitted</p>
+</dd>
+</dl>
 </dd>
 </dl>
 </dd></dl>
@@ -159,18 +232,26 @@
 <dt id="smash.BaseLearner.saveModel">
 <code class="sig-name descname">saveModel</code><span class="sig-paren">(</span><em class="sig-param">file='./learner.pkl'</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/smash.html#BaseLearner.saveModel"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#smash.BaseLearner.saveModel" title="Permalink to this definition">¶</a></dt>
 <dd><p>Save fitted learner</p>
-<dl class="simple">
-<dt>file<span class="classifier">str, optional</span></dt><dd><p>The path to save fitted learner, by default ‘./learner.pkl’</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>file</strong><span class="classifier">str, optional</span></dt><dd><p>The path to save fitted learner, by default ‘./learner.pkl’</p>
+</dd>
+</dl>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="method">
 <dt id="smash.BaseLearner.savePvalue">
-<code class="sig-name descname">savePvalue</code><span class="sig-paren">(</span><em class="sig-param">file='./pvalue.html'</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/smash.html#BaseLearner.savePvalue"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#smash.BaseLearner.savePvalue" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">savePvalue</code><span class="sig-paren">(</span><em class="sig-param">sigPvalue</em>, <em class="sig-param">file='./pvalue.html'</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/smash.html#BaseLearner.savePvalue"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#smash.BaseLearner.savePvalue" title="Permalink to this definition">¶</a></dt>
 <dd><p>Save pvalue result</p>
-<dl class="simple">
-<dt>file<span class="classifier">str, optional</span></dt><dd><p>The path to save result, by default ‘./pvalue.html’</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>file</strong><span class="classifier">str, optional</span></dt><dd><p>The path to save result, by default ‘./pvalue.html’</p>
+</dd>
+</dl>
 </dd>
 </dl>
 </dd></dl>
@@ -182,22 +263,92 @@
 <em class="property">class </em><code class="sig-prename descclassname">smash.</code><code class="sig-name descname">CircularLearner</code><span class="sig-paren">(</span><em class="sig-param">minRadius=1</em>, <em class="sig-param">maxRadius=2</em>, <em class="sig-param">nBits=1024</em>, <em class="sig-param">folded=False</em>, <em class="sig-param">maxFragment=True</em>, <em class="sig-param">nJobs=1</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/smash.html#CircularLearner"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#smash.CircularLearner" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#smash.BaseLearner" title="smash.BaseLearner"><code class="xref py py-class docutils literal notranslate"><span class="pre">smash.BaseLearner</span></code></a>, <a class="reference internal" href="smash.fragments.html#smash.fragments.Circular" title="smash.fragments.Circular"><code class="xref py py-class docutils literal notranslate"><span class="pre">smash.fragments.Circular</span></code></a></p>
 <p>Circular fragment leanrner</p>
-<dl class="simple">
-<dt>BaseLearner<span class="classifier">smash.BaseLearner</span></dt><dd><p>The base learner</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>BaseLearner</strong><span class="classifier">smash.BaseLearner</span></dt><dd><p>The base learner</p>
 </dd>
-<dt>Circular<span class="classifier">smash.fragments.Circular</span></dt><dd><p>The class to obtain circular fragment matrix</p>
+<dt><strong>Circular</strong><span class="classifier">smash.fragments.Circular</span></dt><dd><p>The class to obtain circular fragment matrix</p>
 </dd>
 </dl>
+</dd>
+</dl>
+<p class="rubric">Methods</p>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">GetCircularFragmentLib</span></code>(mols)</p></td>
+<td><p>Calculate circular fragments</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">GetCircularMatrix</span></code>(mols[, minNum])</p></td>
+<td><p>return circular matrix</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#smash.CircularLearner.GetMatrix" title="smash.CircularLearner.GetMatrix"><code class="xref py py-obj docutils literal notranslate"><span class="pre">GetMatrix</span></code></a>(mols, **kwgrs)</p></td>
+<td><p>Rewrite method</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">ShowCircularFragment</span></code>(mol, fragmentIndex)</p></td>
+<td><p>Get the SMARTS and SVG image of circular fragment</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#smash.CircularLearner.ShowFragment" title="smash.CircularLearner.ShowFragment"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ShowFragment</span></code></a>(mol, fragmentIndex)</p></td>
+<td><p>Get the SMARTS and SVG image of circular fragment</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">fit</span></code>(mols, labels[, aimLabel, minNum, …])</p></td>
+<td><p>Learning from given database which have aspecific endpoint label.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">predict</span></code>(mols)</p></td>
+<td><p>Predict molecules without known label</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">saveModel</span></code>([file])</p></td>
+<td><p>Save fitted learner</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">savePvalue</span></code>(sigPvalue[, file])</p></td>
+<td><p>Save pvalue result</p></td>
+</tr>
+</tbody>
+</table>
 <dl class="method">
 <dt id="smash.CircularLearner.GetMatrix">
 <code class="sig-name descname">GetMatrix</code><span class="sig-paren">(</span><em class="sig-param">mols</em>, <em class="sig-param">**kwgrs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/smash.html#CircularLearner.GetMatrix"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#smash.CircularLearner.GetMatrix" title="Permalink to this definition">¶</a></dt>
 <dd><p>Rewrite method</p>
-<dl class="simple">
-<dt>mols<span class="classifier">Iterable object, and each element is a rdkit.Chem.rdchem.Mol object.</span></dt><dd><p>compounds, which have aspecific endpoint label, used to obtain significant fragments.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>mols</strong><span class="classifier">Iterable object, and each element is a rdkit.Chem.rdchem.Mol object.</span></dt><dd><p>compounds, which have aspecific endpoint label, used to obtain significant fragments.</p>
 </dd>
 </dl>
-<dl class="simple">
-<dt>maxtrix<span class="classifier">pandas.core.frame.DataFrame</span></dt><dd><p>The calculated fragment matrix</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><dl class="simple">
+<dt><strong>maxtrix</strong><span class="classifier">pandas.core.frame.DataFrame</span></dt><dd><p>The calculated fragment matrix</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="smash.CircularLearner.ShowFragment">
+<code class="sig-name descname">ShowFragment</code><span class="sig-paren">(</span><em class="sig-param">mol</em>, <em class="sig-param">fragmentIndex</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/smash.html#CircularLearner.ShowFragment"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#smash.CircularLearner.ShowFragment" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the SMARTS and SVG image of circular fragment</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>mol</strong><span class="classifier">rdkit.Chem.rdchem.Mol</span></dt><dd><p>The molecule which contain the aim fragment</p>
+</dd>
+<dt><strong>fragmentIndex</strong><span class="classifier">int</span></dt><dd><p>The index of aim fragment</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><dl class="simple">
+<dt><strong>smarts</strong><span class="classifier">str</span></dt><dd><p>The SMARTS of fragment, which could be used for screening molecules</p>
+</dd>
+<dt><strong>svg</strong><span class="classifier">str</span></dt><dd><p>The svg string of fragment</p>
+</dd>
+</dl>
 </dd>
 </dl>
 </dd></dl>
@@ -209,22 +360,82 @@
 <em class="property">class </em><code class="sig-prename descclassname">smash.</code><code class="sig-name descname">FunctionGroupLearner</code><span class="sig-paren">(</span><em class="sig-param">nJobs=1</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/smash.html#FunctionGroupLearner"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#smash.FunctionGroupLearner" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#smash.BaseLearner" title="smash.BaseLearner"><code class="xref py py-class docutils literal notranslate"><span class="pre">smash.BaseLearner</span></code></a>, <a class="reference internal" href="smash.fragments.html#smash.fragments.FunctionGroup" title="smash.fragments.FunctionGroup"><code class="xref py py-class docutils literal notranslate"><span class="pre">smash.fragments.FunctionGroup</span></code></a></p>
 <p>Function-Group fragment leanrner</p>
-<dl class="simple">
-<dt>BaseLearner<span class="classifier">smash.BaseLearner</span></dt><dd><p>The base learner</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>BaseLearner</strong><span class="classifier">smash.BaseLearner</span></dt><dd><p>The base learner</p>
 </dd>
-<dt>FunctionGroup<span class="classifier">smash.fragments.FunctionGroup</span></dt><dd><p>The class to obtain Function-Group fragment matrix</p>
+<dt><strong>FunctionGroup</strong><span class="classifier">smash.fragments.FunctionGroup</span></dt><dd><p>The class to obtain Function-Group fragment matrix</p>
 </dd>
 </dl>
+</dd>
+</dl>
+<p class="rubric">Methods</p>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">GetFunctionGroupFragmentLib</span></code>(mols)</p></td>
+<td><p>Calculate function-group fragments</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">GetFunctionGroupsMatrix</span></code>(mols[, minNum])</p></td>
+<td><p>return function-group matrix</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#smash.FunctionGroupLearner.GetMatrix" title="smash.FunctionGroupLearner.GetMatrix"><code class="xref py py-obj docutils literal notranslate"><span class="pre">GetMatrix</span></code></a>(mols, **kwgrs)</p></td>
+<td><p>Rewrite method</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">ShowFgFragment</span></code>(mol, fragment)</p></td>
+<td><p>Get the SMARTS and SVG image of functional group fragment</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#smash.FunctionGroupLearner.ShowFragment" title="smash.FunctionGroupLearner.ShowFragment"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ShowFragment</span></code></a>(mol, fragment)</p></td>
+<td><p>Visulaizing fragments.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">fit</span></code>(mols, labels[, aimLabel, minNum, …])</p></td>
+<td><p>Learning from given database which have aspecific endpoint label.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">predict</span></code>(mols)</p></td>
+<td><p>Predict molecules without known label</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">saveModel</span></code>([file])</p></td>
+<td><p>Save fitted learner</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">savePvalue</span></code>(sigPvalue[, file])</p></td>
+<td><p>Save pvalue result</p></td>
+</tr>
+</tbody>
+</table>
 <dl class="method">
 <dt id="smash.FunctionGroupLearner.GetMatrix">
 <code class="sig-name descname">GetMatrix</code><span class="sig-paren">(</span><em class="sig-param">mols</em>, <em class="sig-param">**kwgrs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/smash.html#FunctionGroupLearner.GetMatrix"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#smash.FunctionGroupLearner.GetMatrix" title="Permalink to this definition">¶</a></dt>
 <dd><p>Rewrite method</p>
-<dl class="simple">
-<dt>mols<span class="classifier">Iterable object, and each element is a rdkit.Chem.rdchem.Mol object.</span></dt><dd><p>compounds, which have aspecific endpoint label, used to obtain significant fragments.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>mols</strong><span class="classifier">Iterable object, and each element is a rdkit.Chem.rdchem.Mol object.</span></dt><dd><p>compounds, which have aspecific endpoint label, used to obtain significant fragments.</p>
 </dd>
 </dl>
-<dl class="simple">
-<dt>maxtrix<span class="classifier">pandas.core.frame.DataFrame</span></dt><dd><p>The calculated fragment matrix</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><dl class="simple">
+<dt><strong>maxtrix</strong><span class="classifier">pandas.core.frame.DataFrame</span></dt><dd><p>The calculated fragment matrix</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="smash.FunctionGroupLearner.ShowFragment">
+<code class="sig-name descname">ShowFragment</code><span class="sig-paren">(</span><em class="sig-param">mol</em>, <em class="sig-param">fragment</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/smash.html#FunctionGroupLearner.ShowFragment"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#smash.FunctionGroupLearner.ShowFragment" title="Permalink to this definition">¶</a></dt>
+<dd><p>Visulaizing fragments.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>mols</strong><span class="classifier">Iterable object, and each element is a rdkit.Chem.rdchem.Mol object.</span></dt><dd><p>compounds, which have aspecific endpoint label, used to obtain significant fragments.</p>
+</dd>
+</dl>
 </dd>
 </dl>
 </dd></dl>
@@ -234,30 +445,100 @@
 <dl class="exception">
 <dt id="smash.NotFittedError">
 <em class="property">exception </em><code class="sig-prename descclassname">smash.</code><code class="sig-name descname">NotFittedError</code><a class="reference internal" href="../_modules/smash.html#NotFittedError"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#smash.NotFittedError" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/exceptions.html#Exception" title="(in Python v3.8)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Exception</span></code></a></p>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Exception</span></code></p>
 </dd></dl>
 
 <dl class="class">
-<dt id="smash.PathLeanrner">
-<em class="property">class </em><code class="sig-prename descclassname">smash.</code><code class="sig-name descname">PathLeanrner</code><span class="sig-paren">(</span><em class="sig-param">minPath=1</em>, <em class="sig-param">maxPath=7</em>, <em class="sig-param">nBits=1024</em>, <em class="sig-param">folded=False</em>, <em class="sig-param">maxFragment=True</em>, <em class="sig-param">nJobs=1</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/smash.html#PathLeanrner"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#smash.PathLeanrner" title="Permalink to this definition">¶</a></dt>
+<dt id="smash.PathLearner">
+<em class="property">class </em><code class="sig-prename descclassname">smash.</code><code class="sig-name descname">PathLearner</code><span class="sig-paren">(</span><em class="sig-param">minPath=1</em>, <em class="sig-param">maxPath=7</em>, <em class="sig-param">nBits=1024</em>, <em class="sig-param">folded=False</em>, <em class="sig-param">maxFragment=True</em>, <em class="sig-param">nJobs=1</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/smash.html#PathLearner"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#smash.PathLearner" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#smash.BaseLearner" title="smash.BaseLearner"><code class="xref py py-class docutils literal notranslate"><span class="pre">smash.BaseLearner</span></code></a>, <a class="reference internal" href="smash.fragments.html#smash.fragments.Path" title="smash.fragments.Path"><code class="xref py py-class docutils literal notranslate"><span class="pre">smash.fragments.Path</span></code></a></p>
 <p>Path-Based fragment leanrner</p>
-<dl class="simple">
-<dt>BaseLearner<span class="classifier">smash.BaseLearner</span></dt><dd><p>The base learner</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>BaseLearner</strong><span class="classifier">smash.BaseLearner</span></dt><dd><p>The base learner</p>
 </dd>
-<dt>Path<span class="classifier">smash.fragments.Path</span></dt><dd><p>The class to obtain path-based fragment matrix</p>
+<dt><strong>Path</strong><span class="classifier">smash.fragments.Path</span></dt><dd><p>The class to obtain path-based fragment matrix</p>
 </dd>
 </dl>
+</dd>
+</dl>
+<p class="rubric">Methods</p>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#smash.PathLearner.GetMatrix" title="smash.PathLearner.GetMatrix"><code class="xref py py-obj docutils literal notranslate"><span class="pre">GetMatrix</span></code></a>(mols, **kwgrs)</p></td>
+<td><p>Rewrite method</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">GetPathFragmentLib</span></code>(mols)</p></td>
+<td><p>Calculate path-based fragments</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">GetPathMatrix</span></code>(mols[, minNum])</p></td>
+<td><p>return path-based matrix</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#smash.PathLearner.ShowFragment" title="smash.PathLearner.ShowFragment"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ShowFragment</span></code></a>(mol, fragmentIndex)</p></td>
+<td><p>Get the SMARTS and SVG image of Path fragment</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">ShowPathFragment</span></code>(mol, fragmentIndex)</p></td>
+<td><p>Get the SMARTS and SVG image of Path fragment</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">fit</span></code>(mols, labels[, aimLabel, minNum, …])</p></td>
+<td><p>Learning from given database which have aspecific endpoint label.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">predict</span></code>(mols)</p></td>
+<td><p>Predict molecules without known label</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">saveModel</span></code>([file])</p></td>
+<td><p>Save fitted learner</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">savePvalue</span></code>(sigPvalue[, file])</p></td>
+<td><p>Save pvalue result</p></td>
+</tr>
+</tbody>
+</table>
 <dl class="method">
-<dt id="smash.PathLeanrner.GetMatrix">
-<code class="sig-name descname">GetMatrix</code><span class="sig-paren">(</span><em class="sig-param">mols</em>, <em class="sig-param">**kwgrs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/smash.html#PathLeanrner.GetMatrix"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#smash.PathLeanrner.GetMatrix" title="Permalink to this definition">¶</a></dt>
+<dt id="smash.PathLearner.GetMatrix">
+<code class="sig-name descname">GetMatrix</code><span class="sig-paren">(</span><em class="sig-param">mols</em>, <em class="sig-param">**kwgrs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/smash.html#PathLearner.GetMatrix"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#smash.PathLearner.GetMatrix" title="Permalink to this definition">¶</a></dt>
 <dd><p>Rewrite method</p>
-<dl class="simple">
-<dt>mols<span class="classifier">Iterable object, and each element is a rdkit.Chem.rdchem.Mol object.</span></dt><dd><p>compounds, which have aspecific endpoint label, used to obtain significant fragments.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>mols</strong><span class="classifier">Iterable object, and each element is a rdkit.Chem.rdchem.Mol object.</span></dt><dd><p>compounds, which have aspecific endpoint label, used to obtain significant fragments.</p>
 </dd>
 </dl>
-<dl class="simple">
-<dt>maxtrix<span class="classifier">pandas.core.frame.DataFrame</span></dt><dd><p>The calculated fragment matrix</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><dl class="simple">
+<dt><strong>maxtrix</strong><span class="classifier">pandas.core.frame.DataFrame</span></dt><dd><p>The calculated fragment matrix</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="smash.PathLearner.ShowFragment">
+<code class="sig-name descname">ShowFragment</code><span class="sig-paren">(</span><em class="sig-param">mol</em>, <em class="sig-param">fragmentIndex</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/smash.html#PathLearner.ShowFragment"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#smash.PathLearner.ShowFragment" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the SMARTS and SVG image of Path fragment</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>mol</strong><span class="classifier">rdkit.Chem.rdchem.Mol</span></dt><dd><p>The molecule which contain the aim fragment</p>
+</dd>
+<dt><strong>fragmentIndex</strong><span class="classifier">int</span></dt><dd><p>The index of aim fragment</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><dl class="simple">
+<dt><strong>smarts</strong><span class="classifier">str</span></dt><dd><p>The SMARTS of fragment, which could be used for screening molecules</p>
+</dd>
+<dt><strong>svg</strong><span class="classifier">str</span></dt><dd><p>The svg string of fragment</p>
+</dd>
+</dl>
 </dd>
 </dl>
 </dd></dl>
@@ -268,18 +549,24 @@
 <dt id="smash.Pvalue">
 <code class="sig-prename descclassname">smash.</code><code class="sig-name descname">Pvalue</code><span class="sig-paren">(</span><em class="sig-param">n</em>, <em class="sig-param">m</em>, <em class="sig-param">ns</em>, <em class="sig-param">ms</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/smash.html#Pvalue"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#smash.Pvalue" title="Permalink to this definition">¶</a></dt>
 <dd><p>Get P-value.</p>
-<dl class="simple">
-<dt>n<span class="classifier">int</span></dt><dd><p>n compounds has m compounds with aspecific activity label.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>n</strong><span class="classifier">int</span></dt><dd><p>n compounds has m compounds with aspecific activity label.</p>
 </dd>
-<dt>m<span class="classifier">int</span></dt><dd><p>n compounds has m compounds with aspecific activity label.</p>
+<dt><strong>m</strong><span class="classifier">int</span></dt><dd><p>n compounds has m compounds with aspecific activity label.</p>
 </dd>
-<dt>ns<span class="classifier">int</span></dt><dd><p>a substructure is found in ns compounds.</p>
+<dt><strong>ns</strong><span class="classifier">int</span></dt><dd><p>a substructure is found in ns compounds.</p>
 </dd>
-<dt>ms<span class="classifier">int</span></dt><dd><p>the amount of those compounds with the specific activity label is ms.</p>
+<dt><strong>ms</strong><span class="classifier">int</span></dt><dd><p>the amount of those compounds with the specific activity label is ms.</p>
 </dd>
 </dl>
-<dl class="simple">
-<dt>res<span class="classifier">float</span></dt><dd><p>use sum() function to get the pvalue.</p>
+</dd>
+<dt class="field-even">Yields</dt>
+<dd class="field-even"><dl class="simple">
+<dt><strong>res</strong><span class="classifier">float</span></dt><dd><p>use sum() function to get the pvalue.</p>
+</dd>
+</dl>
 </dd>
 </dl>
 </dd></dl>
@@ -302,11 +589,18 @@
         <li class="right" >
           <a href="../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../index.html">pySmash v0.1 documentation</a> &#187;</li> 
+        <li class="right" >
+          <a href="smash.fragments.html" title="smash.fragments package"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="../modules.html" title="pySmash API"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">PySmash v1.0 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../modules.html" >pySmash API</a> &#187;</li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">
-        &#169; Copyright 2020, Kotori_y.
+        &#169; Copyright 2020, Kotori Yang.
       Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.3.0.
     </div>
   </body>

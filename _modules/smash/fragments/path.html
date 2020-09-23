@@ -4,7 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta charset="utf-8" />
-    <title>smash.fragments.path &#8212; pySmash v0.1 documentation</title>
+    <title>smash.fragments.path &#8212; PySmash v1.0 documentation</title>
     <link rel="stylesheet" href="../../../_static/sphinxdoc.css" type="text/css" />
     <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
     <script type="text/javascript" id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
@@ -27,7 +27,7 @@
         <li class="right" >
           <a href="../../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../../index.html">pySmash v0.1 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../../index.html">PySmash v1.0 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="../../index.html" >Module code</a> &#187;</li>
           <li class="nav-item nav-item-2"><a href="../../smash.html" >smash</a> &#187;</li>
           <li class="nav-item nav-item-3"><a href="../fragments.html" accesskey="U">smash.fragments</a> &#187;</li> 
@@ -64,7 +64,6 @@
 <span class="sd">@Mail: yzjkid9@gmail.com; oriental-cds@163.com</span>
 <span class="sd">@Blog: https://blog.iamkotori.com</span>
 
-<span class="sd">♥I love Princess Zelda forever♥</span>
 <span class="sd">&quot;&quot;&quot;</span>
 
 
@@ -76,15 +75,16 @@
 
 <span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;GetFoldedPathFragment&#39;</span><span class="p">,</span>
            <span class="s1">&#39;GetUnfoldedPathFragment&#39;</span><span class="p">,</span>
-           <span class="s1">&#39;GetPathFragment&#39;</span><span class="p">]</span>
+           <span class="s1">&#39;GetPathFragment&#39;</span><span class="p">,</span>
+           <span class="s1">&#39;DrawRDKitEnv&#39;</span><span class="p">]</span>
 
 
-<span class="k">def</span> <span class="nf">_DisposePathFragments</span><span class="p">(</span><span class="n">mol</span><span class="p">,</span> <span class="n">bitInfo</span><span class="p">,</span> <span class="n">maxFragment</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">svg</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+<span class="k">def</span> <span class="nf">_DisposePathFragments</span><span class="p">(</span><span class="n">bitInfo</span><span class="p">,</span> <span class="n">maxFragment</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Dispose the bitinfo retrived from GetFoldedPathFragment() or GetUnfoldedPathFragment()</span>
 <span class="sd">    *internal only*</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">def</span> <span class="nf">func</span><span class="p">(</span><span class="n">frags</span><span class="p">):</span>
-        <span class="n">sets</span> <span class="o">=</span> <span class="p">[</span><span class="nb">set</span><span class="p">(</span><span class="n">e</span><span class="p">)</span> <span class="k">for</span> <span class="n">e</span> <span class="ow">in</span> <span class="n">frags</span><span class="p">]</span>
+        <span class="n">sets</span> <span class="o">=</span> <span class="p">[</span><span class="nb">set</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="k">for</span> <span class="n">e</span> <span class="ow">in</span> <span class="n">frags</span><span class="o">.</span><span class="n">values</span><span class="p">()</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">e</span><span class="p">]</span>
         <span class="n">us</span> <span class="o">=</span> <span class="p">[]</span>
         <span class="k">for</span> <span class="n">e</span> <span class="ow">in</span> <span class="n">sets</span><span class="p">:</span>
             <span class="k">if</span> <span class="nb">any</span><span class="p">(</span><span class="n">e</span> <span class="o">&lt;</span> <span class="n">s</span> <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">sets</span><span class="p">):</span>
@@ -93,23 +93,22 @@
                 <span class="n">us</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">e</span><span class="p">))</span>
         <span class="k">return</span> <span class="n">us</span>
 
-    <span class="n">fragments</span> <span class="o">=</span> <span class="p">{}</span>
-    <span class="n">keys</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">bitInfo</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
+    <span class="n">maxFragments</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">allFragments</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">bitInfo</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
     <span class="k">if</span> <span class="n">maxFragment</span><span class="p">:</span>
         <span class="n">dic</span> <span class="o">=</span> <span class="p">{</span><span class="nb">str</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="n">x</span><span class="p">)):</span> <span class="n">k</span> <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">bitInfo</span><span class="o">.</span><span class="n">items</span><span class="p">()</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">v</span><span class="p">}</span>
-        <span class="n">bitInfo</span> <span class="o">=</span> <span class="p">[</span><span class="n">i</span> <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="n">bitInfo</span><span class="o">.</span><span class="n">values</span><span class="p">()</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">j</span><span class="p">]</span>
         <span class="n">bitInfo</span> <span class="o">=</span> <span class="n">func</span><span class="p">(</span><span class="n">bitInfo</span><span class="p">)</span>
         <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">bitInfo</span><span class="p">:</span>
-            <span class="n">bondPath</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">eval</span><span class="p">(</span><span class="n">k</span><span class="p">))</span>
-            <span class="n">smi</span><span class="p">,</span> <span class="n">svgImg</span> <span class="o">=</span> <span class="n">DrawRDKitEnv</span><span class="p">(</span><span class="n">mol</span><span class="p">,</span> <span class="n">bondPath</span><span class="p">)</span>
-            <span class="n">fragments</span><span class="p">[</span><span class="n">dic</span><span class="p">[</span><span class="n">k</span><span class="p">]]</span> <span class="o">=</span> <span class="p">(</span><span class="n">smi</span><span class="p">,</span> <span class="n">svgImg</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">,</span><span class="s1">&#39;&#39;</span><span class="p">))</span> <span class="k">if</span> <span class="n">svg</span> <span class="k">else</span> <span class="p">(</span><span class="n">smi</span><span class="p">,</span> <span class="p">)</span>
+            <span class="n">idx</span> <span class="o">=</span> <span class="n">dic</span><span class="p">[</span><span class="n">k</span><span class="p">]</span>
+            <span class="k">if</span> <span class="n">idx</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">maxFragments</span><span class="p">:</span>
+                <span class="n">maxFragments</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">idx</span><span class="p">)</span>
     <span class="k">else</span><span class="p">:</span>
         <span class="k">pass</span>
 
-    <span class="k">return</span> <span class="p">(</span><span class="n">keys</span><span class="p">,</span> <span class="n">fragments</span><span class="p">)</span>
+    <span class="k">return</span> <span class="p">(</span><span class="n">allFragments</span><span class="p">,</span> <span class="n">maxFragments</span><span class="p">)</span>
 
 
-<span class="k">def</span> <span class="nf">DrawRDKitEnv</span><span class="p">(</span><span class="n">mol</span><span class="p">,</span> <span class="n">bondPath</span><span class="p">,</span> <span class="n">molSize</span><span class="o">=</span><span class="p">(</span><span class="mi">150</span><span class="p">,</span> <span class="mi">150</span><span class="p">),</span> <span class="n">baseRad</span><span class="o">=</span><span class="mf">0.3</span><span class="p">,</span> <span class="n">useSVG</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+<div class="viewcode-block" id="DrawRDKitEnv"><a class="viewcode-back" href="../../../modules/smash.fragments.html#smash.fragments.path.DrawRDKitEnv">[docs]</a><span class="k">def</span> <span class="nf">DrawRDKitEnv</span><span class="p">(</span><span class="n">mol</span><span class="p">,</span> <span class="n">bondPath</span><span class="p">,</span> <span class="n">molSize</span><span class="o">=</span><span class="p">(</span><span class="mi">150</span><span class="p">,</span> <span class="mi">150</span><span class="p">),</span> <span class="n">baseRad</span><span class="o">=</span><span class="mf">0.3</span><span class="p">,</span> <span class="n">useSVG</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
                  <span class="n">aromaticColor</span><span class="o">=</span><span class="p">(</span><span class="mf">0.9</span><span class="p">,</span> <span class="mf">0.9</span><span class="p">,</span> <span class="mf">0.2</span><span class="p">),</span> <span class="n">extraColor</span><span class="o">=</span><span class="p">(</span><span class="mf">0.9</span><span class="p">,</span> <span class="mf">0.9</span><span class="p">,</span> <span class="mf">0.9</span><span class="p">),</span> <span class="n">nonAromaticColor</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
                  <span class="n">drawOptions</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Get SMARTS and SVG image from given bonds</span>
@@ -118,7 +117,7 @@
     <span class="n">menv</span> <span class="o">=</span> <span class="n">_getRDKitEnv</span><span class="p">(</span><span class="n">mol</span><span class="p">,</span> <span class="n">bondPath</span><span class="p">,</span> <span class="n">baseRad</span><span class="p">,</span> <span class="n">aromaticColor</span><span class="p">,</span>
                         <span class="n">extraColor</span><span class="p">,</span> <span class="n">nonAromaticColor</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
     <span class="n">submol</span> <span class="o">=</span> <span class="n">menv</span><span class="o">.</span><span class="n">submol</span>
-    <span class="n">subMol</span> <span class="o">=</span> <span class="n">Chem</span><span class="o">.</span><span class="n">MolToSmiles</span><span class="p">(</span><span class="n">submol</span><span class="p">,</span> <span class="n">canonical</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">isomericSmiles</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+    <span class="n">subMol</span> <span class="o">=</span> <span class="n">Chem</span><span class="o">.</span><span class="n">MolToSmiles</span><span class="p">(</span><span class="n">submol</span><span class="p">,</span> <span class="n">isomericSmiles</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 
     <span class="c1"># Drawing</span>
     <span class="k">if</span> <span class="n">useSVG</span><span class="p">:</span>
@@ -138,13 +137,13 @@
                         <span class="n">highlightBondColors</span><span class="o">=</span><span class="n">menv</span><span class="o">.</span><span class="n">bondColors</span><span class="p">,</span> <span class="n">highlightAtomRadii</span><span class="o">=</span><span class="n">menv</span><span class="o">.</span><span class="n">highlightRadii</span><span class="p">,</span>
                         <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
     <span class="n">drawer</span><span class="o">.</span><span class="n">FinishDrawing</span><span class="p">()</span>
-    <span class="k">return</span> <span class="n">subMol</span><span class="p">,</span> <span class="n">drawer</span><span class="o">.</span><span class="n">GetDrawingText</span><span class="p">()</span>
+    <span class="k">return</span> <span class="n">subMol</span><span class="p">,</span> <span class="n">drawer</span><span class="o">.</span><span class="n">GetDrawingText</span><span class="p">()</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">,</span><span class="s1">&#39;&#39;</span><span class="p">)</span></div>
 
 
 <div class="viewcode-block" id="GetFoldedPathFragment"><a class="viewcode-back" href="../../../modules/smash.fragments.html#smash.fragments.path.GetFoldedPathFragment">[docs]</a><span class="k">def</span> <span class="nf">GetFoldedPathFragment</span><span class="p">(</span><span class="n">mol</span><span class="p">,</span>
                           <span class="n">minPath</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">maxPath</span><span class="o">=</span><span class="mi">7</span><span class="p">,</span>
                           <span class="n">nBits</span><span class="o">=</span><span class="mi">1024</span><span class="p">,</span> <span class="n">maxFragment</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
-                          <span class="n">svg</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+                          <span class="n">disposed</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Calculate folded path fragment.</span>
 
 <span class="sd">    Parameters</span>
@@ -159,8 +158,8 @@
 <span class="sd">        the number of bit of morgan, by default 1014</span>
 <span class="sd">    maxFragment : bool, optional</span>
 <span class="sd">        Whether only return the maximum fragment of a given start atom, by default True</span>
-<span class="sd">    svg : bool, optional</span>
-<span class="sd">        Whether output with a svg image, by default False</span>
+<span class="sd">    disposed : bool, optional</span>
+<span class="sd">        Whether dispose the original bitinfo, by default True</span>
 
 <span class="sd">    Returns</span>
 <span class="sd">    -------</span>
@@ -177,12 +176,13 @@
                         <span class="n">bitInfo</span><span class="o">=</span><span class="n">bitInfo</span><span class="p">)</span>
 
     <span class="n">fragments</span> <span class="o">=</span> <span class="n">_DisposePathFragments</span><span class="p">(</span>
-        <span class="n">mol</span><span class="p">,</span> <span class="n">bitInfo</span><span class="p">,</span> <span class="n">maxFragment</span><span class="o">=</span><span class="n">maxFragment</span><span class="p">,</span> <span class="n">svg</span><span class="o">=</span><span class="n">svg</span><span class="p">)</span>
+            <span class="n">bitInfo</span><span class="p">,</span> <span class="n">maxFragment</span><span class="o">=</span><span class="n">maxFragment</span>
+        <span class="p">)</span> <span class="k">if</span> <span class="n">disposed</span> <span class="k">else</span> <span class="n">bitInfo</span>
     <span class="k">return</span> <span class="n">fragments</span></div>
 
 
 <div class="viewcode-block" id="GetUnfoldedPathFragment"><a class="viewcode-back" href="../../../modules/smash.fragments.html#smash.fragments.path.GetUnfoldedPathFragment">[docs]</a><span class="k">def</span> <span class="nf">GetUnfoldedPathFragment</span><span class="p">(</span><span class="n">mol</span><span class="p">,</span> <span class="n">minPath</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">maxPath</span><span class="o">=</span><span class="mi">7</span><span class="p">,</span>
-                            <span class="n">maxFragment</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">svg</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+                            <span class="n">maxFragment</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">disposed</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Calculate unfolded path fragment.</span>
 
 <span class="sd">    Parameters</span>
@@ -195,15 +195,14 @@
 <span class="sd">        The probable maximum length of path-based fragment, by default 7</span>
 <span class="sd">    maxFragment : bool, optional</span>
 <span class="sd">        Whether only return the maximum fragment of a given start atom, by default True</span>
-<span class="sd">    svg : bool, optional</span>
-<span class="sd">        Whether output with a svg image, by default False</span>
+<span class="sd">    disposed : bool, optional</span>
+<span class="sd">        Whether dispose the original bitinfo, by default True</span>
 
 <span class="sd">    Returns</span>
 <span class="sd">    -------</span>
-<span class="sd">    fragments : tuple</span>
-<span class="sd">        The first element is the ID of all fragments generated,</span>
-<span class="sd">        and the second one is a dict whose key is the ID of output fragments,</span>
-<span class="sd">        value is corresponding SMARTS and svg string (is svg set as True)</span>
+<span class="sd">    fragments : list of list</span>
+<span class="sd">        The first element is the ID of all fragments generated</span>
+<span class="sd">        the second one is the ID of output fragments</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">bitInfo</span> <span class="o">=</span> <span class="p">{}</span>
     <span class="n">fp</span> <span class="o">=</span> <span class="n">UnfoldedRDKFingerprintCountBased</span><span class="p">(</span><span class="n">mol</span><span class="p">,</span>
@@ -211,14 +210,16 @@
                                           <span class="n">maxPath</span><span class="o">=</span><span class="n">maxPath</span><span class="p">,</span>
                                           <span class="n">bitInfo</span><span class="o">=</span><span class="n">bitInfo</span><span class="p">)</span>
 
-    <span class="n">fragments</span> <span class="o">=</span> <span class="n">_DisposePathFragments</span><span class="p">(</span><span class="n">mol</span><span class="p">,</span> <span class="n">bitInfo</span><span class="p">,</span> <span class="n">maxFragment</span><span class="o">=</span><span class="n">maxFragment</span><span class="p">,</span> <span class="n">svg</span><span class="o">=</span><span class="n">svg</span><span class="p">)</span>
+    <span class="n">fragments</span> <span class="o">=</span> <span class="n">_DisposePathFragments</span><span class="p">(</span>
+            <span class="n">bitInfo</span><span class="p">,</span> <span class="n">maxFragment</span><span class="o">=</span><span class="n">maxFragment</span>
+        <span class="p">)</span> <span class="k">if</span> <span class="n">disposed</span> <span class="k">else</span> <span class="n">bitInfo</span>
     <span class="k">return</span> <span class="n">fragments</span></div>
 
 
 <div class="viewcode-block" id="GetPathFragment"><a class="viewcode-back" href="../../../modules/smash.fragments.html#smash.fragments.path.GetPathFragment">[docs]</a><span class="k">def</span> <span class="nf">GetPathFragment</span><span class="p">(</span><span class="n">mol</span><span class="p">,</span>
                     <span class="n">minPath</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">maxPath</span><span class="o">=</span><span class="mi">7</span><span class="p">,</span>
                     <span class="n">nBits</span><span class="o">=</span><span class="mi">1024</span><span class="p">,</span> <span class="n">folded</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
-                    <span class="n">maxFragment</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">svg</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+                    <span class="n">maxFragment</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">disposed</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Calculate path fragment.</span>
 
 <span class="sd">    Parameters</span>
@@ -236,44 +237,34 @@
 <span class="sd">        which generate fragment based on unfolded fingerprint, by default True.</span>
 <span class="sd">    maxFragment : bool, optional</span>
 <span class="sd">        Whether only return the maximum fragment at a center atom, by default True</span>
-<span class="sd">    svg : bool, optional</span>
-<span class="sd">        Whether output with a svg image, by default False</span>
+<span class="sd">    disposed : bool, optional</span>
+<span class="sd">        Whether dispose the original bitinfo, by default True</span>
 
 <span class="sd">    Returns</span>
 <span class="sd">    -------</span>
-<span class="sd">    fragments : tuple</span>
-<span class="sd">        The first element is the ID of all fragments generated,</span>
-<span class="sd">        and the second one is a dict whose key is the ID of output fragments,</span>
-<span class="sd">        value is corresponding SMARTS and svg string (is svg set as True)</span>
+<span class="sd">    fragments : list of list</span>
+<span class="sd">        The first element is the ID of all fragments generated</span>
+<span class="sd">        the second one is the ID of output fragments</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">if</span> <span class="n">folded</span><span class="p">:</span>
-        <span class="n">fragments</span> <span class="o">=</span> <span class="n">GetFoldedPathFragment</span><span class="p">(</span><span class="n">mol</span><span class="p">,</span>
-                                        <span class="n">minPath</span><span class="o">=</span><span class="n">minPath</span><span class="p">,</span> <span class="n">maxPath</span><span class="o">=</span><span class="n">maxPath</span><span class="p">,</span>
-                                        <span class="n">nBits</span><span class="o">=</span><span class="n">nBits</span><span class="p">,</span> <span class="n">maxFragment</span><span class="o">=</span><span class="n">maxFragment</span><span class="p">,</span>
-                                        <span class="n">svg</span><span class="o">=</span><span class="n">svg</span><span class="p">)</span>
+        <span class="n">fragments</span> <span class="o">=</span> <span class="n">GetFoldedPathFragment</span><span class="p">(</span>
+            <span class="n">mol</span><span class="p">,</span> <span class="n">minPath</span><span class="o">=</span><span class="n">minPath</span><span class="p">,</span> <span class="n">maxPath</span><span class="o">=</span><span class="n">maxPath</span><span class="p">,</span>
+            <span class="n">nBits</span><span class="o">=</span><span class="n">nBits</span><span class="p">,</span> <span class="n">maxFragment</span><span class="o">=</span><span class="n">maxFragment</span><span class="p">,</span>
+            <span class="n">disposed</span><span class="o">=</span><span class="n">disposed</span>
+        <span class="p">)</span>
     <span class="k">else</span><span class="p">:</span>
-        <span class="n">fragments</span> <span class="o">=</span> <span class="n">GetUnfoldedPathFragment</span><span class="p">(</span><span class="n">mol</span><span class="p">,</span>
-                                          <span class="n">minPath</span><span class="o">=</span><span class="n">minPath</span><span class="p">,</span> <span class="n">maxPath</span><span class="o">=</span><span class="n">maxPath</span><span class="p">,</span>
-                                          <span class="n">maxFragment</span><span class="o">=</span><span class="n">maxFragment</span><span class="p">,</span> <span class="n">svg</span><span class="o">=</span><span class="n">svg</span><span class="p">)</span>
+        <span class="n">fragments</span> <span class="o">=</span> <span class="n">GetUnfoldedPathFragment</span><span class="p">(</span>
+            <span class="n">mol</span><span class="p">,</span> <span class="n">minPath</span><span class="o">=</span><span class="n">minPath</span><span class="p">,</span> <span class="n">maxPath</span><span class="o">=</span><span class="n">maxPath</span><span class="p">,</span>
+            <span class="n">maxFragment</span><span class="o">=</span><span class="n">maxFragment</span><span class="p">,</span> <span class="n">disposed</span><span class="o">=</span><span class="n">disposed</span>
+        <span class="p">)</span>
 
-    <span class="c1"># substrcutures = []</span>
-    <span class="c1"># head = getBeginEndAtom(mol)</span>
-
-    <span class="c1"># for info in bitInfo.values():</span>
-    <span class="c1">#     atomsToUse = [head[bond] for bond in info[0]]</span>
-    <span class="c1">#     atomsToUse = set(sum(atomsToUse, []))</span>
-    <span class="c1">#     smi = Chem.MolFragmentToSmiles(mol, atomsToUse, bondsToUse=info[0])</span>
-    <span class="c1">#     substrcutures.append(smi)</span>
-
-    <span class="c1"># substrcutures = list(set(substrcutures))</span>
-    <span class="c1"># return substrcutures</span>
     <span class="k">return</span> <span class="n">fragments</span></div>
 
 
 <span class="k">if</span> <span class="s1">&#39;__main__&#39;</span> <span class="o">==</span> <span class="vm">__name__</span><span class="p">:</span>
 
     <span class="n">mol</span> <span class="o">=</span> <span class="n">Chem</span><span class="o">.</span><span class="n">MolFromSmiles</span><span class="p">(</span><span class="s1">&#39;CN(C1=CC=C(C=C1)N=N/C2=CC=CC=C2)C&#39;</span><span class="p">)</span>
-    <span class="n">fragments</span> <span class="o">=</span> <span class="n">GetPathFragment</span><span class="p">(</span><span class="n">mol</span><span class="p">,</span> <span class="n">maxFragment</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">svg</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">fragments</span> <span class="o">=</span> <span class="n">GetPathFragment</span><span class="p">(</span><span class="n">mol</span><span class="p">,</span> <span class="n">maxFragment</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">disposed</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
     <span class="nb">print</span><span class="p">(</span><span class="n">fragments</span><span class="p">)</span>
 </pre></div>
 
@@ -291,14 +282,14 @@
         <li class="right" >
           <a href="../../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../../index.html">pySmash v0.1 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../../index.html">PySmash v1.0 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="../../index.html" >Module code</a> &#187;</li>
           <li class="nav-item nav-item-2"><a href="../../smash.html" >smash</a> &#187;</li>
           <li class="nav-item nav-item-3"><a href="../fragments.html" >smash.fragments</a> &#187;</li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">
-        &#169; Copyright 2020, Kotori_y.
+        &#169; Copyright 2020, Kotori Yang.
       Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.3.0.
     </div>
   </body>

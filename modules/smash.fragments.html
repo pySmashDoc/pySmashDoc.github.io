@@ -4,7 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta charset="utf-8" />
-    <title>smash.fragments package &#8212; pySmash v0.1 documentation</title>
+    <title>smash.fragments package &#8212; PySmash v1.0 documentation</title>
     <link rel="stylesheet" href="../_static/sphinxdoc.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
     <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
@@ -16,7 +16,8 @@
     <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true, "ignoreClass": "document", "processClass": "math|output_area"}})</script>
     <link rel="index" title="Index" href="../genindex.html" />
-    <link rel="search" title="Search" href="../search.html" /> 
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="prev" title="smash package" href="smash.html" /> 
   </head><body>
     <div class="related" role="navigation" aria-label="related navigation">
       <h3>Navigation</h3>
@@ -27,7 +28,12 @@
         <li class="right" >
           <a href="../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../index.html">pySmash v0.1 documentation</a> &#187;</li> 
+        <li class="right" >
+          <a href="smash.html" title="smash package"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">PySmash v1.0 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../modules.html" >pySmash API</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="smash.html" accesskey="U">smash package</a> &#187;</li> 
       </ul>
     </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
@@ -44,6 +50,9 @@
 </li>
 </ul>
 
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="smash.html"
+                        title="previous chapter">smash package</a></p>
   <div role="note" aria-label="source link">
     <h3>This Page</h3>
     <ul class="this-page-menu">
@@ -82,84 +91,107 @@
 &#64;Homepage: <a class="reference external" href="http://www.scbdd.com">http://www.scbdd.com</a>
 &#64;Mail: <a class="reference external" href="mailto:yzjkid9&#37;&#52;&#48;gmail&#46;com">yzjkid9<span>&#64;</span>gmail<span>&#46;</span>com</a>; <a class="reference external" href="mailto:oriental-cds&#37;&#52;&#48;163&#46;com">oriental-cds<span>&#64;</span>163<span>&#46;</span>com</a>
 &#64;Blog: <a class="reference external" href="https://blog.iamkotori.com">https://blog.iamkotori.com</a></p>
-<p>♥I love Princess Zelda forever♥</p>
 <dl class="function">
 <dt id="smash.fragments.circular.GetFoldedCircularFragment">
-<code class="sig-prename descclassname">smash.fragments.circular.</code><code class="sig-name descname">GetFoldedCircularFragment</code><span class="sig-paren">(</span><em class="sig-param">mol</em>, <em class="sig-param">minRadius=1</em>, <em class="sig-param">maxRadius=2</em>, <em class="sig-param">nBits=1024</em>, <em class="sig-param">maxFragment=True</em>, <em class="sig-param">svg=False</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/smash/fragments/circular.html#GetFoldedCircularFragment"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#smash.fragments.circular.GetFoldedCircularFragment" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">smash.fragments.circular.</code><code class="sig-name descname">GetFoldedCircularFragment</code><span class="sig-paren">(</span><em class="sig-param">mol</em>, <em class="sig-param">minRadius=1</em>, <em class="sig-param">maxRadius=2</em>, <em class="sig-param">nBits=1024</em>, <em class="sig-param">maxFragment=True</em>, <em class="sig-param">disposed=True</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/smash/fragments/circular.html#GetFoldedCircularFragment"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#smash.fragments.circular.GetFoldedCircularFragment" title="Permalink to this definition">¶</a></dt>
 <dd><p>Get folded circular fragment</p>
-<dl class="simple">
-<dt>mol<span class="classifier">dkit.Chem.rdchem.Mol object</span></dt><dd><p>Compound to be Calculated</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>mol</strong><span class="classifier">dkit.Chem.rdchem.Mol object</span></dt><dd><p>Compound to be Calculated</p>
 </dd>
-<dt>minRadius<span class="classifier">int, optional</span></dt><dd><p>The probable minimum radius of circular fragment, by default 1</p>
+<dt><strong>minRadius</strong><span class="classifier">int, optional</span></dt><dd><p>The probable minimum radius of circular fragment, by default 1</p>
 </dd>
-<dt>maxRadius<span class="classifier">int, optional</span></dt><dd><p>The probable maximum radius of circular fragment, by default 2</p>
+<dt><strong>maxRadius</strong><span class="classifier">int, optional</span></dt><dd><p>The probable maximum radius of circular fragment, by default 2</p>
 </dd>
-<dt>nBits<span class="classifier">int, optional, </span></dt><dd><p>the number of bit of morgan, by default 1014</p>
+<dt><strong>nBits</strong><span class="classifier">int, optional,</span></dt><dd><p>the number of bit of morgan, by default 1014</p>
 </dd>
-<dt>maxFragment<span class="classifier">bool, optional</span></dt><dd><p>Whether only return the maximum fragment at a center atom, by default True</p>
+<dt><strong>maxFragment</strong><span class="classifier">bool, optional</span></dt><dd><p>Whether only return the maximum fragment at a center atom, by default True</p>
 </dd>
-<dt>svg<span class="classifier">bool, optional</span></dt><dd><p>Whether output with a svg image, by default False</p>
+<dt><strong>disposed</strong><span class="classifier">bool, optional</span></dt><dd><p>Whether dispose the original bitinfo, by default True</p>
 </dd>
 </dl>
-<dl class="simple">
-<dt>fragments<span class="classifier">tuple</span></dt><dd><p>The first element is the ID of all fragments generated,
-and the second one is a dict whose key is the ID of output fragments,
-value is corresponding SMARTS and svg string (is svg set as True)</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><dl class="simple">
+<dt><strong>fragments</strong><span class="classifier">list of list</span></dt><dd><p>The first element is the ID of all fragments generated
+the second one is the ID of output fragments</p>
+</dd>
+</dl>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="function">
 <dt id="smash.fragments.circular.GetUnfoldedCircularFragment">
-<code class="sig-prename descclassname">smash.fragments.circular.</code><code class="sig-name descname">GetUnfoldedCircularFragment</code><span class="sig-paren">(</span><em class="sig-param">mol</em>, <em class="sig-param">minRadius=1</em>, <em class="sig-param">maxRadius=2</em>, <em class="sig-param">maxFragment=True</em>, <em class="sig-param">svg=False</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/smash/fragments/circular.html#GetUnfoldedCircularFragment"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#smash.fragments.circular.GetUnfoldedCircularFragment" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">smash.fragments.circular.</code><code class="sig-name descname">GetUnfoldedCircularFragment</code><span class="sig-paren">(</span><em class="sig-param">mol</em>, <em class="sig-param">minRadius=1</em>, <em class="sig-param">maxRadius=2</em>, <em class="sig-param">maxFragment=True</em>, <em class="sig-param">disposed=True</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/smash/fragments/circular.html#GetUnfoldedCircularFragment"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#smash.fragments.circular.GetUnfoldedCircularFragment" title="Permalink to this definition">¶</a></dt>
 <dd><p>Get unfolded circular fragment</p>
-<dl class="simple">
-<dt>mol<span class="classifier">dkit.Chem.rdchem.Mol object</span></dt><dd><p>Compound to be Calculated</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>mol</strong><span class="classifier">dkit.Chem.rdchem.Mol object</span></dt><dd><p>Compound to be Calculated</p>
 </dd>
-<dt>minRadius<span class="classifier">int, optional</span></dt><dd><p>The probable minimum radius of circular fragment, by default 1</p>
+<dt><strong>minRadius</strong><span class="classifier">int, optional</span></dt><dd><p>The probable minimum radius of circular fragment, by default 1</p>
 </dd>
-<dt>maxRadius<span class="classifier">int, optional</span></dt><dd><p>The probable maximum radius of circular fragment, by default 2</p>
+<dt><strong>maxRadius</strong><span class="classifier">int, optional</span></dt><dd><p>The probable maximum radius of circular fragment, by default 2</p>
 </dd>
-<dt>maxFragment<span class="classifier">bool, optional</span></dt><dd><p>Whether only return the maximum fragment at a center atom, by default True</p>
+<dt><strong>maxFragment</strong><span class="classifier">bool, optional</span></dt><dd><p>Whether only return the maximum fragment at a center atom, by default True</p>
 </dd>
-<dt>svg<span class="classifier">bool, optional</span></dt><dd><p>Whether output with a svg image, by default False</p>
+<dt><strong>disposed</strong><span class="classifier">bool, optional</span></dt><dd><p>Whether dispose the original bitinfo, by default True</p>
 </dd>
 </dl>
-<dl class="simple">
-<dt>fragments<span class="classifier">tuple</span></dt><dd><p>The first element is the ID of all fragments generated,
-and the second one is a dict whose key is the ID of output fragments,
-value is corresponding SMARTS and svg string (is svg set as True)</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><dl class="simple">
+<dt><strong>fragments</strong><span class="classifier">list of list</span></dt><dd><p>The first element is the ID of all fragments generated
+the second one is the ID of output fragments</p>
+</dd>
+</dl>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="function">
 <dt id="smash.fragments.circular.GetCircularFragment">
-<code class="sig-prename descclassname">smash.fragments.circular.</code><code class="sig-name descname">GetCircularFragment</code><span class="sig-paren">(</span><em class="sig-param">mol</em>, <em class="sig-param">minRadius=1</em>, <em class="sig-param">maxRadius=2</em>, <em class="sig-param">nBits=1024</em>, <em class="sig-param">folded=False</em>, <em class="sig-param">maxFragment=True</em>, <em class="sig-param">svg=False</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/smash/fragments/circular.html#GetCircularFragment"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#smash.fragments.circular.GetCircularFragment" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">smash.fragments.circular.</code><code class="sig-name descname">GetCircularFragment</code><span class="sig-paren">(</span><em class="sig-param">mol</em>, <em class="sig-param">minRadius=1</em>, <em class="sig-param">maxRadius=2</em>, <em class="sig-param">nBits=1024</em>, <em class="sig-param">folded=False</em>, <em class="sig-param">maxFragment=True</em>, <em class="sig-param">disposed=True</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/smash/fragments/circular.html#GetCircularFragment"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#smash.fragments.circular.GetCircularFragment" title="Permalink to this definition">¶</a></dt>
 <dd><p>Get circular fragment</p>
-<dl class="simple">
-<dt>mol<span class="classifier">dkit.Chem.rdchem.Mol object</span></dt><dd><p>Compound to be Calculated</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>mol</strong><span class="classifier">dkit.Chem.rdchem.Mol object</span></dt><dd><p>Compound to be Calculated</p>
 </dd>
-<dt>minRadius<span class="classifier">int, optional</span></dt><dd><p>The probable minimum radius of circular fragment, by default 1</p>
+<dt><strong>minRadius</strong><span class="classifier">int, optional</span></dt><dd><p>The probable minimum radius of circular fragment, by default 1</p>
 </dd>
-<dt>maxRadius<span class="classifier">int, optional</span></dt><dd><p>The probable maximum radius of circular fragment, by default 2</p>
+<dt><strong>maxRadius</strong><span class="classifier">int, optional</span></dt><dd><p>The probable maximum radius of circular fragment, by default 2</p>
 </dd>
-<dt>nBits<span class="classifier">int, optional</span></dt><dd><p>the number of bit of morgan, by default 1014
+<dt><strong>nBits</strong><span class="classifier">int, optional</span></dt><dd><p>the number of bit of morgan, by default 1014
 this param would be ignored, if the folded set as False.</p>
 </dd>
-<dt>folded<span class="classifier">bool, optional</span></dt><dd><p>which generate fragment based on unfolded fingerprint, by default True.</p>
+<dt><strong>folded</strong><span class="classifier">bool, optional</span></dt><dd><p>which generate fragment based on unfolded fingerprint, by default True.</p>
 </dd>
-<dt>maxFragment<span class="classifier">bool, optional</span></dt><dd><p>Whether only return the maximum fragment at a center atom, by default True</p>
+<dt><strong>maxFragment</strong><span class="classifier">bool, optional</span></dt><dd><p>Whether only return the maximum fragment at a center atom, by default True</p>
 </dd>
-<dt>nJobs<span class="classifier">int, optional</span></dt><dd><p>The number of CPUs to use to do the computation, by default 1</p>
+<dt><strong>nJobs</strong><span class="classifier">int, optional</span></dt><dd><p>The number of CPUs to use to do the computation, by default 1</p>
 </dd>
-</dl>
-<dl class="simple">
-<dt>fragments<span class="classifier">tuple</span></dt><dd><p>The first element is the ID of all fragments generated,
-and the second one is a dict whose key is the ID of output fragments,
-value is corresponding SMARTS and svg string (is svg set as True)</p>
+<dt><strong>disposed</strong><span class="classifier">bool, optional</span></dt><dd><p>Whether dispose the original bitinfo, by default True</p>
 </dd>
 </dl>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><dl class="simple">
+<dt><strong>fragments</strong><span class="classifier">list of list</span></dt><dd><p>The first element is the ID of all fragments generated
+the second one is the ID of output fragments</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="smash.fragments.circular.DrawMorganEnv">
+<code class="sig-prename descclassname">smash.fragments.circular.</code><code class="sig-name descname">DrawMorganEnv</code><span class="sig-paren">(</span><em class="sig-param">mol</em>, <em class="sig-param">atomId</em>, <em class="sig-param">radius</em>, <em class="sig-param">molSize=(150</em>, <em class="sig-param">150)</em>, <em class="sig-param">baseRad=0.3</em>, <em class="sig-param">useSVG=True</em>, <em class="sig-param">aromaticColor=(0.9</em>, <em class="sig-param">0.9</em>, <em class="sig-param">0.2)</em>, <em class="sig-param">ringColor=(0.8</em>, <em class="sig-param">0.8</em>, <em class="sig-param">0.8)</em>, <em class="sig-param">centerColor=(0.6</em>, <em class="sig-param">0.6</em>, <em class="sig-param">0.9)</em>, <em class="sig-param">extraColor=(0.9</em>, <em class="sig-param">0.9</em>, <em class="sig-param">0.9)</em>, <em class="sig-param">drawOptions=None</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/smash/fragments/circular.html#DrawMorganEnv"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#smash.fragments.circular.DrawMorganEnv" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get SMARTS and SVG image from given ceten and radius
+<em>internal only</em></p>
 </dd></dl>
 
 </div>
@@ -174,17 +206,42 @@ value is corresponding SMARTS and svg string (is svg set as True)</p>
 <p>♥I love Princess Zelda forever♥</p>
 <dl class="function">
 <dt id="smash.fragments.functionGroup.GetFunctionGroupFragment">
-<code class="sig-prename descclassname">smash.fragments.functionGroup.</code><code class="sig-name descname">GetFunctionGroupFragment</code><span class="sig-paren">(</span><em class="sig-param">mol</em>, <em class="sig-param">svg=False</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/smash/fragments/functionGroup.html#GetFunctionGroupFragment"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#smash.fragments.functionGroup.GetFunctionGroupFragment" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">smash.fragments.functionGroup.</code><code class="sig-name descname">GetFunctionGroupFragment</code><span class="sig-paren">(</span><em class="sig-param">mol</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/smash/fragments/functionGroup.html#GetFunctionGroupFragment"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#smash.fragments.functionGroup.GetFunctionGroupFragment" title="Permalink to this definition">¶</a></dt>
 <dd><p>Calculate function group fragment.</p>
-<dl class="simple">
-<dt>mol<span class="classifier">dkit.Chem.rdchem.Mol object</span></dt><dd><p>Compound to be Calculated</p>
-</dd>
-<dt>svg<span class="classifier">bool, optional</span></dt><dd><p>Whether output with a svg image, by default False</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>mol</strong><span class="classifier">dkit.Chem.rdchem.Mol object</span></dt><dd><p>Compound to be Calculated</p>
 </dd>
 </dl>
-<dl class="simple">
-<dt>ifgs<span class="classifier">tuple of list</span></dt><dd><p>In each tuple element, the first element is the SMARTS of fragment
-and the second one svg string (is svg set as True)</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><dl class="simple">
+<dt><strong>ifgs</strong><span class="classifier">list</span></dt><dd><p>Each element is the SMARTS of a fragment</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="smash.fragments.functionGroup.DrawFgEnv">
+<code class="sig-prename descclassname">smash.fragments.functionGroup.</code><code class="sig-name descname">DrawFgEnv</code><span class="sig-paren">(</span><em class="sig-param">mol</em>, <em class="sig-param">subMol</em>, <em class="sig-param">molSize=(150</em>, <em class="sig-param">150)</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/smash/fragments/functionGroup.html#DrawFgEnv"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#smash.fragments.functionGroup.DrawFgEnv" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the SVG image of funtion group fragment</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>mol</strong><span class="classifier">rdkit.Chem.rdchem.Mol</span></dt><dd><p>The molecule which contain the aim fragment</p>
+</dd>
+<dt><strong>subMol</strong><span class="classifier">str</span></dt><dd><p>Fragment in fragment format</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><dl class="simple">
+<dt><strong>svg</strong><span class="classifier">str</span></dt><dd><p>The svg string of fragment</p>
+</dd>
+</dl>
 </dd>
 </dl>
 </dd></dl>
@@ -201,81 +258,104 @@ and the second one svg string (is svg set as True)</p>
 <p>♥I love Princess Zelda forever♥</p>
 <dl class="function">
 <dt id="smash.fragments.path.GetFoldedPathFragment">
-<code class="sig-prename descclassname">smash.fragments.path.</code><code class="sig-name descname">GetFoldedPathFragment</code><span class="sig-paren">(</span><em class="sig-param">mol</em>, <em class="sig-param">minPath=1</em>, <em class="sig-param">maxPath=7</em>, <em class="sig-param">nBits=1024</em>, <em class="sig-param">maxFragment=True</em>, <em class="sig-param">svg=False</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/smash/fragments/path.html#GetFoldedPathFragment"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#smash.fragments.path.GetFoldedPathFragment" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">smash.fragments.path.</code><code class="sig-name descname">GetFoldedPathFragment</code><span class="sig-paren">(</span><em class="sig-param">mol</em>, <em class="sig-param">minPath=1</em>, <em class="sig-param">maxPath=7</em>, <em class="sig-param">nBits=1024</em>, <em class="sig-param">maxFragment=True</em>, <em class="sig-param">disposed=True</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/smash/fragments/path.html#GetFoldedPathFragment"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#smash.fragments.path.GetFoldedPathFragment" title="Permalink to this definition">¶</a></dt>
 <dd><p>Calculate folded path fragment.</p>
-<dl class="simple">
-<dt>mol<span class="classifier">dkit.Chem.rdchem.Mol object</span></dt><dd><p>Compound to be Calculated</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>mol</strong><span class="classifier">dkit.Chem.rdchem.Mol object</span></dt><dd><p>Compound to be Calculated</p>
 </dd>
-<dt>minPath<span class="classifier">int, optional</span></dt><dd><p>The probable minimum length of path-based fragment, by default 1</p>
+<dt><strong>minPath</strong><span class="classifier">int, optional</span></dt><dd><p>The probable minimum length of path-based fragment, by default 1</p>
 </dd>
-<dt>maxPath<span class="classifier">int, optional</span></dt><dd><p>The probable maximum length of path-based fragment, by default 7</p>
+<dt><strong>maxPath</strong><span class="classifier">int, optional</span></dt><dd><p>The probable maximum length of path-based fragment, by default 7</p>
 </dd>
-<dt>nBits<span class="classifier">int, optional</span></dt><dd><p>the number of bit of morgan, by default 1014</p>
+<dt><strong>nBits</strong><span class="classifier">int, optional</span></dt><dd><p>the number of bit of morgan, by default 1014</p>
 </dd>
-<dt>maxFragment<span class="classifier">bool, optional</span></dt><dd><p>Whether only return the maximum fragment of a given start atom, by default True</p>
+<dt><strong>maxFragment</strong><span class="classifier">bool, optional</span></dt><dd><p>Whether only return the maximum fragment of a given start atom, by default True</p>
 </dd>
-<dt>svg<span class="classifier">bool, optional</span></dt><dd><p>Whether output with a svg image, by default False</p>
+<dt><strong>disposed</strong><span class="classifier">bool, optional</span></dt><dd><p>Whether dispose the original bitinfo, by default True</p>
 </dd>
 </dl>
-<dl class="simple">
-<dt>fragments<span class="classifier">tuple</span></dt><dd><p>The first element is the ID of all fragments generated,
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><dl class="simple">
+<dt><strong>fragments</strong><span class="classifier">tuple</span></dt><dd><p>The first element is the ID of all fragments generated,
 and the second one is a dict whose key is the ID of output fragments,
 value is corresponding SMARTS and svg string (is svg set as True)</p>
+</dd>
+</dl>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="function">
 <dt id="smash.fragments.path.GetUnfoldedPathFragment">
-<code class="sig-prename descclassname">smash.fragments.path.</code><code class="sig-name descname">GetUnfoldedPathFragment</code><span class="sig-paren">(</span><em class="sig-param">mol</em>, <em class="sig-param">minPath=1</em>, <em class="sig-param">maxPath=7</em>, <em class="sig-param">maxFragment=True</em>, <em class="sig-param">svg=False</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/smash/fragments/path.html#GetUnfoldedPathFragment"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#smash.fragments.path.GetUnfoldedPathFragment" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">smash.fragments.path.</code><code class="sig-name descname">GetUnfoldedPathFragment</code><span class="sig-paren">(</span><em class="sig-param">mol</em>, <em class="sig-param">minPath=1</em>, <em class="sig-param">maxPath=7</em>, <em class="sig-param">maxFragment=True</em>, <em class="sig-param">disposed=True</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/smash/fragments/path.html#GetUnfoldedPathFragment"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#smash.fragments.path.GetUnfoldedPathFragment" title="Permalink to this definition">¶</a></dt>
 <dd><p>Calculate unfolded path fragment.</p>
-<dl class="simple">
-<dt>mol<span class="classifier">dkit.Chem.rdchem.Mol object</span></dt><dd><p>Compound to be Calculated</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>mol</strong><span class="classifier">dkit.Chem.rdchem.Mol object</span></dt><dd><p>Compound to be Calculated</p>
 </dd>
-<dt>minPath<span class="classifier">int, optional</span></dt><dd><p>The probable minimum length of path-based fragment, by default 1</p>
+<dt><strong>minPath</strong><span class="classifier">int, optional</span></dt><dd><p>The probable minimum length of path-based fragment, by default 1</p>
 </dd>
-<dt>maxPath<span class="classifier">int, optional</span></dt><dd><p>The probable maximum length of path-based fragment, by default 7</p>
+<dt><strong>maxPath</strong><span class="classifier">int, optional</span></dt><dd><p>The probable maximum length of path-based fragment, by default 7</p>
 </dd>
-<dt>maxFragment<span class="classifier">bool, optional</span></dt><dd><p>Whether only return the maximum fragment of a given start atom, by default True</p>
+<dt><strong>maxFragment</strong><span class="classifier">bool, optional</span></dt><dd><p>Whether only return the maximum fragment of a given start atom, by default True</p>
 </dd>
-<dt>svg<span class="classifier">bool, optional</span></dt><dd><p>Whether output with a svg image, by default False</p>
+<dt><strong>disposed</strong><span class="classifier">bool, optional</span></dt><dd><p>Whether dispose the original bitinfo, by default True</p>
 </dd>
 </dl>
-<dl class="simple">
-<dt>fragments<span class="classifier">tuple</span></dt><dd><p>The first element is the ID of all fragments generated,
-and the second one is a dict whose key is the ID of output fragments,
-value is corresponding SMARTS and svg string (is svg set as True)</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><dl class="simple">
+<dt><strong>fragments</strong><span class="classifier">list of list</span></dt><dd><p>The first element is the ID of all fragments generated
+the second one is the ID of output fragments</p>
+</dd>
+</dl>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="function">
 <dt id="smash.fragments.path.GetPathFragment">
-<code class="sig-prename descclassname">smash.fragments.path.</code><code class="sig-name descname">GetPathFragment</code><span class="sig-paren">(</span><em class="sig-param">mol</em>, <em class="sig-param">minPath=1</em>, <em class="sig-param">maxPath=7</em>, <em class="sig-param">nBits=1024</em>, <em class="sig-param">folded=False</em>, <em class="sig-param">maxFragment=True</em>, <em class="sig-param">svg=False</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/smash/fragments/path.html#GetPathFragment"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#smash.fragments.path.GetPathFragment" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">smash.fragments.path.</code><code class="sig-name descname">GetPathFragment</code><span class="sig-paren">(</span><em class="sig-param">mol</em>, <em class="sig-param">minPath=1</em>, <em class="sig-param">maxPath=7</em>, <em class="sig-param">nBits=1024</em>, <em class="sig-param">folded=False</em>, <em class="sig-param">maxFragment=True</em>, <em class="sig-param">disposed=True</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/smash/fragments/path.html#GetPathFragment"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#smash.fragments.path.GetPathFragment" title="Permalink to this definition">¶</a></dt>
 <dd><p>Calculate path fragment.</p>
-<dl class="simple">
-<dt>mol<span class="classifier">dkit.Chem.rdchem.Mol object</span></dt><dd><p>Compound to be Calculated</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>mol</strong><span class="classifier">dkit.Chem.rdchem.Mol object</span></dt><dd><p>Compound to be Calculated</p>
 </dd>
-<dt>minPath<span class="classifier">int, optional</span></dt><dd><p>The probable minimum length of path-based fragment, by default 1</p>
+<dt><strong>minPath</strong><span class="classifier">int, optional</span></dt><dd><p>The probable minimum length of path-based fragment, by default 1</p>
 </dd>
-<dt>maxPath<span class="classifier">int, optional</span></dt><dd><p>The probable maximum length of path-based fragment, by default 7</p>
+<dt><strong>maxPath</strong><span class="classifier">int, optional</span></dt><dd><p>The probable maximum length of path-based fragment, by default 7</p>
 </dd>
-<dt>nBits<span class="classifier">int, optional</span></dt><dd><p>the number of bit of morgan, by default 1014
+<dt><strong>nBits</strong><span class="classifier">int, optional</span></dt><dd><p>the number of bit of morgan, by default 1014
 this param would be ignored, if the folded set as False.</p>
 </dd>
-<dt>folded<span class="classifier">bool, optional</span></dt><dd><p>which generate fragment based on unfolded fingerprint, by default True.</p>
+<dt><strong>folded</strong><span class="classifier">bool, optional</span></dt><dd><p>which generate fragment based on unfolded fingerprint, by default True.</p>
 </dd>
-<dt>maxFragment<span class="classifier">bool, optional</span></dt><dd><p>Whether only return the maximum fragment at a center atom, by default True</p>
+<dt><strong>maxFragment</strong><span class="classifier">bool, optional</span></dt><dd><p>Whether only return the maximum fragment at a center atom, by default True</p>
 </dd>
-<dt>svg<span class="classifier">bool, optional</span></dt><dd><p>Whether output with a svg image, by default False</p>
-</dd>
-</dl>
-<dl class="simple">
-<dt>fragments<span class="classifier">tuple</span></dt><dd><p>The first element is the ID of all fragments generated,
-and the second one is a dict whose key is the ID of output fragments,
-value is corresponding SMARTS and svg string (is svg set as True)</p>
+<dt><strong>disposed</strong><span class="classifier">bool, optional</span></dt><dd><p>Whether dispose the original bitinfo, by default True</p>
 </dd>
 </dl>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><dl class="simple">
+<dt><strong>fragments</strong><span class="classifier">list of list</span></dt><dd><p>The first element is the ID of all fragments generated
+the second one is the ID of output fragments</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="smash.fragments.path.DrawRDKitEnv">
+<code class="sig-prename descclassname">smash.fragments.path.</code><code class="sig-name descname">DrawRDKitEnv</code><span class="sig-paren">(</span><em class="sig-param">mol</em>, <em class="sig-param">bondPath</em>, <em class="sig-param">molSize=(150</em>, <em class="sig-param">150)</em>, <em class="sig-param">baseRad=0.3</em>, <em class="sig-param">useSVG=True</em>, <em class="sig-param">aromaticColor=(0.9</em>, <em class="sig-param">0.9</em>, <em class="sig-param">0.2)</em>, <em class="sig-param">extraColor=(0.9</em>, <em class="sig-param">0.9</em>, <em class="sig-param">0.9)</em>, <em class="sig-param">nonAromaticColor=None</em>, <em class="sig-param">drawOptions=None</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/smash/fragments/path.html#DrawRDKitEnv"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#smash.fragments.path.DrawRDKitEnv" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get SMARTS and SVG image from given bonds
+<em>internal only</em></p>
 </dd></dl>
 
 </div>
@@ -291,37 +371,91 @@ value is corresponding SMARTS and svg string (is svg set as True)</p>
 <dl class="class">
 <dt id="smash.fragments.Circular">
 <em class="property">class </em><code class="sig-prename descclassname">smash.fragments.</code><code class="sig-name descname">Circular</code><span class="sig-paren">(</span><em class="sig-param">minRadius=1</em>, <em class="sig-param">maxRadius=2</em>, <em class="sig-param">nBits=1024</em>, <em class="sig-param">folded=False</em>, <em class="sig-param">maxFragment=True</em>, <em class="sig-param">nJobs=1</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/smash/fragments.html#Circular"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#smash.fragments.Circular" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.8)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
 <p>Calculte circular fragments and obtain matrix</p>
+<p class="rubric">Methods</p>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#smash.fragments.Circular.GetCircularFragmentLib" title="smash.fragments.Circular.GetCircularFragmentLib"><code class="xref py py-obj docutils literal notranslate"><span class="pre">GetCircularFragmentLib</span></code></a>(mols)</p></td>
+<td><p>Calculate circular fragments</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#smash.fragments.Circular.GetCircularMatrix" title="smash.fragments.Circular.GetCircularMatrix"><code class="xref py py-obj docutils literal notranslate"><span class="pre">GetCircularMatrix</span></code></a>(mols[, minNum])</p></td>
+<td><p>return circular matrix</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#smash.fragments.Circular.ShowCircularFragment" title="smash.fragments.Circular.ShowCircularFragment"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ShowCircularFragment</span></code></a>(mol, fragmentIndex)</p></td>
+<td><p>Get the SMARTS and SVG image of circular fragment</p></td>
+</tr>
+</tbody>
+</table>
 <dl class="method">
 <dt id="smash.fragments.Circular.GetCircularFragmentLib">
-<code class="sig-name descname">GetCircularFragmentLib</code><span class="sig-paren">(</span><em class="sig-param">mols</em>, <em class="sig-param">svg=False</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/smash/fragments.html#Circular.GetCircularFragmentLib"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#smash.fragments.Circular.GetCircularFragmentLib" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">GetCircularFragmentLib</code><span class="sig-paren">(</span><em class="sig-param">mols</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/smash/fragments.html#Circular.GetCircularFragmentLib"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#smash.fragments.Circular.GetCircularFragmentLib" title="Permalink to this definition">¶</a></dt>
 <dd><p>Calculate circular fragments</p>
-<dl class="simple">
-<dt>mols<span class="classifier">Iterable object, and each element is a rdkit.Chem.rdchem.Mol object.</span></dt><dd><p>The compounds used to obtain circular fragments.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>mols</strong><span class="classifier">Iterable object, and each element is a rdkit.Chem.rdchem.Mol object.</span></dt><dd><p>The compounds used to obtain circular fragments.</p>
 </dd>
-<dt>svg<span class="classifier">bool, optional</span></dt><dd><p>Whether output with a svg image, by default False</p>
+<dt><strong>svg</strong><span class="classifier">bool, optional</span></dt><dd><p>Whether output with a svg image, by default False</p>
 </dd>
 </dl>
-<dl class="simple">
-<dt>fragments<span class="classifier">list</span></dt><dd><p>Fragments calculated, each element is a tuple 
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><dl class="simple">
+<dt><strong>fragments</strong><span class="classifier">list</span></dt><dd><p>Fragments calculated, each element is a list of list
 return from GetCircularFragment() function</p>
+</dd>
+</dl>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="method">
 <dt id="smash.fragments.Circular.GetCircularMatrix">
-<code class="sig-name descname">GetCircularMatrix</code><span class="sig-paren">(</span><em class="sig-param">mols</em>, <em class="sig-param">svg=False</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/smash/fragments.html#Circular.GetCircularMatrix"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#smash.fragments.Circular.GetCircularMatrix" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">GetCircularMatrix</code><span class="sig-paren">(</span><em class="sig-param">mols</em>, <em class="sig-param">minNum=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/smash/fragments.html#Circular.GetCircularMatrix"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#smash.fragments.Circular.GetCircularMatrix" title="Permalink to this definition">¶</a></dt>
 <dd><p>return circular matrix</p>
-<dl class="simple">
-<dt>mols<span class="classifier">Iterable object, and each element is a rdkit.Chem.rdchem.Mol object</span></dt><dd><p>The compounds used to obtain circular fragments matrix</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>mols</strong><span class="classifier">Iterable object, and each element is a rdkit.Chem.rdchem.Mol object</span></dt><dd><p>The compounds used to obtain circular fragments matrix</p>
 </dd>
-<dt>svg<span class="classifier">bool, optional</span></dt><dd><p>Whether output with a svg image, by default False</p>
+<dt><strong>minNum</strong><span class="classifier">bool, optional</span></dt><dd><p>Whether output with a svg image, by default False</p>
 </dd>
 </dl>
-<dl class="simple">
-<dt>pandas.core.frame.DataFrame</dt><dd><p>The fragment matrix of molecules</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><dl class="simple">
+<dt><strong>pandas.core.frame.DataFrame</strong></dt><dd><p>The fragment matrix of molecules</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="smash.fragments.Circular.ShowCircularFragment">
+<code class="sig-name descname">ShowCircularFragment</code><span class="sig-paren">(</span><em class="sig-param">mol</em>, <em class="sig-param">fragmentIndex</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/smash/fragments.html#Circular.ShowCircularFragment"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#smash.fragments.Circular.ShowCircularFragment" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the SMARTS and SVG image of circular fragment</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>mol</strong><span class="classifier">rdkit.Chem.rdchem.Mol</span></dt><dd><p>The molecule which contain the aim fragment</p>
+</dd>
+<dt><strong>fragmentIndex</strong><span class="classifier">int</span></dt><dd><p>The index of aim fragment</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><dl class="simple">
+<dt><strong>smarts</strong><span class="classifier">str</span></dt><dd><p>The SMARTS of fragment, which could be used for screening molecules</p>
+</dd>
+<dt><strong>svg</strong><span class="classifier">str</span></dt><dd><p>The svg string of fragment</p>
+</dd>
+</dl>
 </dd>
 </dl>
 </dd></dl>
@@ -331,36 +465,86 @@ return from GetCircularFragment() function</p>
 <dl class="class">
 <dt id="smash.fragments.FunctionGroup">
 <em class="property">class </em><code class="sig-prename descclassname">smash.fragments.</code><code class="sig-name descname">FunctionGroup</code><span class="sig-paren">(</span><em class="sig-param">nJobs=1</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/smash/fragments.html#FunctionGroup"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#smash.fragments.FunctionGroup" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.8)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
 <p>Calculte function-group fragments and obtain matrix</p>
+<p class="rubric">Methods</p>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#smash.fragments.FunctionGroup.GetFunctionGroupFragmentLib" title="smash.fragments.FunctionGroup.GetFunctionGroupFragmentLib"><code class="xref py py-obj docutils literal notranslate"><span class="pre">GetFunctionGroupFragmentLib</span></code></a>(mols)</p></td>
+<td><p>Calculate function-group fragments</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#smash.fragments.FunctionGroup.GetFunctionGroupsMatrix" title="smash.fragments.FunctionGroup.GetFunctionGroupsMatrix"><code class="xref py py-obj docutils literal notranslate"><span class="pre">GetFunctionGroupsMatrix</span></code></a>(mols[, minNum])</p></td>
+<td><p>return function-group matrix</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#smash.fragments.FunctionGroup.ShowFgFragment" title="smash.fragments.FunctionGroup.ShowFgFragment"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ShowFgFragment</span></code></a>(mol, fragment)</p></td>
+<td><p>Get the SMARTS and SVG image of functional group fragment</p></td>
+</tr>
+</tbody>
+</table>
 <dl class="method">
 <dt id="smash.fragments.FunctionGroup.GetFunctionGroupFragmentLib">
-<code class="sig-name descname">GetFunctionGroupFragmentLib</code><span class="sig-paren">(</span><em class="sig-param">mols</em>, <em class="sig-param">svg=False</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/smash/fragments.html#FunctionGroup.GetFunctionGroupFragmentLib"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#smash.fragments.FunctionGroup.GetFunctionGroupFragmentLib" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">GetFunctionGroupFragmentLib</code><span class="sig-paren">(</span><em class="sig-param">mols</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/smash/fragments.html#FunctionGroup.GetFunctionGroupFragmentLib"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#smash.fragments.FunctionGroup.GetFunctionGroupFragmentLib" title="Permalink to this definition">¶</a></dt>
 <dd><p>Calculate function-group fragments</p>
-<dl class="simple">
-<dt>mols<span class="classifier">Iterable object, and each element is a rdkit.Chem.rdchem.Mol object</span></dt><dd><p>The compounds used to obtain function-group fragment</p>
-</dd>
-<dt>svg<span class="classifier">bool, optional</span></dt><dd><p>Whether output with a svg image, by default False</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>mols</strong><span class="classifier">Iterable object, and each element is a rdkit.Chem.rdchem.Mol object</span></dt><dd><p>The compounds used to obtain function-group fragment</p>
 </dd>
 </dl>
-<dl class="simple">
-<dt>fragments<span class="classifier">list</span></dt><dd><p>Fragments calculated, each element is rerurned from GetFunctionGroupFragment() function</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><dl class="simple">
+<dt><strong>fragments</strong><span class="classifier">list</span></dt><dd><p>Fragments calculated, each element is rerurned from GetFunctionGroupFragment() function</p>
+</dd>
+</dl>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="method">
 <dt id="smash.fragments.FunctionGroup.GetFunctionGroupsMatrix">
-<code class="sig-name descname">GetFunctionGroupsMatrix</code><span class="sig-paren">(</span><em class="sig-param">mols</em>, <em class="sig-param">svg=False</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/smash/fragments.html#FunctionGroup.GetFunctionGroupsMatrix"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#smash.fragments.FunctionGroup.GetFunctionGroupsMatrix" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">GetFunctionGroupsMatrix</code><span class="sig-paren">(</span><em class="sig-param">mols</em>, <em class="sig-param">minNum=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/smash/fragments.html#FunctionGroup.GetFunctionGroupsMatrix"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#smash.fragments.FunctionGroup.GetFunctionGroupsMatrix" title="Permalink to this definition">¶</a></dt>
 <dd><p>return function-group matrix</p>
-<dl class="simple">
-<dt>mols<span class="classifier">Iterable object, and each element is a rdkit.Chem.rdchem.Mol object</span></dt><dd><p>The compounds used to obtain function-group matrix</p>
-</dd>
-<dt>svg<span class="classifier">bool, optional</span></dt><dd><p>Whether output with a svg image, by default False</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>mols</strong><span class="classifier">Iterable object, and each element is a rdkit.Chem.rdchem.Mol object</span></dt><dd><p>The compounds used to obtain function-group matrix</p>
 </dd>
 </dl>
-<dl class="simple">
-<dt>pandas.core.frame.DataFrame</dt><dd><p>the fragment matrix of molecules</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><dl class="simple">
+<dt><strong>pandas.core.frame.DataFrame</strong></dt><dd><p>the fragment matrix of molecules</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="smash.fragments.FunctionGroup.ShowFgFragment">
+<code class="sig-name descname">ShowFgFragment</code><span class="sig-paren">(</span><em class="sig-param">mol</em>, <em class="sig-param">fragment</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/smash/fragments.html#FunctionGroup.ShowFgFragment"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#smash.fragments.FunctionGroup.ShowFgFragment" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the SMARTS and SVG image of functional group fragment</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>mol</strong><span class="classifier">rdkit.Chem.rdchem.Mol</span></dt><dd><p>The molecule which contain the aim fragment</p>
+</dd>
+<dt><strong>fragment</strong><span class="classifier">int</span></dt><dd><p>The fragment in SMARTS format</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><dl class="simple">
+<dt><strong>smarts</strong><span class="classifier">str</span></dt><dd><p>The SMARTS of fragment, which could be used for screening molecules</p>
+</dd>
+<dt><strong>svg</strong><span class="classifier">str</span></dt><dd><p>The svg string of fragment</p>
+</dd>
+</dl>
 </dd>
 </dl>
 </dd></dl>
@@ -370,36 +554,88 @@ return from GetCircularFragment() function</p>
 <dl class="class">
 <dt id="smash.fragments.Path">
 <em class="property">class </em><code class="sig-prename descclassname">smash.fragments.</code><code class="sig-name descname">Path</code><span class="sig-paren">(</span><em class="sig-param">minPath=1</em>, <em class="sig-param">maxPath=7</em>, <em class="sig-param">nBits=1024</em>, <em class="sig-param">folded=False</em>, <em class="sig-param">maxFragment=True</em>, <em class="sig-param">nJobs=1</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/smash/fragments.html#Path"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#smash.fragments.Path" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.8)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
 <p>Calculte path-based fragments and obtain matrix</p>
+<p class="rubric">Methods</p>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#smash.fragments.Path.GetPathFragmentLib" title="smash.fragments.Path.GetPathFragmentLib"><code class="xref py py-obj docutils literal notranslate"><span class="pre">GetPathFragmentLib</span></code></a>(mols)</p></td>
+<td><p>Calculate path-based fragments</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#smash.fragments.Path.GetPathMatrix" title="smash.fragments.Path.GetPathMatrix"><code class="xref py py-obj docutils literal notranslate"><span class="pre">GetPathMatrix</span></code></a>(mols[, minNum])</p></td>
+<td><p>return path-based matrix</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#smash.fragments.Path.ShowPathFragment" title="smash.fragments.Path.ShowPathFragment"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ShowPathFragment</span></code></a>(mol, fragmentIndex)</p></td>
+<td><p>Get the SMARTS and SVG image of Path fragment</p></td>
+</tr>
+</tbody>
+</table>
 <dl class="method">
 <dt id="smash.fragments.Path.GetPathFragmentLib">
-<code class="sig-name descname">GetPathFragmentLib</code><span class="sig-paren">(</span><em class="sig-param">mols</em>, <em class="sig-param">svg=False</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/smash/fragments.html#Path.GetPathFragmentLib"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#smash.fragments.Path.GetPathFragmentLib" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">GetPathFragmentLib</code><span class="sig-paren">(</span><em class="sig-param">mols</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/smash/fragments.html#Path.GetPathFragmentLib"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#smash.fragments.Path.GetPathFragmentLib" title="Permalink to this definition">¶</a></dt>
 <dd><p>Calculate path-based fragments</p>
-<dl class="simple">
-<dt>mols<span class="classifier">Iterable object, and each element is a rdkit.Chem.rdchem.Mol object</span></dt><dd><p>The compounds used to obtain path-based fragment</p>
-</dd>
-<dt>svg<span class="classifier">bool, optional</span></dt><dd><p>Whether output with a svg image, by default False</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>mols</strong><span class="classifier">Iterable object, and each element is a rdkit.Chem.rdchem.Mol object</span></dt><dd><p>The compounds used to obtain path-based fragment</p>
 </dd>
 </dl>
-<dl class="simple">
-<dt>fragments<span class="classifier">list</span></dt><dd><p>Fragments calculated, each element is returned from GetPathFragment() function</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><dl class="simple">
+<dt><strong>fragments</strong><span class="classifier">list</span></dt><dd><p>Fragments calculated, each element is returned from GetPathFragment() function</p>
+</dd>
+</dl>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="method">
 <dt id="smash.fragments.Path.GetPathMatrix">
-<code class="sig-name descname">GetPathMatrix</code><span class="sig-paren">(</span><em class="sig-param">mols</em>, <em class="sig-param">svg=False</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/smash/fragments.html#Path.GetPathMatrix"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#smash.fragments.Path.GetPathMatrix" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">GetPathMatrix</code><span class="sig-paren">(</span><em class="sig-param">mols</em>, <em class="sig-param">minNum=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/smash/fragments.html#Path.GetPathMatrix"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#smash.fragments.Path.GetPathMatrix" title="Permalink to this definition">¶</a></dt>
 <dd><p>return path-based matrix</p>
-<dl class="simple">
-<dt>mols<span class="classifier">Iterable object, and each element is a rdkit.Chem.rdchem.Mol object</span></dt><dd><p>The compounds used to obtain path-based matrix</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>mols</strong><span class="classifier">Iterable object, and each element is a rdkit.Chem.rdchem.Mol object</span></dt><dd><p>The compounds used to obtain path-based matrix</p>
 </dd>
-<dt>svg<span class="classifier">bool, optional</span></dt><dd><p>Whether output with a svg image, by default False</p>
+<dt><strong>minNum</strong><span class="classifier">bool, optional</span></dt><dd><p>Whether output with a svg image, by default False</p>
 </dd>
 </dl>
-<dl class="simple">
-<dt>pandas.core.frame.DataFrame</dt><dd><p>the fragment matrix of molecules</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><dl class="simple">
+<dt><strong>matrix</strong><span class="classifier">pandas.core.frame.DataFrame</span></dt><dd><p>The fragment matrix of molecules</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="smash.fragments.Path.ShowPathFragment">
+<code class="sig-name descname">ShowPathFragment</code><span class="sig-paren">(</span><em class="sig-param">mol</em>, <em class="sig-param">fragmentIndex</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/smash/fragments.html#Path.ShowPathFragment"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#smash.fragments.Path.ShowPathFragment" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the SMARTS and SVG image of Path fragment</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>mol</strong><span class="classifier">rdkit.Chem.rdchem.Mol</span></dt><dd><p>The molecule which contain the aim fragment</p>
+</dd>
+<dt><strong>fragmentIndex</strong><span class="classifier">int</span></dt><dd><p>The index of aim fragment</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><dl class="simple">
+<dt><strong>smarts</strong><span class="classifier">str</span></dt><dd><p>The SMARTS of fragment, which could be used for screening molecules</p>
+</dd>
+<dt><strong>svg</strong><span class="classifier">str</span></dt><dd><p>The svg string of fragment</p>
+</dd>
+</dl>
 </dd>
 </dl>
 </dd></dl>
@@ -424,11 +660,16 @@ return from GetCircularFragment() function</p>
         <li class="right" >
           <a href="../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../index.html">pySmash v0.1 documentation</a> &#187;</li> 
+        <li class="right" >
+          <a href="smash.html" title="smash package"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">PySmash v1.0 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../modules.html" >pySmash API</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="smash.html" >smash package</a> &#187;</li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">
-        &#169; Copyright 2020, Kotori_y.
+        &#169; Copyright 2020, Kotori Yang.
       Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.3.0.
     </div>
   </body>

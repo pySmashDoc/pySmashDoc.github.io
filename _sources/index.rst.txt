@@ -1,26 +1,26 @@
-.. pySmash documentation master file, created by
-   sphinx-quickstart on Wed Aug 12 15:40:59 2020.
+.. PySmash documentation master file, created by
+   sphinx-quickstart on Wed Sep  2 16:32:26 2020.
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
-Welcome to pySmash's documentation!
+Welcome to PySmash's documentation!
 ===================================
-In the field of chemoinformatics, there is a saying that similar structures have similar properties. The main aim of chemoinformatics refers to analyzing the similarity among molecules, searching the molecules in the structural database, finding potential drug molecule and their property. To systematically obtain the relation between structure and property, we developed pySmash, a Python library designed for obtaining fragments, which are highly related to a specific endpoint conveniently and comprehensively. pySmash can smash molecules, which have certein property label, with three different algorithms, including **circular**-, **path**- and **function group**-based, and combined with statistical methods to a set of significant fragments. By using these fragments, the molecule with unknown label can got a predicted label. Besides, pySmash provides functionalities for the easy visualization of the derived fragments. The Python package pySmash is designed by `CBDD Group`_ (Computational Biology & Drug Design Group), Xiangya School of Pharmaceutical Sciences, Central South University.
+Structural alerts are widely applied in drug discovery and have been instrumental in evaluating potency against its intended target, appropriate absorption, distribution, metabolism, and elimination (ADME) properties and an acceptable safety profile. They are also integrated into the application of QSAR model, which can provide wide application domain and clear interpretability. With the increase of the available public domain resources, computational data-driven systems which can draw on large databases, analyze the underlying data, and apply the resulting knowledge automatically with no human intervention get more attention. Here, PySmash is presented, which offers several advantages for the automatic derivation and application of the derived structural alerts: (1) various alert derivation algorithms; (2) simple and convenient operation; (3) easy visualization of the derived structural alerts, (4) substructure anlysis for neither positive or negative set and (5) integration of the alerts extraction and application. It provides both Python package and software, which can meet the different research need. PySmash is designed by `CBDD Group`_ (Computational Biology & Drug Design Group), Xiangya School of Pharmaceutical Sciences, Central South University.
 
 .. _`CBDD Group`: http://home.scbdd.com/index.php?s=/Home/Index.html&t=english
 
+.. toctree::
+   :maxdepth: 4
+
+   overview
+   smash_tutorial.ipynb
+   pysmash_gui.ipynb
+   Application.ipynb
 
 .. toctree::
    :maxdepth: 3
 
-   smash_tutorial
-   pysmash_gui
-   Application
-
-.. automodule::
-   :maxdepth: 3
-   
-   modules.rst
+   modules
 
 Indices and tables
 ==================

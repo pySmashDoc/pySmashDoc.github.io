@@ -1,8 +1,8 @@
 pySmash API
-===============
+============
 
 .. toctree::
    :maxdepth: 4
    
-   /modules/smash
-   /modules/smash.fragments
+   ./modules/smash
+   ./modules/smash.fragments

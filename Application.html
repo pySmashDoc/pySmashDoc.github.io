@@ -4,7 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta charset="utf-8" />
-    <title>Application &#8212; pySmash v0.1 documentation</title>
+    <title>Application &#8212; PySmash v1.0 documentation</title>
     <link rel="stylesheet" href="_static/sphinxdoc.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
@@ -17,6 +17,7 @@
     <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true, "ignoreClass": "document", "processClass": "math|output_area"}})</script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="pySmash API" href="modules.html" />
     <link rel="prev" title="Getting Started with pySmash GUI" href="pysmash_gui.html" /> 
   </head><body>
     <div class="related" role="navigation" aria-label="related navigation">
@@ -29,9 +30,12 @@
           <a href="py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
         <li class="right" >
+          <a href="modules.html" title="pySmash API"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
           <a href="pysmash_gui.html" title="Getting Started with pySmash GUI"
              accesskey="P">previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="index.html">pySmash v0.1 documentation</a> &#187;</li> 
+        <li class="nav-item nav-item-0"><a href="index.html">PySmash v1.0 documentation</a> &#187;</li> 
       </ul>
     </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
@@ -39,7 +43,10 @@
   <h3><a href="index.html">Table of Contents</a></h3>
   <ul>
 <li><a class="reference internal" href="#">Application</a><ul>
-<li><a class="reference internal" href="#Generating-Significant-Fragment-for-Chemical-Carcinogens">Generating Significant Fragment for Chemical Carcinogens</a></li>
+<li><a class="reference internal" href="#Example-of-toxicophore-analysis-on-a-carcinogenicity-dataset">Example of toxicophore analysis on a carcinogenicity dataset</a><ul>
+<li><a class="reference internal" href="#Result-1">Result 1</a></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -47,6 +54,9 @@
   <h4>Previous topic</h4>
   <p class="topless"><a href="pysmash_gui.html"
                         title="previous chapter">Getting Started with pySmash GUI</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="modules.html"
+                        title="next chapter">pySmash API</a></p>
   <div role="note" aria-label="source link">
     <h3>This Page</h3>
     <ul class="this-page-menu">
@@ -307,12 +317,13 @@ div.rendered_html tbody tr:hover {
 </style>
 <div class="section" id="Application">
 <h1>Application<a class="headerlink" href="#Application" title="Permalink to this headline">¶</a></h1>
-<p>In order to obtain a better understanding of <strong>pySmash</strong> and its application, we introduce an examples to show a regular significant fragment extracting process. We will show the workflow of <strong>pySmash</strong> in <em>package</em> and <em>software</em>.</p>
-<p><a class="no-scaled-link reference internal" href="image/flow.png"><img alt="fd4cc63ac33c46aba1ccf06c34f5de95" class="no-scaled-link" src="image/flow.png" style="width: 800px;" /></a></p>
-<div class="section" id="Generating-Significant-Fragment-for-Chemical-Carcinogens">
-<h2>Generating Significant Fragment for Chemical Carcinogens<a class="headerlink" href="#Generating-Significant-Fragment-for-Chemical-Carcinogens" title="Permalink to this headline">¶</a></h2>
+<p>In order to obtain a better understanding of <strong>pySmash</strong> and its application, we introduce examples to show a regular significant fragment extracting process. We will show the workflow of <strong>pySmash</strong> in <em>package</em> and <em>software</em>. This application scripts can be obtained from <a class="reference external" href="https://github.com/kotori-y/pySmash/blob/master/tutorial/Application.ipynb">here</a>.</p>
+<div class="section" id="Example-of-toxicophore-analysis-on-a-carcinogenicity-dataset">
+<h2>Example of toxicophore analysis on a carcinogenicity dataset<a class="headerlink" href="#Example-of-toxicophore-analysis-on-a-carcinogenicity-dataset" title="Permalink to this headline">¶</a></h2>
+<p>Toxicity is a significant issue for the pharmaceutical industry in early drug development phase. In order to gain a better understanding of the utility of substructure extraction, 1092 compounds that have been tested long-term carcinogenicity bioassay on rodents, including 694 carcinogenicity toxic compounds and 358 non-toxic compounds were collected from <a class="reference external" href="http://old.iss.it/meca/index.php?lang=1&amp;anno=2013&amp;tipo=25">here</a> (Benigni, et al., 2013). Three algorithms were used for fragment
+extraction, with circular fragment (minimum radius = 1, maximum radius = 4) and path fragment (minimum path = 1, maximum path = 7) parameter setup. For substructure requirement, the minimum number of compounds with the substructure (minNum) was set as 5 and the minimum portion of aimed label compounds with the substructure (minAcc) was set as 0.7. To control the familywise error rate, the Bonferroni correction was also applied. The result is summarized in <a class="reference external" href="#Result-1">Result 1</a>.</p>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[118]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -321,55 +332,27 @@ div.rendered_html tbody tr:hover {
 <span class="c1"># science modules</span>
 <span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="c1"># visualization</span>
-<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
-<span class="kn">import</span> <span class="nn">matplotlib.lines</span> <span class="k">as</span> <span class="nn">mlines</span>
-<span class="kn">from</span> <span class="nn">matplotlib.legend</span> <span class="kn">import</span> <span class="n">Legend</span>
+<span class="c1"># Display</span>
 <span class="kn">import</span> <span class="nn">IPython</span>
-<span class="c1"># Machine learning, for comparing</span>
-<span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="kn">import</span> <span class="n">accuracy_score</span><span class="p">,</span> <span class="n">precision_score</span><span class="p">,</span> <span class="n">recall_score</span>
-<span class="kn">from</span> <span class="nn">imblearn.metrics</span> <span class="kn">import</span> <span class="n">specificity_score</span><span class="p">,</span> <span class="n">sensitivity_score</span>
-<span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">train_test_split</span>
-<span class="kn">from</span> <span class="nn">xgboost</span> <span class="kn">import</span> <span class="n">XGBClassifier</span>
-<span class="c1"># Fragment generating modules</span>
-<span class="kn">from</span> <span class="nn">smash</span> <span class="kn">import</span> <span class="n">CircularLearner</span><span class="p">,</span> <span class="n">PathLeanrner</span><span class="p">,</span> <span class="n">FunctionGroupLearner</span>
-
-
-<span class="k">def</span> <span class="nf">buildXgbModel</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="o">**</span><span class="n">kwagrs</span><span class="p">):</span>
-
-    <span class="n">model</span> <span class="o">=</span> <span class="n">XGBClassifier</span><span class="p">(</span><span class="o">**</span><span class="n">kwagrs</span><span class="p">)</span>
-    <span class="n">model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
-
-    <span class="k">return</span> <span class="n">model</span>
-
-<span class="k">def</span> <span class="nf">evaluateModel</span><span class="p">(</span><span class="n">y_true</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">):</span>
-
-<span class="c1">#     y_pred = kwagrs.get(&#39;y_pred&#39;) or traindedModel.predict(X_test)</span>
-
-    <span class="n">acc</span> <span class="o">=</span> <span class="nb">round</span><span class="p">(</span><span class="n">accuracy_score</span><span class="p">(</span><span class="n">y_true</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">),</span> <span class="mi">3</span><span class="p">)</span>
-    <span class="n">sen</span> <span class="o">=</span> <span class="nb">round</span><span class="p">(</span><span class="n">sensitivity_score</span><span class="p">(</span><span class="n">y_true</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">),</span> <span class="mi">3</span><span class="p">)</span>
-    <span class="n">spe</span> <span class="o">=</span> <span class="nb">round</span><span class="p">(</span><span class="n">specificity_score</span><span class="p">(</span><span class="n">y_true</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">),</span> <span class="mi">3</span><span class="p">)</span>
-    <span class="n">pre</span> <span class="o">=</span> <span class="nb">round</span><span class="p">(</span><span class="n">precision_score</span><span class="p">(</span><span class="n">y_true</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">),</span> <span class="mi">3</span><span class="p">)</span>
-
-    <span class="k">return</span> <span class="nb">dict</span><span class="p">(</span><span class="nb">zip</span><span class="p">([</span><span class="s1">&#39;Accurary&#39;</span><span class="p">,</span> <span class="s1">&#39;Sensitivity&#39;</span><span class="p">,</span> <span class="s1">&#39;Specificity&#39;</span><span class="p">,</span> <span class="s1">&#39;Precision&#39;</span><span class="p">],</span>
-                    <span class="p">[</span><span class="n">acc</span><span class="p">,</span> <span class="n">sen</span><span class="p">,</span> <span class="n">spe</span><span class="p">,</span> <span class="n">pre</span><span class="p">]))</span>
+<span class="c1"># pySmash Learner</span>
+<span class="kn">from</span> <span class="nn">smash</span> <span class="kn">import</span> <span class="n">CircularLearner</span><span class="p">,</span> <span class="n">PathLearner</span><span class="p">,</span> <span class="n">FunctionGroupLearner</span>
 </pre></div>
 </div>
 </div>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[10]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
 <span></span><span class="c1"># loading data</span>
 <span class="n">data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;./datasets/carc/carc.txt&#39;</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s1">&#39;</span><span class="se">\t</span><span class="s1">&#39;</span><span class="p">)</span>
-<span class="n">pd</span><span class="o">.</span><span class="n">set_option</span><span class="p">(</span><span class="s1">&#39;display.max_rows&#39;</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>
+<span class="n">pd</span><span class="o">.</span><span class="n">set_option</span><span class="p">(</span><span class="s1">&#39;display.max_rows&#39;</span><span class="p">,</span> <span class="mi">8</span><span class="p">)</span>
 <span class="n">data</span>
 </pre></div>
 </div>
 </div>
 <div class="nboutput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[10]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
 </pre></div>
 </div>
 <div class="output_area rendered_html docutils container">
@@ -417,65 +400,45 @@ div.rendered_html tbody tr:hover {
       <td>1</td>
     </tr>
     <tr>
-      <th>4</th>
-      <td>CC/C(=C(\c1ccc(cc1)O)/CC)/c1ccc(cc1)O</td>
-      <td>1</td>
-    </tr>
-    <tr>
       <th>...</th>
       <td>...</td>
       <td>...</td>
     </tr>
     <tr>
-      <th>1111</th>
-      <td>OC(=O)C1=NN(C(=O)C1/N=N/c1ccc(cc1)S(=O)(=O)O)c1ccc(cc1)S(=O)(=O)O</td>
-      <td>1</td>
-    </tr>
-    <tr>
-      <th>1112</th>
+      <th>1048</th>
       <td>CN1C2CCC1CC(C2)NC(=O)c1cc(Cl)cc2c1OC(C2)(C)C</td>
       <td>0</td>
     </tr>
     <tr>
-      <th>1113</th>
+      <th>1049</th>
       <td>O=C1C=CC(=O)C=C1</td>
       <td>1</td>
     </tr>
     <tr>
-      <th>1114</th>
+      <th>1050</th>
       <td>c1ccc2c(c1)sc(n2)SSc1nc2c(s1)cccc2</td>
       <td>0</td>
     </tr>
     <tr>
-      <th>1115</th>
+      <th>1051</th>
       <td>O=NN(CCN(C)C)C</td>
       <td>1</td>
     </tr>
   </tbody>
 </table>
-<p>1116 rows × 2 columns</p>
+<p>1052 rows × 2 columns</p>
 </div></div>
 </div>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[21]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="c1"># Spliting data</span>
-<span class="n">train</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span><span class="n">frac</span><span class="o">=</span><span class="mf">0.7</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">777</span><span class="p">)</span>
-<span class="n">test</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="o">~</span><span class="n">data</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">isin</span><span class="p">(</span><span class="n">train</span><span class="o">.</span><span class="n">index</span><span class="p">)]</span>
+<span></span><span class="n">mols</span> <span class="o">=</span> <span class="p">[</span><span class="n">Chem</span><span class="o">.</span><span class="n">MolFromSmiles</span><span class="p">(</span><span class="n">smi</span><span class="p">)</span> <span class="k">for</span> <span class="n">smi</span> <span class="ow">in</span> <span class="n">data</span><span class="o">.</span><span class="n">SMILES</span><span class="p">]</span>
+<span class="n">labels</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">Label</span><span class="o">.</span><span class="n">values</span>
 
-<span class="n">mol_train</span> <span class="o">=</span> <span class="p">[</span><span class="n">Chem</span><span class="o">.</span><span class="n">MolFromSmiles</span><span class="p">(</span><span class="n">smi</span><span class="p">)</span> <span class="k">for</span> <span class="n">smi</span> <span class="ow">in</span> <span class="n">train</span><span class="o">.</span><span class="n">SMILES</span><span class="p">]</span>
-<span class="n">mol_test</span> <span class="o">=</span> <span class="p">[</span><span class="n">Chem</span><span class="o">.</span><span class="n">MolFromSmiles</span><span class="p">(</span><span class="n">smi</span><span class="p">)</span> <span class="k">for</span> <span class="n">smi</span> <span class="ow">in</span> <span class="n">test</span><span class="o">.</span><span class="n">SMILES</span><span class="p">]</span>
-
-<span class="n">y_train</span> <span class="o">=</span> <span class="n">train</span><span class="o">.</span><span class="n">Label</span><span class="o">.</span><span class="n">values</span>
-<span class="n">y_test</span> <span class="o">=</span> <span class="n">test</span><span class="o">.</span><span class="n">Label</span><span class="o">.</span><span class="n">values</span>
-
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">{:8s}</span><span class="s2"> Positive Number: </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="s1">&#39;Training&#39;</span><span class="p">,</span> <span class="n">y_train</span><span class="o">.</span><span class="n">sum</span><span class="p">()))</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">{:8s}</span><span class="s2"> Negative Number: </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="s1">&#39;Training&#39;</span><span class="p">,</span> <span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="n">y_train</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">()))</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;++++++++++++++++++++++++++++++&quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">{:8s}</span><span class="s2"> Positive Number: </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="s1">&#39;Testing&#39;</span><span class="p">,</span> <span class="n">y_test</span><span class="o">.</span><span class="n">sum</span><span class="p">()))</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">{:8s}</span><span class="s2"> Negative Number: </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="s1">&#39;Testing&#39;</span><span class="p">,</span> <span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="n">y_test</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">()))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Positive Number: </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">labels</span><span class="o">.</span><span class="n">sum</span><span class="p">()))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Negative Number: </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">((</span><span class="mi">1</span><span class="o">-</span><span class="n">labels</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">()))</span>
 </pre></div>
 </div>
 </div>
@@ -484,80 +447,156 @@ div.rendered_html tbody tr:hover {
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
-Training Positive Number: 520
-Training Negative Number: 261
-++++++++++++++++++++++++++++++
-Testing  Positive Number: 238
-Testing  Negative Number: 97
+Positive Number: 694
+Negative Number: 358
 </pre></div></div>
 </div>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[22]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
 <span></span><span class="c1"># Instantiate</span>
 <span class="n">cir</span> <span class="o">=</span> <span class="n">CircularLearner</span><span class="p">(</span><span class="n">minRadius</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">maxRadius</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">nJobs</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span>
-<span class="n">path</span> <span class="o">=</span> <span class="n">PathLeanrner</span><span class="p">(</span><span class="n">minPath</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">maxPath</span><span class="o">=</span><span class="mi">7</span><span class="p">,</span> <span class="n">nJobs</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span>
+<span class="n">path</span> <span class="o">=</span> <span class="n">PathLearner</span><span class="p">(</span><span class="n">minPath</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">maxPath</span><span class="o">=</span><span class="mi">7</span><span class="p">,</span> <span class="n">nJobs</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span>
 <span class="n">fg</span> <span class="o">=</span> <span class="n">FunctionGroupLearner</span><span class="p">(</span><span class="n">nJobs</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
-<div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[25]:
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
 <span></span><span class="c1"># Fitting</span>
-<span class="n">cir</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">mol_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
-<span class="n">path</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">mol_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
-<span class="n">fg</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">mol_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
+<span class="n">kwgrs</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">&quot;mols&quot;</span><span class="p">:</span> <span class="n">mols</span><span class="p">,</span>
+    <span class="s2">&quot;labels&quot;</span><span class="p">:</span> <span class="n">labels</span><span class="p">,</span>
+    <span class="s2">&quot;accCutoff&quot;</span><span class="p">:</span> <span class="mf">0.7</span><span class="p">,</span>
+    <span class="s2">&quot;pCutoff&quot;</span><span class="p">:</span> <span class="mf">0.05</span><span class="p">,</span>
+    <span class="s2">&quot;Bonferroni&quot;</span><span class="p">:</span> <span class="kc">True</span>
+<span class="p">}</span>
+
+<span class="n">sigCirPvalue</span><span class="p">,</span> <span class="n">sigCirMatrix</span> <span class="o">=</span> <span class="n">cir</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="o">**</span><span class="n">kwgrs</span><span class="p">)</span>
+<span class="n">sigPathPvalue</span><span class="p">,</span> <span class="n">sigPathMatrix</span> <span class="o">=</span> <span class="n">path</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="o">**</span><span class="n">kwgrs</span><span class="p">)</span>
+<span class="n">sigFgPvalue</span><span class="p">,</span> <span class="n">sigFgMatrix</span> <span class="o">=</span> <span class="n">fg</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="o">**</span><span class="n">kwgrs</span><span class="p">)</span>
 </pre></div>
 </div>
-</div>
-<div class="nboutput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[25]:
-</pre></div>
-</div>
-<div class="output_area docutils container">
-<div class="highlight"><pre>
-&lt;smash.FunctionGroupLearner at 0x11c4553f908&gt;
-</pre></div></div>
 </div>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[38]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="c1"># The number of each fragments</span>
-<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">{:8s}</span><span class="s1"> Fragment Number: </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="s1">&#39;Circular&#39;</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">cir</span><span class="o">.</span><span class="n">sigPvalue</span><span class="p">)))</span>
-<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">{:8s}</span><span class="s1"> Fragment Number: </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="s1">&#39;Path&#39;</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">path</span><span class="o">.</span><span class="n">sigPvalue</span><span class="p">)))</span>
-<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">{:8s}</span><span class="s1"> Fragment Number: </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="s1">&#39;FG&#39;</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">fg</span><span class="o">.</span><span class="n">sigPvalue</span><span class="p">)))</span>
+<span></span><span class="c1"># Visualizing circular fragments</span>
+<span class="n">IPython</span><span class="o">.</span><span class="n">display</span><span class="o">.</span><span class="n">HTML</span><span class="p">(</span><span class="n">sigCirPvalue</span><span class="o">.</span><span class="n">to_html</span><span class="p">(</span><span class="n">escape</span><span class="o">=</span><span class="kc">False</span><span class="p">))</span>
 </pre></div>
 </div>
 </div>
 <div class="nboutput nblast docutils container">
-<div class="prompt empty docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
+</pre></div>
 </div>
-<div class="output_area docutils container">
-<div class="highlight"><pre>
-Circular Fragment Number: 11
-Path     Fragment Number: 81
-FG       Fragment Number: 7
-</pre></div></div>
+<div class="output_area rendered_html docutils container">
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Pvalue</th>
+      <th>Total</th>
+      <th>Hitted</th>
+      <th>Accuracy</th>
+      <th>Coverage</th>
+      <th>SMARTS</th>
+      <th>Substructure</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>2380084179</th>
+      <td>1.584474e-08</td>
+      <td>126</td>
+      <td>113</td>
+      <td>0.896825</td>
+      <td>0.162824</td>
+      <td>[*]-[N]=[O]</td>
+      <td><?xml version='1.0' encoding='iso-8859-1'?><svg version='1.1' baseProfile='full'              xmlns='http://www.w3.org/2000/svg'                      xmlns:rdkit='http://www.rdkit.org/xml'                      xmlns:xlink='http://www.w3.org/1999/xlink'                  xml:space='preserve'width='150px' height='150px' ><!-- END OF HEADER --><rect style='opacity:1.0;fill:#FFFFFF;stroke:none' width='150' height='150' x='0' y='0'> </rect><ellipse cx='40.3678' cy='143.182' rx='18.9554' ry='18.9554' style='fill:#9999E5;fill-rule:evenodd;stroke:#9999E5;stroke-width:2px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1' /><path class='bond-0' d='M 125.932,93.8832 131.26,14.3182' style='fill:none;fill-rule:evenodd;stroke:#E5E5E5;stroke-width:4px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1' /><path class='bond-1' d='M 114.749,96.0714 78.971,113.652' style='fill:none;fill-rule:evenodd;stroke:#0000FF;stroke-width:2px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1' /><path class='bond-1' d='M 78.971,113.652 43.1927,131.234' style='fill:none;fill-rule:evenodd;stroke:#FF0000;stroke-width:2px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1' /><path class='bond-1' d='M 123.109,113.084 87.3307,130.665' style='fill:none;fill-rule:evenodd;stroke:#0000FF;stroke-width:2px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1' /><path class='bond-1' d='M 87.3307,130.665 51.5524,148.246' style='fill:none;fill-rule:evenodd;stroke:#FF0000;stroke-width:2px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1' /><text x='118.929' y='108.883' style='font-size:15px;font-style:normal;font-weight:normal;fill-opacity:1;stroke:none;font-family:sans-serif;text-anchor:start;fill:#0000FF' ><tspan>N</tspan></text><text x='128.26' y='14.3182' style='font-size:15px;font-style:normal;font-weight:normal;fill-opacity:1;stroke:none;font-family:sans-serif;text-anchor:start;fill:#7F7F7F' ><tspan>*</tspan></text><text x='33.363' y='150.682' style='font-size:15px;font-style:normal;font-weight:normal;fill-opacity:1;stroke:none;font-family:sans-serif;text-anchor:start;fill:#FF0000' ><tspan>O</tspan></text></svg></td>
+    </tr>
+    <tr>
+      <th>3153453529</th>
+      <td>1.609288e-03</td>
+      <td>23</td>
+      <td>23</td>
+      <td>1.000000</td>
+      <td>0.033141</td>
+      <td>[*]-[CH2]-[N](-[N]=[O])-[C](-[*])=[*]</td>
+      <td><?xml version='1.0' encoding='iso-8859-1'?><svg version='1.1' baseProfile='full'              xmlns='http://www.w3.org/2000/svg'                      xmlns:rdkit='http://www.rdkit.org/xml'                      xmlns:xlink='http://www.w3.org/1999/xlink'                  xml:space='preserve'width='150px' height='150px' ><!-- END OF HEADER --><rect style='opacity:1.0;fill:#FFFFFF;stroke:none' width='150' height='150' x='0' y='0'> </rect><ellipse cx='75' cy='111.119' rx='7.22375' ry='7.22375' style='fill:#9999E5;fill-rule:evenodd;stroke:#9999E5;stroke-width:2px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1' /><path class='bond-0' d='M 15.2517,73.377 43.7203,56.9406' style='fill:none;fill-rule:evenodd;stroke:#E5E5E5;stroke-width:4px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1' /><path class='bond-5' d='M 43.7203,56.9406 56.7513,64.4641' style='fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1' /><path class='bond-5' d='M 56.7513,64.4641 69.7824,71.9876' style='fill:none;fill-rule:evenodd;stroke:#0000FF;stroke-width:2px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1' /><path class='bond-1' d='M 109.892,56.9406 109.892,26.8417' style='fill:none;fill-rule:evenodd;stroke:#E5E5E5;stroke-width:4px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1' /><path class='bond-1' d='M 102.668,56.9406 102.668,26.8417' style='fill:none;fill-rule:evenodd;stroke:#E5E5E5;stroke-width:4px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1' /><path class='bond-2' d='M 106.28,56.9406 134.748,73.377' style='fill:none;fill-rule:evenodd;stroke:#E5E5E5;stroke-width:4px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1' /><path class='bond-6' d='M 106.28,56.9406 93.2487,64.4641' style='fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1' /><path class='bond-6' d='M 93.2487,64.4641 80.2176,71.9876' style='fill:none;fill-rule:evenodd;stroke:#0000FF;stroke-width:2px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1' /><path class='bond-3' d='M 75,81.0198 75,105.099' style='fill:none;fill-rule:evenodd;stroke:#0000FF;stroke-width:2px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1' /><path class='bond-4' d='M 78.4117,117.259 88.6316,123.16' style='fill:none;fill-rule:evenodd;stroke:#0000FF;stroke-width:2px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1' /><path class='bond-4' d='M 88.6316,123.16 98.8515,129.06' style='fill:none;fill-rule:evenodd;stroke:#FF0000;stroke-width:2px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1' /><path class='bond-4' d='M 82.0236,111.003 92.2435,116.904' style='fill:none;fill-rule:evenodd;stroke:#0000FF;stroke-width:2px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1' /><path class='bond-4' d='M 92.2435,116.904 102.463,122.804' style='fill:none;fill-rule:evenodd;stroke:#FF0000;stroke-width:2px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1' /><text x='9.62934' y='81.0198' style='font-size:12px;font-style:normal;font-weight:normal;fill-opacity:1;stroke:none;font-family:sans-serif;text-anchor:start;fill:#7F7F7F' ><tspan>*</tspan></text><text x='103.469' y='26.8417' style='font-size:12px;font-style:normal;font-weight:normal;fill-opacity:1;stroke:none;font-family:sans-serif;text-anchor:start;fill:#7F7F7F' ><tspan>*</tspan></text><text x='134.748' y='81.0198' style='font-size:12px;font-style:normal;font-weight:normal;fill-opacity:1;stroke:none;font-family:sans-serif;text-anchor:start;fill:#7F7F7F' ><tspan>*</tspan></text><text x='69.7824' y='81.0198' style='font-size:12px;font-style:normal;font-weight:normal;fill-opacity:1;stroke:none;font-family:sans-serif;text-anchor:start;fill:#0000FF' ><tspan>N</tspan></text><text x='69.7824' y='117.139' style='font-size:12px;font-style:normal;font-weight:normal;fill-opacity:1;stroke:none;font-family:sans-serif;text-anchor:start;fill:#0000FF' ><tspan>N</tspan></text><text x='100.657' y='135.198' style='font-size:12px;font-style:normal;font-weight:normal;fill-opacity:1;stroke:none;font-family:sans-serif;text-anchor:start;fill:#FF0000' ><tspan>O</tspan></text></svg></td>
+    </tr>
+    <tr>
+      <th>3356397823</th>
+      <td>1.157093e-02</td>
+      <td>30</td>
+      <td>28</td>
+      <td>0.933333</td>
+      <td>0.040346</td>
+      <td>[*]:[cH]:[c](:[o]:[*])-[N+](=[O])-[O-]</td>
+      <td><?xml version='1.0' encoding='iso-8859-1'?><svg version='1.1' baseProfile='full'              xmlns='http://www.w3.org/2000/svg'                      xmlns:rdkit='http://www.rdkit.org/xml'                      xmlns:xlink='http://www.w3.org/1999/xlink'                  xml:space='preserve'width='150px' height='150px' ><!-- END OF HEADER --><rect style='opacity:1.0;fill:#FFFFFF;stroke:none' width='150' height='150' x='0' y='0'> </rect><ellipse cx='119.046' cy='69.4075' rx='7.5132' ry='7.5132' style='fill:#E5E533;fill-rule:evenodd;stroke:#E5E533;stroke-width:2px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1' /><ellipse cx='81.9414' cy='117.551' rx='7.5132' ry='7.5132' style='fill:#E5E533;fill-rule:evenodd;stroke:#E5E533;stroke-width:2px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1' /><ellipse cx='83.0047' cy='80.0001' rx='7.5132' ry='7.5132' style='fill:#E5E533;fill-rule:evenodd;stroke:#E5E533;stroke-width:2px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1' /><ellipse cx='53.2504' cy='57.0679' rx='7.5132' ry='7.5132' style='fill:#9999E5;fill-rule:evenodd;stroke:#9999E5;stroke-width:2px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1' /><path class='bond-0' d='M 123.33,75.6685 137.334,96.1382' style='fill:none;fill-rule:evenodd;stroke:#E5E5E5;stroke-width:4px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1' /><path class='bond-0' d='M 119.23,82.9813 129.033,97.3101' style='fill:none;fill-rule:evenodd;stroke:#E5E5E5;stroke-width:4px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;stroke-dasharray:6,6' /><path class='bond-6' d='M 113.199,71.1261 98.1017,75.5631' style='fill:none;fill-rule:evenodd;stroke:#FF0000;stroke-width:2px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1' /><path class='bond-6' d='M 98.1017,75.5631 83.0047,80.0001' style='fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1' /><path class='bond-6' d='M 106.551,65.2488 95.9832,68.3547' style='fill:none;fill-rule:evenodd;stroke:#FF0000;stroke-width:2px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;stroke-dasharray:6,6' /><path class='bond-6' d='M 95.9832,68.3547 85.4153,71.4606' style='fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;stroke-dasharray:6,6' /><path class='bond-1' d='M 114.402,129.124 81.9414,117.551' style='fill:none;fill-rule:evenodd;stroke:#E5E5E5;stroke-width:4px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1' /><path class='bond-1' d='M 112.056,120.311 89.3335,112.21' style='fill:none;fill-rule:evenodd;stroke:#E5E5E5;stroke-width:4px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;stroke-dasharray:6,6' /><path class='bond-5' d='M 81.9414,117.551 83.0047,80.0001' style='fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1' /><path class='bond-5' d='M 89.6111,112.131 90.3554,85.8454' style='fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;stroke-dasharray:6,6' /><path class='bond-2' d='M 83.0047,80.0001 71.9383,71.471' style='fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1' /><path class='bond-2' d='M 71.9383,71.471 60.8718,62.9419' style='fill:none;fill-rule:evenodd;stroke:#0000FF;stroke-width:2px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1' /><path class='bond-3' d='M 44.1988,56.7321 33.5648,61.1104' style='fill:none;fill-rule:evenodd;stroke:#0000FF;stroke-width:2px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1' /><path class='bond-3' d='M 33.5648,61.1104 22.9308,65.4886' style='fill:none;fill-rule:evenodd;stroke:#FF0000;stroke-width:2px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1' /><path class='bond-3' d='M 47.0591,63.6795 36.4252,68.0578' style='fill:none;fill-rule:evenodd;stroke:#0000FF;stroke-width:2px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1' /><path class='bond-3' d='M 36.4252,68.0578 25.7912,72.436' style='fill:none;fill-rule:evenodd;stroke:#FF0000;stroke-width:2px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1' /><path class='bond-4' d='M 54.172,50.1808 55.7417,38.4509' style='fill:none;fill-rule:evenodd;stroke:#0000FF;stroke-width:2px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1' /><path class='bond-4' d='M 55.7417,38.4509 57.3114,26.7209' style='fill:none;fill-rule:evenodd;stroke:#FF0000;stroke-width:2px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1' /><text x='113.199' y='75.6685' style='font-size:12px;font-style:normal;font-weight:normal;fill-opacity:1;stroke:none;font-family:sans-serif;text-anchor:start;fill:#FF0000' ><tspan>O</tspan></text><text x='137.334' y='106.673' style='font-size:12px;font-style:normal;font-weight:normal;fill-opacity:1;stroke:none;font-family:sans-serif;text-anchor:start;fill:#7F7F7F' ><tspan>*</tspan></text><text x='114.402' y='136.427' style='font-size:12px;font-style:normal;font-weight:normal;fill-opacity:1;stroke:none;font-family:sans-serif;text-anchor:start;fill:#7F7F7F' ><tspan>*</tspan></text><text x='45.629' y='63.955' style='font-size:12px;font-style:normal;font-weight:normal;fill-opacity:1;stroke:none;font-family:sans-serif;text-anchor:start;fill:#0000FF' ><tspan>N</tspan><tspan style='baseline-shift:super;font-size:9px;'>+</tspan><tspan></tspan></text><text x='12.6658' y='77.6309' style='font-size:12px;font-style:normal;font-weight:normal;fill-opacity:1;stroke:none;font-family:sans-serif;text-anchor:start;fill:#FF0000' ><tspan>O</tspan></text><text x='51.134' y='26.7209' style='font-size:12px;font-style:normal;font-weight:normal;fill-opacity:1;stroke:none;font-family:sans-serif;text-anchor:start;fill:#FF0000' ><tspan>O</tspan><tspan style='baseline-shift:super;font-size:9px;'>-</tspan><tspan></tspan></text></svg></td>
+    </tr>
+    <tr>
+      <th>3440991424</th>
+      <td>1.157093e-02</td>
+      <td>30</td>
+      <td>28</td>
+      <td>0.933333</td>
+      <td>0.040346</td>
+      <td>[*]-[c]1:[cH]:[cH]:[c](-[N+](=[O])-[O-]):[o]:1</td>
+      <td><?xml version='1.0' encoding='iso-8859-1'?><svg version='1.1' baseProfile='full'              xmlns='http://www.w3.org/2000/svg'                      xmlns:rdkit='http://www.rdkit.org/xml'                      xmlns:xlink='http://www.w3.org/1999/xlink'                  xml:space='preserve'width='150px' height='150px' ><!-- END OF HEADER --><rect style='opacity:1.0;fill:#FFFFFF;stroke:none' width='150' height='150' x='0' y='0'> </rect><ellipse cx='109.716' cy='94.5956' rx='5.79358' ry='5.79358' style='fill:#E5E533;fill-rule:evenodd;stroke:#E5E533;stroke-width:2px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1' /><ellipse cx='92.0329' cy='117.54' rx='5.79358' ry='5.79358' style='fill:#E5E533;fill-rule:evenodd;stroke:#E5E533;stroke-width:2px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1' /><ellipse cx='64.7472' cy='107.812' rx='5.79358' ry='5.79358' style='fill:#E5E533;fill-rule:evenodd;stroke:#E5E533;stroke-width:2px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1' /><ellipse cx='65.5672' cy='78.8556' rx='5.79358' ry='5.79358' style='fill:#9999E5;fill-rule:evenodd;stroke:#9999E5;stroke-width:2px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1' /><ellipse cx='93.3596' cy='70.6875' rx='5.79358' ry='5.79358' style='fill:#E5E533;fill-rule:evenodd;stroke:#E5E533;stroke-width:2px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1' /><path class='bond-0' d='M 136.418,95.3517 109.716,94.5956' style='fill:none;fill-rule:evenodd;stroke:#E5E5E5;stroke-width:4px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1' /><path class='bond-1' d='M 109.716,94.5956 92.0329,117.54' style='fill:none;fill-rule:evenodd;stroke:#E5E5E5;stroke-width:4px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1' /><path class='bond-1' d='M 102.475,94.5005 90.0966,110.561' style='fill:none;fill-rule:evenodd;stroke:#E5E5E5;stroke-width:4px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;stroke-dasharray:6,6' /><path class='bond-6' d='M 109.716,94.5956 103.189,85.0555' style='fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1' /><path class='bond-6' d='M 103.189,85.0555 96.6627,75.5155' style='fill:none;fill-rule:evenodd;stroke:#FF0000;stroke-width:2px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1' /><path class='bond-6' d='M 102.977,95.0049 98.4079,88.3269' style='fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;stroke-dasharray:6,6' /><path class='bond-6' d='M 98.4079,88.3269 93.8391,81.6488' style='fill:none;fill-rule:evenodd;stroke:#FF0000;stroke-width:2px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;stroke-dasharray:6,6' /><path class='bond-5' d='M 92.0329,117.54 64.7472,107.812' style='fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1' /><path class='bond-5' d='M 89.8856,110.623 70.7856,103.814' style='fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;stroke-dasharray:6,6' /><path class='bond-2' d='M 64.7472,107.812 65.5672,78.8556' style='fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1' /><path class='bond-2' d='M 70.6615,103.632 71.2354,83.3631' style='fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;stroke-dasharray:6,6' /><path class='bond-3' d='M 65.5672,78.8556 77.2088,75.4342' style='fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1' /><path class='bond-3' d='M 77.2088,75.4342 88.8504,72.0127' style='fill:none;fill-rule:evenodd;stroke:#FF0000;stroke-width:2px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1' /><path class='bond-3' d='M 70.6933,83.3877 78.8424,80.9927' style='fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;stroke-dasharray:6,6' /><path class='bond-3' d='M 78.8424,80.9927 86.9915,78.5977' style='fill:none;fill-rule:evenodd;stroke:#FF0000;stroke-width:2px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;stroke-dasharray:6,6' /><path class='bond-4' d='M 65.5672,78.8556 57.0336,72.2787' style='fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1' /><path class='bond-4' d='M 57.0336,72.2787 48.5,65.7017' style='fill:none;fill-rule:evenodd;stroke:#0000FF;stroke-width:2px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1' /><path class='bond-7' d='M 35.6431,60.9133 27.443,64.2894' style='fill:none;fill-rule:evenodd;stroke:#0000FF;stroke-width:2px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1' /><path class='bond-7' d='M 27.443,64.2894 19.243,67.6656' style='fill:none;fill-rule:evenodd;stroke:#FF0000;stroke-width:2px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1' /><path class='bond-7' d='M 37.8488,66.2706 29.6487,69.6467' style='fill:none;fill-rule:evenodd;stroke:#0000FF;stroke-width:2px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1' /><path class='bond-7' d='M 29.6487,69.6467 21.4487,73.0228' style='fill:none;fill-rule:evenodd;stroke:#FF0000;stroke-width:2px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1' /><path class='bond-8' d='M 43.3337,55.8614 44.5441,46.8162' style='fill:none;fill-rule:evenodd;stroke:#0000FF;stroke-width:2px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1' /><path class='bond-8' d='M 44.5441,46.8162 45.7545,37.771' style='fill:none;fill-rule:evenodd;stroke:#FF0000;stroke-width:2px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1' /><text x='136.418' y='100.244' style='font-size:9px;font-style:normal;font-weight:normal;fill-opacity:1;stroke:none;font-family:sans-serif;text-anchor:start;fill:#7F7F7F' ><tspan>*</tspan></text><text x='88.8504' y='75.5155' style='font-size:9px;font-style:normal;font-weight:normal;fill-opacity:1;stroke:none;font-family:sans-serif;text-anchor:start;fill:#FF0000' ><tspan>O</tspan></text><text x='36.7459' y='66.483' style='font-size:9px;font-style:normal;font-weight:normal;fill-opacity:1;stroke:none;font-family:sans-serif;text-anchor:start;fill:#0000FF' ><tspan>N</tspan><tspan style='baseline-shift:super;font-size:6.75px;'>+</tspan><tspan></tspan></text><text x='11.3274' y='77.0287' style='font-size:9px;font-style:normal;font-weight:normal;fill-opacity:1;stroke:none;font-family:sans-serif;text-anchor:start;fill:#FF0000' ><tspan>O</tspan></text><text x='40.991' y='37.771' style='font-size:9px;font-style:normal;font-weight:normal;fill-opacity:1;stroke:none;font-family:sans-serif;text-anchor:start;fill:#FF0000' ><tspan>O</tspan><tspan style='baseline-shift:super;font-size:6.75px;'>-</tspan><tspan></tspan></text></svg></td>
+    </tr>
+    <tr>
+      <th>1470580613</th>
+      <td>1.287997e-02</td>
+      <td>18</td>
+      <td>18</td>
+      <td>1.000000</td>
+      <td>0.025937</td>
+      <td>[*]:[c](:[*])-[c]1:[cH]:[cH]:[c](-[N+](=[O])-[O-]):[o]:1</td>
+      <td><?xml version='1.0' encoding='iso-8859-1'?><svg version='1.1' baseProfile='full'              xmlns='http://www.w3.org/2000/svg'                      xmlns:rdkit='http://www.rdkit.org/xml'                      xmlns:xlink='http://www.w3.org/1999/xlink'                  xml:space='preserve'width='150px' height='150px' ><!-- END OF HEADER --><rect style='opacity:1.0;fill:#FFFFFF;stroke:none' width='150' height='150' x='0' y='0'> </rect><ellipse cx='116.289' cy='67.1497' rx='5.13793' ry='5.13793' style='fill:#E5E533;fill-rule:evenodd;stroke:#E5E533;stroke-width:2px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1' /><ellipse cx='89.3949' cy='104.197' rx='5.13793' ry='5.13793' style='fill:#E5E533;fill-rule:evenodd;stroke:#E5E533;stroke-width:2px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1' /><ellipse cx='64.0231' cy='108.225' rx='5.13793' ry='5.13793' style='fill:#9999E5;fill-rule:evenodd;stroke:#9999E5;stroke-width:2px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1' /><ellipse cx='52.3512' cy='85.3402' rx='5.13793' ry='5.13793' style='fill:#E5E533;fill-rule:evenodd;stroke:#E5E533;stroke-width:2px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1' /><ellipse cx='93.4036' cy='78.8216' rx='5.13793' ry='5.13793' style='fill:#E5E533;fill-rule:evenodd;stroke:#E5E533;stroke-width:2px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1' /><ellipse cx='70.5094' cy='67.1677' rx='5.13793' ry='5.13793' style='fill:#E5E533;fill-rule:evenodd;stroke:#E5E533;stroke-width:2px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1' /><path class='bond-0' d='M 119.621,46.0563 116.289,67.1497' style='fill:none;fill-rule:evenodd;stroke:#E5E5E5;stroke-width:4px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1' /><path class='bond-0' d='M 124.196,50.0221 121.863,64.7874' style='fill:none;fill-rule:evenodd;stroke:#E5E5E5;stroke-width:4px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;stroke-dasharray:6,6' /><path class='bond-1' d='M 116.289,67.1497 137.183,77.7857' style='fill:none;fill-rule:evenodd;stroke:#E5E5E5;stroke-width:4px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1' /><path class='bond-1' d='M 121.754,64.1662 136.38,71.6115' style='fill:none;fill-rule:evenodd;stroke:#E5E5E5;stroke-width:4px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;stroke-dasharray:6,6' /><path class='bond-7' d='M 116.289,67.1497 93.4036,78.8216' style='fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1' /><path class='bond-2' d='M 89.3949,104.197 64.0231,108.225' style='fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1' /><path class='bond-2' d='M 84.7834,99.7265 67.0231,102.547' style='fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;stroke-dasharray:6,6' /><path class='bond-4' d='M 89.3949,104.197 93.4036,78.8216' style='fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1' /><path class='bond-4' d='M 84.9212,99.5885 87.7273,81.8261' style='fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;stroke-dasharray:6,6' /><path class='bond-3' d='M 64.0231,108.225 52.3512,85.3402' style='fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1' /><path class='bond-3' d='M 66.8493,102.458 58.679,86.4386' style='fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;stroke-dasharray:6,6' /><path class='bond-5' d='M 52.3512,85.3402 59.4308,78.255' style='fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1' /><path class='bond-5' d='M 59.4308,78.255 66.5104,71.1698' style='fill:none;fill-rule:evenodd;stroke:#FF0000;stroke-width:2px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1' /><path class='bond-5' d='M 58.1096,86.8463 63.0653,81.8867' style='fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;stroke-dasharray:6,6' /><path class='bond-5' d='M 63.0653,81.8867 68.0211,76.927' style='fill:none;fill-rule:evenodd;stroke:#FF0000;stroke-width:2px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;stroke-dasharray:6,6' /><path class='bond-6' d='M 52.3512,85.3402 42.2697,83.7476' style='fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1' /><path class='bond-6' d='M 42.2697,83.7476 32.1882,82.1549' style='fill:none;fill-rule:evenodd;stroke:#0000FF;stroke-width:2px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1' /><path class='bond-8' d='M 93.4036,78.8216 83.9559,74.0124' style='fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1' /><path class='bond-8' d='M 83.9559,74.0124 74.5083,69.2033' style='fill:none;fill-rule:evenodd;stroke:#FF0000;stroke-width:2px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1' /><path class='bond-8' d='M 88.2385,81.9577 81.6252,78.5913' style='fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;stroke-dasharray:6,6' /><path class='bond-8' d='M 81.6252,78.5913 75.0118,75.2249' style='fill:none;fill-rule:evenodd;stroke:#FF0000;stroke-width:2px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;stroke-dasharray:6,6' /><path class='bond-9' d='M 21.1683,84.4254 16.7263,89.9152' style='fill:none;fill-rule:evenodd;stroke:#0000FF;stroke-width:2px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1' /><path class='bond-9' d='M 16.7263,89.9152 12.2844,95.405' style='fill:none;fill-rule:evenodd;stroke:#FF0000;stroke-width:2px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1' /><path class='bond-9' d='M 25.1625,87.6572 20.7205,93.147' style='fill:none;fill-rule:evenodd;stroke:#0000FF;stroke-width:2px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1' /><path class='bond-9' d='M 20.7205,93.147 16.2786,98.6368' style='fill:none;fill-rule:evenodd;stroke:#FF0000;stroke-width:2px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1' /><path class='bond-10' d='M 25.1662,76.6217 22.3683,69.3416' style='fill:none;fill-rule:evenodd;stroke:#0000FF;stroke-width:2px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1' /><path class='bond-10' d='M 22.3683,69.3416 19.5705,62.0615' style='fill:none;fill-rule:evenodd;stroke:#FF0000;stroke-width:2px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1' /><text x='118.298' y='46.0563' style='font-size:8px;font-style:normal;font-weight:normal;fill-opacity:1;stroke:none;font-family:sans-serif;text-anchor:start;fill:#7F7F7F' ><tspan>*</tspan></text><text x='137.183' y='83.0851' style='font-size:8px;font-style:normal;font-weight:normal;fill-opacity:1;stroke:none;font-family:sans-serif;text-anchor:start;fill:#7F7F7F' ><tspan>*</tspan></text><text x='66.5104' y='71.4493' style='font-size:8px;font-style:normal;font-weight:normal;fill-opacity:1;stroke:none;font-family:sans-serif;text-anchor:start;fill:#FF0000' ><tspan>O</tspan></text><text x='21.7643' y='86.0413' style='font-size:8px;font-style:normal;font-weight:normal;fill-opacity:1;stroke:none;font-family:sans-serif;text-anchor:start;fill:#0000FF' ><tspan>N</tspan><tspan style='baseline-shift:super;font-size:6px;'>+</tspan><tspan></tspan></text><text x='6.81818' y='105.584' style='font-size:8px;font-style:normal;font-weight:normal;fill-opacity:1;stroke:none;font-family:sans-serif;text-anchor:start;fill:#FF0000' ><tspan>O</tspan></text><text x='12.9057' y='62.0615' style='font-size:8px;font-style:normal;font-weight:normal;fill-opacity:1;stroke:none;font-family:sans-serif;text-anchor:start;fill:#FF0000' ><tspan>O</tspan><tspan style='baseline-shift:super;font-size:6px;'>-</tspan><tspan></tspan></text></svg></td>
+    </tr>
+    <tr>
+      <th>1083852209</th>
+      <td>1.585835e-02</td>
+      <td>115</td>
+      <td>92</td>
+      <td>0.800000</td>
+      <td>0.132565</td>
+      <td>[*]:[c](:[*])-[NH2]</td>
+      <td><?xml version='1.0' encoding='iso-8859-1'?><svg version='1.1' baseProfile='full'              xmlns='http://www.w3.org/2000/svg'                      xmlns:rdkit='http://www.rdkit.org/xml'                      xmlns:xlink='http://www.w3.org/1999/xlink'                  xml:space='preserve'width='150px' height='150px' ><!-- END OF HEADER --><rect style='opacity:1.0;fill:#FFFFFF;stroke:none' width='150' height='150' x='0' y='0'> </rect><ellipse cx='93.3523' cy='84.6066' rx='10.6702' ry='10.6702' style='fill:#E5E533;fill-rule:evenodd;stroke:#E5E533;stroke-width:2px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1' /><ellipse cx='43.581' cy='103.82' rx='10.6702' ry='10.6702' style='fill:#9999E5;fill-rule:evenodd;stroke:#9999E5;stroke-width:2px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1' /><path class='bond-0' d='M 93.3523,84.6066 100.208,40.7887' style='fill:none;fill-rule:evenodd;stroke:#E5E5E5;stroke-width:4px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1' /><path class='bond-0' d='M 104.923,79.6832 109.721,49.0107' style='fill:none;fill-rule:evenodd;stroke:#E5E5E5;stroke-width:4px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;stroke-dasharray:6,6' /><path class='bond-1' d='M 93.3523,84.6066 130.725,114.754' style='fill:none;fill-rule:evenodd;stroke:#E5E5E5;stroke-width:4px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1' /><path class='bond-1' d='M 105.657,80.8237 131.818,101.927' style='fill:none;fill-rule:evenodd;stroke:#E5E5E5;stroke-width:4px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;stroke-dasharray:6,6' /><path class='bond-2' d='M 93.3523,84.6066 77.6574,90.6654' style='fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1' /><path class='bond-2' d='M 77.6574,90.6654 61.9625,96.7241' style='fill:none;fill-rule:evenodd;stroke:#0000FF;stroke-width:2px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1' /><text x='97.4463' y='40.7887' style='font-size:17px;font-style:normal;font-weight:normal;fill-opacity:1;stroke:none;font-family:sans-serif;text-anchor:start;fill:#7F7F7F' ><tspan>*</tspan></text><text x='130.725' y='126.995' style='font-size:17px;font-style:normal;font-weight:normal;fill-opacity:1;stroke:none;font-family:sans-serif;text-anchor:start;fill:#7F7F7F' ><tspan>*</tspan></text><text x='25.1996' y='113.601' style='font-size:17px;font-style:normal;font-weight:normal;fill-opacity:1;stroke:none;font-family:sans-serif;text-anchor:start;fill:#0000FF' ><tspan>H</tspan><tspan style='baseline-shift:sub;font-size:12.75px;'>2</tspan><tspan>N</tspan></text></svg></td>
+    </tr>
+    <tr>
+      <th>1147919419</th>
+      <td>4.375580e-02</td>
+      <td>21</td>
+      <td>20</td>
+      <td>0.952381</td>
+      <td>0.028818</td>
+      <td>[*]-[CH2]-[N](-[CH2]-[*])-[N]=[O]</td>
+      <td><?xml version='1.0' encoding='iso-8859-1'?><svg version='1.1' baseProfile='full'              xmlns='http://www.w3.org/2000/svg'                      xmlns:rdkit='http://www.rdkit.org/xml'                      xmlns:xlink='http://www.w3.org/1999/xlink'                  xml:space='preserve'width='150px' height='150px' ><!-- END OF HEADER --><rect style='opacity:1.0;fill:#FFFFFF;stroke:none' width='150' height='150' x='0' y='0'> </rect><ellipse cx='74.4585' cy='93.0592' rx='7.22449' ry='7.22449' style='fill:#9999E5;fill-rule:evenodd;stroke:#9999E5;stroke-width:2px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1' /><path class='bond-0' d='M 15.2525,54.4354 43.9913,38.4126' style='fill:none;fill-rule:evenodd;stroke:#E5E5E5;stroke-width:4px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1' /><path class='bond-4' d='M 43.9913,38.4126 56.8866,46.1177' style='fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1' /><path class='bond-4' d='M 56.8866,46.1177 69.7818,53.8229' style='fill:none;fill-rule:evenodd;stroke:#0000FF;stroke-width:2px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1' /><path class='bond-1' d='M 106.55,39.3506 134.747,56.1988' style='fill:none;fill-rule:evenodd;stroke:#E5E5E5;stroke-width:4px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1' /><path class='bond-5' d='M 106.55,39.3506 93.3842,46.691' style='fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1' /><path class='bond-5' d='M 93.3842,46.691 80.2182,54.0315' style='fill:none;fill-rule:evenodd;stroke:#0000FF;stroke-width:2px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1' /><path class='bond-2' d='M 74.9097,62.9612 74.5487,87.0388' style='fill:none;fill-rule:evenodd;stroke:#0000FF;stroke-width:2px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1' /><path class='bond-3' d='M 77.8238,99.278 87.9077,105.303' style='fill:none;fill-rule:evenodd;stroke:#0000FF;stroke-width:2px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1' /><path class='bond-3' d='M 87.9077,105.303 97.9915,111.328' style='fill:none;fill-rule:evenodd;stroke:#FF0000;stroke-width:2px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1' /><path class='bond-3' d='M 81.5295,93.0763 91.6133,99.1015' style='fill:none;fill-rule:evenodd;stroke:#0000FF;stroke-width:2px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1' /><path class='bond-3' d='M 91.6133,99.1015 101.697,105.127' style='fill:none;fill-rule:evenodd;stroke:#FF0000;stroke-width:2px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1' /><text x='9.62963' y='62.0233' style='font-size:12px;font-style:normal;font-weight:normal;fill-opacity:1;stroke:none;font-family:sans-serif;text-anchor:start;fill:#7F7F7F' ><tspan>*</tspan></text><text x='134.747' y='63.8991' style='font-size:12px;font-style:normal;font-weight:normal;fill-opacity:1;stroke:none;font-family:sans-serif;text-anchor:start;fill:#7F7F7F' ><tspan>*</tspan></text><text x='69.7818' y='62.9612' style='font-size:12px;font-style:normal;font-weight:normal;fill-opacity:1;stroke:none;font-family:sans-serif;text-anchor:start;fill:#0000FF' ><tspan>N</tspan></text><text x='69.2403' y='99.0796' style='font-size:12px;font-style:normal;font-weight:normal;fill-opacity:1;stroke:none;font-family:sans-serif;text-anchor:start;fill:#0000FF' ><tspan>N</tspan></text><text x='99.8443' y='117.608' style='font-size:12px;font-style:normal;font-weight:normal;fill-opacity:1;stroke:none;font-family:sans-serif;text-anchor:start;fill:#FF0000' ><tspan>O</tspan></text></svg></td>
+    </tr>
+  </tbody>
+</table></div>
 </div>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[34]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
 <span></span><span class="c1"># Visualizing FG fragments</span>
-<span class="n">IPython</span><span class="o">.</span><span class="n">display</span><span class="o">.</span><span class="n">HTML</span><span class="p">(</span><span class="n">fg</span><span class="o">.</span><span class="n">sigPvalue</span><span class="o">.</span><span class="n">to_html</span><span class="p">(</span><span class="n">escape</span><span class="o">=</span><span class="kc">False</span><span class="p">))</span>
+<span class="n">IPython</span><span class="o">.</span><span class="n">display</span><span class="o">.</span><span class="n">HTML</span><span class="p">(</span><span class="n">sigFgPvalue</span><span class="o">.</span><span class="n">to_html</span><span class="p">(</span><span class="n">escape</span><span class="o">=</span><span class="kc">False</span><span class="p">))</span>
 </pre></div>
 </div>
 </div>
 <div class="nboutput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[34]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
 </pre></div>
 </div>
 <div class="output_area rendered_html docutils container">
@@ -577,106 +616,269 @@ FG       Fragment Number: 7
   <tbody>
     <tr>
       <th>CN(C)N=O</th>
-      <td>0.000125</td>
-      <td>50</td>
-      <td>45</td>
-      <td>0.900000</td>
-      <td>0.086538</td>
+      <td>0.000027</td>
+      <td>61</td>
+      <td>56</td>
+      <td>0.918033</td>
+      <td>0.080692</td>
       <td>CN(C)N=O</td>
-      <td><?xml version='1.0' encoding='iso-8859-1'?><svg version='1.1' baseProfile='full'              xmlns='http://www.w3.org/2000/svg'                      xmlns:rdkit='http://www.rdkit.org/xml'                      xmlns:xlink='http://www.w3.org/1999/xlink'                  xml:space='preserve'width='150px' height='150px' ><!-- END OF HEADER --><rect style='opacity:1.0;fill:#FFFFFF;stroke:none' width='150' height='150' x='0' y='0'> </rect><path class='bond-0' d='M 129.674,47.5675 120.144,49.2858' style='fill:none;fill-rule:evenodd;stroke:#FF0000;stroke-width:2px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1' /><path class='bond-0' d='M 120.144,49.2858 110.614,51.0042' style='fill:none;fill-rule:evenodd;stroke:#0000FF;stroke-width:2px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1' /><path class='bond-0' d='M 130.663,53.0522 121.133,54.7706' style='fill:none;fill-rule:evenodd;stroke:#FF0000;stroke-width:2px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1' /><path class='bond-0' d='M 121.133,54.7706 111.603,56.4889' style='fill:none;fill-rule:evenodd;stroke:#0000FF;stroke-width:2px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1' /><path class='bond-1' d='M 105.413,59.1166 99.3233,76.0498' style='fill:none;fill-rule:evenodd;stroke:#0000FF;stroke-width:2px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1' /><path class='bond-2' d='M 93.6277,81.4199 81.9287,83.5293' style='fill:none;fill-rule:evenodd;stroke:#0000FF;stroke-width:2px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1' /><path class='bond-2' d='M 81.9287,83.5293 70.2296,85.6386' style='fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1' /><path class='bond-7' d='M 101.581,85.3384 108.614,93.6549' style='fill:none;fill-rule:evenodd;stroke:#0000FF;stroke-width:2px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1' /><path class='bond-7' d='M 108.614,93.6549 115.647,101.971' style='fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1' /><path class='bond-3' d='M 70.2296,85.6386 52.2357,64.3614' style='fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1' /><path class='bond-4' d='M 52.2357,64.3614 40.5366,66.4707' style='fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1' /><path class='bond-4' d='M 40.5366,66.4707 28.8375,68.5801' style='fill:none;fill-rule:evenodd;stroke:#0000FF;stroke-width:2px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1' /><path class='bond-5' d='M 20.8845,64.6616 13.8513,56.3451' style='fill:none;fill-rule:evenodd;stroke:#0000FF;stroke-width:2px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1' /><path class='bond-5' d='M 13.8513,56.3451 6.81818,48.0286' style='fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1' /><path class='bond-6' d='M 23.1419,73.9502 19.2621,84.7389' style='fill:none;fill-rule:evenodd;stroke:#0000FF;stroke-width:2px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1' /><path class='bond-6' d='M 19.2621,84.7389 15.3823,95.5277' style='fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1' /><text x='130.169' y='54.1721' style='font-size:9px;font-style:normal;font-weight:normal;fill-opacity:1;stroke:none;font-family:sans-serif;text-anchor:start;fill:#FF0000' ><tspan>O</tspan></text><text x='103.057' y='59.1166' style='font-size:9px;font-style:normal;font-weight:normal;fill-opacity:1;stroke:none;font-family:sans-serif;text-anchor:start;fill:#0000FF' ><tspan>N</tspan></text><text x='93.6277' y='85.3384' style='font-size:9px;font-style:normal;font-weight:normal;fill-opacity:1;stroke:none;font-family:sans-serif;text-anchor:start;fill:#0000FF' ><tspan>N</tspan></text><text x='20.7866' y='73.9502' style='font-size:9px;font-style:normal;font-weight:normal;fill-opacity:1;stroke:none;font-family:sans-serif;text-anchor:start;fill:#0000FF' ><tspan>N</tspan></text></svg></td>
-    </tr>
-    <tr>
-      <th>coc</th>
-      <td>0.020554</td>
-      <td>40</td>
-      <td>33</td>
-      <td>0.825000</td>
-      <td>0.063462</td>
-      <td>coc</td>
-      <td><?xml version='1.0' encoding='iso-8859-1'?><svg version='1.1' baseProfile='full'              xmlns='http://www.w3.org/2000/svg'                      xmlns:rdkit='http://www.rdkit.org/xml'                      xmlns:xlink='http://www.w3.org/1999/xlink'                  xml:space='preserve'width='150px' height='150px' ><!-- END OF HEADER --><rect style='opacity:1.0;fill:#FFFFFF;stroke:none' width='150' height='150' x='0' y='0'> </rect><path class='bond-0' d='M 139.845,75 90.3078,6.81818' style='fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1' /><path class='bond-0' d='M 118.778,74.6801 84.102,26.9529' style='fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;stroke-dasharray:6,6' /><path class='bond-1' d='M 139.845,75 117.801,105.341' style='fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1' /><path class='bond-1' d='M 117.801,105.341 95.7568,135.682' style='fill:none;fill-rule:evenodd;stroke:#FF0000;stroke-width:2px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1' /><path class='bond-1' d='M 119.595,74.1949 104.164,95.4335' style='fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;stroke-dasharray:6,6' /><path class='bond-1' d='M 104.164,95.4335 88.7337,116.672' style='fill:none;fill-rule:evenodd;stroke:#FF0000;stroke-width:2px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;stroke-dasharray:6,6' /><path class='bond-2' d='M 83.303,140.906 46.7291,129.022' style='fill:none;fill-rule:evenodd;stroke:#FF0000;stroke-width:2px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1' /><path class='bond-2' d='M 46.7291,129.022 10.1552,117.139' style='fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1' /><path class='bond-2' d='M 77.5394,121.31 51.9377,112.992' style='fill:none;fill-rule:evenodd;stroke:#FF0000;stroke-width:2px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;stroke-dasharray:6,6' /><path class='bond-2' d='M 51.9377,112.992 26.336,104.673' style='fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;stroke-dasharray:6,6' /><text x='83.303' y='150.682' style='font-size:15px;font-style:normal;font-weight:normal;fill-opacity:1;stroke:none;font-family:sans-serif;text-anchor:start;fill:#FF0000' ><tspan>O</tspan></text></svg></td>
-    </tr>
-    <tr>
-      <th>C=CC</th>
-      <td>0.027007</td>
-      <td>14</td>
-      <td>13</td>
-      <td>0.928571</td>
-      <td>0.025000</td>
-      <td>C=CC</td>
-      <td><?xml version='1.0' encoding='iso-8859-1'?><svg version='1.1' baseProfile='full'              xmlns='http://www.w3.org/2000/svg'                      xmlns:rdkit='http://www.rdkit.org/xml'                      xmlns:xlink='http://www.w3.org/1999/xlink'                  xml:space='preserve'width='150px' height='150px' ><!-- END OF HEADER --><rect style='opacity:1.0;fill:#FFFFFF;stroke:none' width='150' height='150' x='0' y='0'> </rect><path class='bond-0' d='M 117.573,74.5197 101.048,81.5515' style='fill:none;fill-rule:evenodd;stroke:#00CC00;stroke-width:2px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1' /><path class='bond-0' d='M 101.048,81.5515 84.523,88.5834' style='fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1' /><path class='bond-1' d='M 84.523,88.5834 48.4046,61.4166' style='fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1' /><path class='bond-2' d='M 46.6349,57.258 5.04857,74.9541' style='fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1' /><path class='bond-2' d='M 50.1742,65.5752 8.58779,83.2714' style='fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1' /><text x='117.573' y='78.4198' style='font-size:15px;font-style:normal;font-weight:normal;fill-opacity:1;stroke:none;font-family:sans-serif;text-anchor:start;fill:#00CC00' ><tspan>Cl</tspan></text></svg></td>
+      <td><?xml version='1.0' encoding='iso-8859-1'?><svg version='1.1' baseProfile='full'              xmlns='http://www.w3.org/2000/svg'                      xmlns:rdkit='http://www.rdkit.org/xml'                      xmlns:xlink='http://www.w3.org/1999/xlink'                  xml:space='preserve'width='150px' height='150px' ><!-- END OF HEADER --><rect style='opacity:1.0;fill:#FFFFFF;stroke:none' width='150' height='150' x='0' y='0'> </rect><path class='bond-0' d='M 102.098,44.0525 143.182,34.788' style='fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1' /><path class='bond-1' d='M 102.098,44.0525 96.9311,60.6488' style='fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1' /><path class='bond-1' d='M 96.9311,60.6488 91.7643,77.2452' style='fill:none;fill-rule:evenodd;stroke:#0000FF;stroke-width:2px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1' /><path class='bond-2' d='M 95.663,90.8558 106.904,103.034' style='fill:none;fill-rule:evenodd;stroke:#0000FF;stroke-width:2px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1' /><path class='bond-2' d='M 106.904,103.034 118.144,115.212' style='fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1' /><path class='bond-3' d='M 83.4952,85.6364 54.579,92.157' style='fill:none;fill-rule:evenodd;stroke:#0000FF;stroke-width:2px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1' /><path class='bond-4' d='M 45.5059,84.0811 37.5047,75.4126' style='fill:none;fill-rule:evenodd;stroke:#0000FF;stroke-width:2px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1' /><path class='bond-4' d='M 37.5047,75.4126 29.5035,66.7442' style='fill:none;fill-rule:evenodd;stroke:#FF0000;stroke-width:2px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1' /><path class='bond-4' d='M 39.3164,89.7942 31.3152,81.1257' style='fill:none;fill-rule:evenodd;stroke:#0000FF;stroke-width:2px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1' /><path class='bond-4' d='M 31.3152,81.1257 23.314,72.4572' style='fill:none;fill-rule:evenodd;stroke:#FF0000;stroke-width:2px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1' /><text x='83.4952' y='91.2838' style='font-size:14px;font-style:normal;font-weight:normal;fill-opacity:1;stroke:none;font-family:sans-serif;text-anchor:start;fill:#0000FF' ><tspan>N</tspan></text><text x='42.4112' y='100.548' style='font-size:14px;font-style:normal;font-weight:normal;fill-opacity:1;stroke:none;font-family:sans-serif;text-anchor:start;fill:#0000FF' ><tspan>N</tspan></text><text x='13.374' y='69.6007' style='font-size:14px;font-style:normal;font-weight:normal;fill-opacity:1;stroke:none;font-family:sans-serif;text-anchor:start;fill:#FF0000' ><tspan>O</tspan></text></svg></td>
     </tr>
     <tr>
       <th>cN</th>
-      <td>0.027175</td>
-      <td>86</td>
-      <td>66</td>
-      <td>0.767442</td>
-      <td>0.126923</td>
+      <td>0.009277</td>
+      <td>114</td>
+      <td>91</td>
+      <td>0.798246</td>
+      <td>0.131124</td>
       <td>cN</td>
-      <td><?xml version='1.0' encoding='iso-8859-1'?><svg version='1.1' baseProfile='full'              xmlns='http://www.w3.org/2000/svg'                      xmlns:rdkit='http://www.rdkit.org/xml'                      xmlns:xlink='http://www.w3.org/1999/xlink'                  xml:space='preserve'width='150px' height='150px' ><!-- END OF HEADER --><rect style='opacity:1.0;fill:#FFFFFF;stroke:none' width='150' height='150' x='0' y='0'> </rect><path class='bond-0' d='M 41.4892,50.3042 6.81818,99.6958' style='fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1' /><path class='bond-0' d='M 46.1668,64.6471 21.8972,99.2213' style='fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;stroke-dasharray:6,6' /><path class='bond-1' d='M 41.4892,50.3042 63.792,52.2819' style='fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1' /><path class='bond-1' d='M 63.792,52.2819 86.0948,54.2595' style='fill:none;fill-rule:evenodd;stroke:#0000FF;stroke-width:2px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1' /><text x='86.0948' y='63.8844' style='font-size:15px;font-style:normal;font-weight:normal;fill-opacity:1;stroke:none;font-family:sans-serif;text-anchor:start;fill:#0000FF' ><tspan>NH</tspan><tspan style='baseline-shift:sub;font-size:11.25px;'>2</tspan><tspan></tspan></text></svg></td>
+      <td><?xml version='1.0' encoding='iso-8859-1'?><svg version='1.1' baseProfile='full'              xmlns='http://www.w3.org/2000/svg'                      xmlns:rdkit='http://www.rdkit.org/xml'                      xmlns:xlink='http://www.w3.org/1999/xlink'                  xml:space='preserve'width='150px' height='150px' ><!-- END OF HEADER --><rect style='opacity:1.0;fill:#FFFFFF;stroke:none' width='150' height='150' x='0' y='0'> </rect><path class='bond-0' d='M 131.317,99.0962 143.182,23.261' style='fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1' /><path class='bond-0' d='M 117.93,85.3481 126.235,32.2634' style='fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;stroke-dasharray:6,6' /><path class='bond-1' d='M 131.317,99.0962 103.266,109.925' style='fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1' /><path class='bond-1' d='M 103.266,109.925 75.2142,120.754' style='fill:none;fill-rule:evenodd;stroke:#0000FF;stroke-width:2px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1' /><text x='44.2058' y='134.989' style='font-size:15px;font-style:normal;font-weight:normal;fill-opacity:1;stroke:none;font-family:sans-serif;text-anchor:start;fill:#0000FF' ><tspan>H</tspan><tspan style='baseline-shift:sub;font-size:11.25px;'>2</tspan><tspan>N</tspan></text></svg></td>
     </tr>
     <tr>
-      <th>CNN</th>
-      <td>0.038621</td>
-      <td>8</td>
-      <td>8</td>
-      <td>1.000000</td>
-      <td>0.015385</td>
+      <th>coc</th>
+      <td>0.010573</td>
+      <td>51</td>
+      <td>44</td>
+      <td>0.862745</td>
+      <td>0.063401</td>
+      <td>coc</td>
+      <td><?xml version='1.0' encoding='iso-8859-1'?><svg version='1.1' baseProfile='full'              xmlns='http://www.w3.org/2000/svg'                      xmlns:rdkit='http://www.rdkit.org/xml'                      xmlns:xlink='http://www.w3.org/1999/xlink'                  xml:space='preserve'width='150px' height='150px' ><!-- END OF HEADER --><rect style='opacity:1.0;fill:#FFFFFF;stroke:none' width='150' height='150' x='0' y='0'> </rect><path class='bond-0' d='M 41.104,58.0762 6.81818,70.8449' style='fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1' /><path class='bond-0' d='M 38.5149,66.8487 14.5148,75.7867' style='fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;stroke-dasharray:6,6' /><path class='bond-1' d='M 75,79.2634 89.2954,73.9395' style='fill:none;fill-rule:evenodd;stroke:#FF0000;stroke-width:2px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1' /><path class='bond-1' d='M 89.2954,73.9395 103.591,68.6157' style='fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1' /><path class='bond-1' d='M 81.8423,84.5234 91.8491,80.7967' style='fill:none;fill-rule:evenodd;stroke:#FF0000;stroke-width:2px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;stroke-dasharray:6,6' /><path class='bond-1' d='M 91.8491,80.7967 101.856,77.07' style='fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;stroke-dasharray:6,6' /><path class='bond-2' d='M 101.26,71.4358 112.513,80.7363' style='fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1' /><path class='bond-2' d='M 112.513,80.7363 123.766,90.0368' style='fill:none;fill-rule:evenodd;stroke:#FF0000;stroke-width:2px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1' /><path class='bond-2' d='M 105.922,65.7956 117.174,75.0961' style='fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1' /><path class='bond-2' d='M 117.174,75.0961 128.427,84.3967' style='fill:none;fill-rule:evenodd;stroke:#FF0000;stroke-width:2px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1' /><text x='63.6098' y='87.482' style='font-size:12px;font-style:normal;font-weight:normal;fill-opacity:1;stroke:none;font-family:sans-serif;text-anchor:start;fill:#FF0000' ><tspan>O</tspan></text><text x='126.097' y='98.0215' style='font-size:12px;font-style:normal;font-weight:normal;fill-opacity:1;stroke:none;font-family:sans-serif;text-anchor:start;fill:#FF0000' ><tspan>O</tspan></text></svg></td>
+    </tr>
+  </tbody>
+</table></div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="c1"># Visualizing Path fragments</span>
+<span class="n">IPython</span><span class="o">.</span><span class="n">display</span><span class="o">.</span><span class="n">HTML</span><span class="p">(</span><span class="n">sigPathPvalue</span><span class="o">.</span><span class="n">to_html</span><span class="p">(</span><span class="n">escape</span><span class="o">=</span><span class="kc">False</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
+</pre></div>
+</div>
+<div class="output_area rendered_html docutils container">
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Pvalue</th>
+      <th>Total</th>
+      <th>Hitted</th>
+      <th>Accuracy</th>
+      <th>Coverage</th>
+      <th>SMARTS</th>
+      <th>Substructure</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>480113190</th>
+      <td>2.737936e-09</td>
+      <td>128</td>
+      <td>117</td>
+      <td>0.914062</td>
+      <td>0.168588</td>
+      <td>CCNN</td>
+      <td><?xml version='1.0' encoding='iso-8859-1'?><svg version='1.1' baseProfile='full'              xmlns='http://www.w3.org/2000/svg'                      xmlns:rdkit='http://www.rdkit.org/xml'                      xmlns:xlink='http://www.w3.org/1999/xlink'                  xml:space='preserve'width='150px' height='150px' ><!-- END OF HEADER --><rect style='opacity:1.0;fill:#FFFFFF;stroke:none' width='150' height='150' x='0' y='0'> </rect><path class='bond-0' d='M 27.0693,66.5883 59.1529,59.3535' style='fill:none;fill-rule:evenodd;stroke:#0000FF;stroke-width:2px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1' /><path class='bond-1' d='M 72.6536,65.1446 85.1255,78.6567' style='fill:none;fill-rule:evenodd;stroke:#0000FF;stroke-width:2px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1' /><path class='bond-1' d='M 85.1255,78.6567 97.5975,92.1688' style='fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1' /><path class='bond-2' d='M 97.5975,92.1688 143.182,81.8895' style='fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1' /><text x='13.5685' y='75.8987' style='font-size:15px;font-style:normal;font-weight:normal;fill-opacity:1;stroke:none;font-family:sans-serif;text-anchor:start;fill:#0000FF' ><tspan>N</tspan></text><text x='59.1529' y='65.6194' style='font-size:15px;font-style:normal;font-weight:normal;fill-opacity:1;stroke:none;font-family:sans-serif;text-anchor:start;fill:#0000FF' ><tspan>N</tspan></text></svg></td>
+    </tr>
+    <tr>
+      <th>1856304663</th>
+      <td>2.737936e-09</td>
+      <td>128</td>
+      <td>117</td>
+      <td>0.914062</td>
+      <td>0.168588</td>
+      <td>CN(C)N</td>
+      <td><?xml version='1.0' encoding='iso-8859-1'?><svg version='1.1' baseProfile='full'              xmlns='http://www.w3.org/2000/svg'                      xmlns:rdkit='http://www.rdkit.org/xml'                      xmlns:xlink='http://www.w3.org/1999/xlink'                  xml:space='preserve'width='150px' height='150px' ><!-- END OF HEADER --><rect style='opacity:1.0;fill:#FFFFFF;stroke:none' width='150' height='150' x='0' y='0'> </rect><path class='bond-0' d='M 33.5988,96.6956 89.0718,84.1864' style='fill:none;fill-rule:evenodd;stroke:#0000FF;stroke-width:2px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1' /><path class='bond-1' d='M 102.073,89.7632 122.627,112.032' style='fill:none;fill-rule:evenodd;stroke:#0000FF;stroke-width:2px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1' /><path class='bond-1' d='M 122.627,112.032 143.182,134.3' style='fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1' /><path class='bond-2' d='M 97.9073,75.2205 107.172,45.46' style='fill:none;fill-rule:evenodd;stroke:#0000FF;stroke-width:2px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1' /><path class='bond-2' d='M 107.172,45.46 116.437,15.6996' style='fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1' /><text x='20.5976' y='105.662' style='font-size:14px;font-style:normal;font-weight:normal;fill-opacity:1;stroke:none;font-family:sans-serif;text-anchor:start;fill:#0000FF' ><tspan>N</tspan></text><text x='89.0718' y='90.2205' style='font-size:14px;font-style:normal;font-weight:normal;fill-opacity:1;stroke:none;font-family:sans-serif;text-anchor:start;fill:#0000FF' ><tspan>N</tspan></text></svg></td>
+    </tr>
+    <tr>
+      <th>4276258003</th>
+      <td>2.910665e-09</td>
+      <td>194</td>
+      <td>169</td>
+      <td>0.871134</td>
+      <td>0.243516</td>
+      <td>NN</td>
+      <td><?xml version='1.0' encoding='iso-8859-1'?><svg version='1.1' baseProfile='full'              xmlns='http://www.w3.org/2000/svg'                      xmlns:rdkit='http://www.rdkit.org/xml'                      xmlns:xlink='http://www.w3.org/1999/xlink'                  xml:space='preserve'width='150px' height='150px' ><!-- END OF HEADER --><rect style='opacity:1.0;fill:#FFFFFF;stroke:none' width='150' height='150' x='0' y='0'> </rect><path class='bond-0' d='M 66.0858,75 83.9142,75' style='fill:none;fill-rule:evenodd;stroke:#0000FF;stroke-width:2px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1' /><text x='26.574' y='85.5124' style='font-size:19px;font-style:normal;font-weight:normal;fill-opacity:1;stroke:none;font-family:sans-serif;text-anchor:start;fill:#0000FF' ><tspan>H</tspan><tspan style='baseline-shift:sub;font-size:14.25px;'>2</tspan><tspan>N</tspan></text><text x='83.9142' y='85.5124' style='font-size:19px;font-style:normal;font-weight:normal;fill-opacity:1;stroke:none;font-family:sans-serif;text-anchor:start;fill:#0000FF' ><tspan>NH</tspan><tspan style='baseline-shift:sub;font-size:14.25px;'>2</tspan><tspan></tspan></text></svg></td>
+    </tr>
+    <tr>
+      <th>278227040</th>
+      <td>6.905304e-09</td>
+      <td>182</td>
+      <td>159</td>
+      <td>0.873626</td>
+      <td>0.229107</td>
       <td>CNN</td>
-      <td><?xml version='1.0' encoding='iso-8859-1'?><svg version='1.1' baseProfile='full'              xmlns='http://www.w3.org/2000/svg'                      xmlns:rdkit='http://www.rdkit.org/xml'                      xmlns:xlink='http://www.w3.org/1999/xlink'                  xml:space='preserve'width='150px' height='150px' ><!-- END OF HEADER --><rect style='opacity:1.0;fill:#FFFFFF;stroke:none' width='150' height='150' x='0' y='0'> </rect><path class='bond-0' d='M 6.81818,83.2084 35.2529,66.7916' style='fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1' /><path class='bond-1' d='M 35.2529,66.7916 63.6876,83.2084' style='fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1' /><path class='bond-2' d='M 63.6876,83.2084 73.1658,77.7361' style='fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1' /><path class='bond-2' d='M 73.1658,77.7361 82.6441,72.2639' style='fill:none;fill-rule:evenodd;stroke:#0000FF;stroke-width:2px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1' /><path class='bond-3' d='M 101.601,72.2639 110.131,77.1889' style='fill:none;fill-rule:evenodd;stroke:#0000FF;stroke-width:2px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1' /><text x='82.6362' y='72.2639' style='font-size:10px;font-style:normal;font-weight:normal;fill-opacity:1;stroke:none;font-family:sans-serif;text-anchor:start;fill:#0000FF' ><tspan>NH</tspan></text><text x='109.245' y='89.2279' style='font-size:10px;font-style:normal;font-weight:normal;fill-opacity:1;stroke:none;font-family:sans-serif;text-anchor:start;fill:#0000FF' ><tspan>NH</tspan><tspan style='baseline-shift:sub;font-size:7.5px;'>2</tspan><tspan></tspan></text></svg></td>
+      <td><?xml version='1.0' encoding='iso-8859-1'?><svg version='1.1' baseProfile='full'              xmlns='http://www.w3.org/2000/svg'                      xmlns:rdkit='http://www.rdkit.org/xml'                      xmlns:xlink='http://www.w3.org/1999/xlink'                  xml:space='preserve'width='150px' height='150px' ><!-- END OF HEADER --><rect style='opacity:1.0;fill:#FFFFFF;stroke:none' width='150' height='150' x='0' y='0'> </rect><path class='bond-0' d='M 33.5988,63.1852 89.0718,50.6759' style='fill:none;fill-rule:evenodd;stroke:#0000FF;stroke-width:2px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1' /><path class='bond-1' d='M 102.073,56.2528 122.627,78.5214' style='fill:none;fill-rule:evenodd;stroke:#0000FF;stroke-width:2px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1' /><path class='bond-1' d='M 122.627,78.5214 143.182,100.79' style='fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1' /><text x='20.5976' y='72.151' style='font-size:14px;font-style:normal;font-weight:normal;fill-opacity:1;stroke:none;font-family:sans-serif;text-anchor:start;fill:#0000FF' ><tspan>N</tspan></text><text x='89.0718' y='56.71' style='font-size:14px;font-style:normal;font-weight:normal;fill-opacity:1;stroke:none;font-family:sans-serif;text-anchor:start;fill:#0000FF' ><tspan>N</tspan></text></svg></td>
     </tr>
     <tr>
-      <th>CC1CO1</th>
-      <td>0.038621</td>
-      <td>8</td>
-      <td>8</td>
-      <td>1.000000</td>
-      <td>0.015385</td>
-      <td>CC1CO1</td>
-      <td><?xml version='1.0' encoding='iso-8859-1'?><svg version='1.1' baseProfile='full'              xmlns='http://www.w3.org/2000/svg'                      xmlns:rdkit='http://www.rdkit.org/xml'                      xmlns:xlink='http://www.w3.org/1999/xlink'                  xml:space='preserve'width='150px' height='150px' ><!-- END OF HEADER --><rect style='opacity:1.0;fill:#FFFFFF;stroke:none' width='150' height='150' x='0' y='0'> </rect><path class='bond-0' d='M 29.3514,81.1737 6.81818,30.8124' style='fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1' /><path class='bond-1' d='M 29.3514,81.1737 84.2322,86.84' style='fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1' /><path class='bond-3' d='M 84.2322,86.84 105.119,77.4947' style='fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1' /><path class='bond-3' d='M 105.119,77.4947 126.005,68.1494' style='fill:none;fill-rule:evenodd;stroke:#FF0000;stroke-width:2px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1' /><path class='bond-2' d='M 128.927,119.188 131.286,96.3449' style='fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1' /><path class='bond-2' d='M 131.286,96.3449 133.644,73.5022' style='fill:none;fill-rule:evenodd;stroke:#FF0000;stroke-width:2px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1' /><text x='126.005' y='73.5022' style='font-size:18px;font-style:normal;font-weight:normal;fill-opacity:1;stroke:none;font-family:sans-serif;text-anchor:start;fill:#FF0000' ><tspan>O</tspan></text></svg></td>
+      <th>3901489279</th>
+      <td>3.072772e-07</td>
+      <td>93</td>
+      <td>86</td>
+      <td>0.924731</td>
+      <td>0.123919</td>
+      <td>CCN(C)N=O</td>
+      <td><?xml version='1.0' encoding='iso-8859-1'?><svg version='1.1' baseProfile='full'              xmlns='http://www.w3.org/2000/svg'                      xmlns:rdkit='http://www.rdkit.org/xml'                      xmlns:xlink='http://www.w3.org/1999/xlink'                  xml:space='preserve'width='150px' height='150px' ><!-- END OF HEADER --><rect style='opacity:1.0;fill:#FFFFFF;stroke:none' width='150' height='150' x='0' y='0'> </rect><path class='bond-0' d='M 21.5772,68.5804 28.736,76.3362' style='fill:none;fill-rule:evenodd;stroke:#FF0000;stroke-width:2px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1' /><path class='bond-0' d='M 28.736,76.3362 35.8948,84.092' style='fill:none;fill-rule:evenodd;stroke:#0000FF;stroke-width:2px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1' /><path class='bond-0' d='M 27.1151,63.4688 34.2739,71.2247' style='fill:none;fill-rule:evenodd;stroke:#FF0000;stroke-width:2px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1' /><path class='bond-0' d='M 34.2739,71.2247 41.4327,78.9805' style='fill:none;fill-rule:evenodd;stroke:#0000FF;stroke-width:2px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1' /><path class='bond-1' d='M 49.5505,86.2061 75.4222,80.372' style='fill:none;fill-rule:evenodd;stroke:#0000FF;stroke-width:2px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1' /><path class='bond-2' d='M 86.309,85.0419 96.3662,95.9378' style='fill:none;fill-rule:evenodd;stroke:#0000FF;stroke-width:2px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1' /><path class='bond-2' d='M 96.3662,95.9378 106.423,106.834' style='fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1' /><path class='bond-4' d='M 82.8207,72.8643 87.4435,58.0153' style='fill:none;fill-rule:evenodd;stroke:#0000FF;stroke-width:2px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1' /><path class='bond-4' d='M 87.4435,58.0153 92.0663,43.1662' style='fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1' /><path class='bond-3' d='M 106.423,106.834 143.182,98.5447' style='fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1' /><text x='12.6838' y='66.0246' style='font-size:12px;font-style:normal;font-weight:normal;fill-opacity:1;stroke:none;font-family:sans-serif;text-anchor:start;fill:#FF0000' ><tspan>O</tspan></text><text x='38.6637' y='93.7138' style='font-size:12px;font-style:normal;font-weight:normal;fill-opacity:1;stroke:none;font-family:sans-serif;text-anchor:start;fill:#0000FF' ><tspan>N</tspan></text><text x='75.4222' y='85.4248' style='font-size:12px;font-style:normal;font-weight:normal;fill-opacity:1;stroke:none;font-family:sans-serif;text-anchor:start;fill:#0000FF' ><tspan>N</tspan></text></svg></td>
     </tr>
     <tr>
-      <th>CN(N=O)C(N)=O</th>
-      <td>0.038621</td>
-      <td>8</td>
-      <td>8</td>
+      <th>3436234336</th>
+      <td>6.695027e-07</td>
+      <td>106</td>
+      <td>96</td>
+      <td>0.905660</td>
+      <td>0.138329</td>
+      <td>CN(C)N=O</td>
+      <td><?xml version='1.0' encoding='iso-8859-1'?><svg version='1.1' baseProfile='full'              xmlns='http://www.w3.org/2000/svg'                      xmlns:rdkit='http://www.rdkit.org/xml'                      xmlns:xlink='http://www.w3.org/1999/xlink'                  xml:space='preserve'width='150px' height='150px' ><!-- END OF HEADER --><rect style='opacity:1.0;fill:#FFFFFF;stroke:none' width='150' height='150' x='0' y='0'> </rect><path class='bond-0' d='M 27.0239,66.2113 36.8246,76.8293' style='fill:none;fill-rule:evenodd;stroke:#FF0000;stroke-width:2px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1' /><path class='bond-0' d='M 36.8246,76.8293 46.6253,87.4474' style='fill:none;fill-rule:evenodd;stroke:#0000FF;stroke-width:2px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1' /><path class='bond-0' d='M 34.6055,59.2134 44.4062,69.8314' style='fill:none;fill-rule:evenodd;stroke:#FF0000;stroke-width:2px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1' /><path class='bond-0' d='M 44.4062,69.8314 54.2068,80.4494' style='fill:none;fill-rule:evenodd;stroke:#0000FF;stroke-width:2px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1' /><path class='bond-1' d='M 65.3205,90.3416 100.74,82.3545' style='fill:none;fill-rule:evenodd;stroke:#0000FF;stroke-width:2px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1' /><path class='bond-2' d='M 115.644,88.7478 129.413,103.665' style='fill:none;fill-rule:evenodd;stroke:#0000FF;stroke-width:2px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1' /><path class='bond-2' d='M 129.413,103.665 143.182,118.582' style='fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1' /><path class='bond-3' d='M 110.869,72.0761 117.198,51.7472' style='fill:none;fill-rule:evenodd;stroke:#0000FF;stroke-width:2px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1' /><path class='bond-3' d='M 117.198,51.7472 123.526,31.4183' style='fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1' /><text x='14.8484' y='62.7123' style='font-size:17px;font-style:normal;font-weight:normal;fill-opacity:1;stroke:none;font-family:sans-serif;text-anchor:start;fill:#FF0000' ><tspan>O</tspan></text><text x='50.4161' y='100.62' style='font-size:17px;font-style:normal;font-weight:normal;fill-opacity:1;stroke:none;font-family:sans-serif;text-anchor:start;fill:#0000FF' ><tspan>N</tspan></text><text x='100.74' y='89.272' style='font-size:17px;font-style:normal;font-weight:normal;fill-opacity:1;stroke:none;font-family:sans-serif;text-anchor:start;fill:#0000FF' ><tspan>N</tspan></text></svg></td>
+    </tr>
+    <tr>
+      <th>2414583053</th>
+      <td>2.167071e-05</td>
+      <td>46</td>
+      <td>45</td>
+      <td>0.978261</td>
+      <td>0.064841</td>
+      <td>CN(N)C=O</td>
+      <td><?xml version='1.0' encoding='iso-8859-1'?><svg version='1.1' baseProfile='full'              xmlns='http://www.w3.org/2000/svg'                      xmlns:rdkit='http://www.rdkit.org/xml'                      xmlns:xlink='http://www.w3.org/1999/xlink'                  xml:space='preserve'width='150px' height='150px' ><!-- END OF HEADER --><rect style='opacity:1.0;fill:#FFFFFF;stroke:none' width='150' height='150' x='0' y='0'> </rect><path class='bond-0' d='M 130.323,56.0982 124.159,35.1221' style='fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1' /><path class='bond-0' d='M 124.159,35.1221 117.994,14.1459' style='fill:none;fill-rule:evenodd;stroke:#FF0000;stroke-width:2px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1' /><path class='bond-0' d='M 120.169,59.0826 114.004,38.1065' style='fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1' /><path class='bond-0' d='M 114.004,38.1065 107.839,17.1303' style='fill:none;fill-rule:evenodd;stroke:#FF0000;stroke-width:2px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1' /><path class='bond-1' d='M 125.246,57.5904 112.493,74.1381' style='fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1' /><path class='bond-1' d='M 112.493,74.1381 99.7391,90.6857' style='fill:none;fill-rule:evenodd;stroke:#0000FF;stroke-width:2px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1' /><path class='bond-2' d='M 85.2968,99.2892 47.6877,98.2242' style='fill:none;fill-rule:evenodd;stroke:#0000FF;stroke-width:2px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1' /><path class='bond-3' d='M 98.9756,108.326 110.899,125.754' style='fill:none;fill-rule:evenodd;stroke:#0000FF;stroke-width:2px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1' /><path class='bond-3' d='M 110.899,125.754 122.823,143.182' style='fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1' /><text x='102.087' y='15.6381' style='font-size:17px;font-style:normal;font-weight:normal;fill-opacity:1;stroke:none;font-family:sans-serif;text-anchor:start;fill:#FF0000' ><tspan>O</tspan></text><text x='85.2968' y='108.326' style='font-size:17px;font-style:normal;font-weight:normal;fill-opacity:1;stroke:none;font-family:sans-serif;text-anchor:start;fill:#0000FF' ><tspan>N</tspan></text><text x='32.3984' y='106.828' style='font-size:17px;font-style:normal;font-weight:normal;fill-opacity:1;stroke:none;font-family:sans-serif;text-anchor:start;fill:#0000FF' ><tspan>N</tspan></text></svg></td>
+    </tr>
+    <tr>
+      <th>4282884236</th>
+      <td>1.212875e-03</td>
+      <td>77</td>
+      <td>68</td>
+      <td>0.883117</td>
+      <td>0.097983</td>
+      <td>CCCNN</td>
+      <td><?xml version='1.0' encoding='iso-8859-1'?><svg version='1.1' baseProfile='full'              xmlns='http://www.w3.org/2000/svg'                      xmlns:rdkit='http://www.rdkit.org/xml'                      xmlns:xlink='http://www.w3.org/1999/xlink'                  xml:space='preserve'width='150px' height='150px' ><!-- END OF HEADER --><rect style='opacity:1.0;fill:#FFFFFF;stroke:none' width='150' height='150' x='0' y='0'> </rect><path class='bond-0' d='M 89.2668,10.7423 12.0963,30.2667' style='fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1' /><path class='bond-2' d='M 89.2668,10.7423 108.113,40.6724' style='fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1' /><path class='bond-2' d='M 108.113,40.6724 126.96,70.6024' style='fill:none;fill-rule:evenodd;stroke:#0000FF;stroke-width:2px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1' /><path class='bond-1' d='M 12.0963,30.2667 6.81818,109.694' style='fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1' /><path class='bond-3' d='M 125.433,85.6024 86.9758,131.758' style='fill:none;fill-rule:evenodd;stroke:#0000FF;stroke-width:2px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1' /><text x='125.182' y='85.6024' style='font-size:15px;font-style:normal;font-weight:normal;fill-opacity:1;stroke:none;font-family:sans-serif;text-anchor:start;fill:#0000FF' ><tspan>N</tspan></text><text x='74.226' y='146.758' style='font-size:15px;font-style:normal;font-weight:normal;fill-opacity:1;stroke:none;font-family:sans-serif;text-anchor:start;fill:#0000FF' ><tspan>N</tspan></text></svg></td>
+    </tr>
+    <tr>
+      <th>88390985</th>
+      <td>2.391244e-03</td>
+      <td>34</td>
+      <td>33</td>
+      <td>0.970588</td>
+      <td>0.047550</td>
+      <td>CCN(N)C=O</td>
+      <td><?xml version='1.0' encoding='iso-8859-1'?><svg version='1.1' baseProfile='full'              xmlns='http://www.w3.org/2000/svg'                      xmlns:rdkit='http://www.rdkit.org/xml'                      xmlns:xlink='http://www.w3.org/1999/xlink'                  xml:space='preserve'width='150px' height='150px' ><!-- END OF HEADER --><rect style='opacity:1.0;fill:#FFFFFF;stroke:none' width='150' height='150' x='0' y='0'> </rect><path class='bond-0' d='M 103.538,57.6828 97.8899,38.465' style='fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1' /><path class='bond-0' d='M 97.8899,38.465 92.2418,19.2473' style='fill:none;fill-rule:evenodd;stroke:#FF0000;stroke-width:2px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1' /><path class='bond-0' d='M 94.2347,60.417 88.5867,41.1992' style='fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1' /><path class='bond-0' d='M 88.5867,41.1992 82.9386,21.9815' style='fill:none;fill-rule:evenodd;stroke:#FF0000;stroke-width:2px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1' /><path class='bond-1' d='M 98.8863,59.0499 87.2019,74.2103' style='fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1' /><path class='bond-1' d='M 87.2019,74.2103 75.5175,89.3708' style='fill:none;fill-rule:evenodd;stroke:#0000FF;stroke-width:2px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1' /><path class='bond-2' d='M 62.2859,97.253 27.8296,96.2773' style='fill:none;fill-rule:evenodd;stroke:#0000FF;stroke-width:2px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1' /><path class='bond-3' d='M 74.818,105.532 85.7419,121.499' style='fill:none;fill-rule:evenodd;stroke:#0000FF;stroke-width:2px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1' /><path class='bond-3' d='M 85.7419,121.499 96.6658,137.466' style='fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1' /><path class='bond-4' d='M 96.6658,137.466 143.182,123.795' style='fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1' /><text x='77.6683' y='20.6144' style='font-size:16px;font-style:normal;font-weight:normal;fill-opacity:1;stroke:none;font-family:sans-serif;text-anchor:start;fill:#FF0000' ><tspan>O</tspan></text><text x='62.2859' y='105.532' style='font-size:16px;font-style:normal;font-weight:normal;fill-opacity:1;stroke:none;font-family:sans-serif;text-anchor:start;fill:#0000FF' ><tspan>N</tspan></text><text x='13.822' y='104.16' style='font-size:16px;font-style:normal;font-weight:normal;fill-opacity:1;stroke:none;font-family:sans-serif;text-anchor:start;fill:#0000FF' ><tspan>N</tspan></text></svg></td>
+    </tr>
+    <tr>
+      <th>4236736947</th>
+      <td>3.927312e-03</td>
+      <td>73</td>
+      <td>64</td>
+      <td>0.876712</td>
+      <td>0.092219</td>
+      <td>NNC=O</td>
+      <td><?xml version='1.0' encoding='iso-8859-1'?><svg version='1.1' baseProfile='full'              xmlns='http://www.w3.org/2000/svg'                      xmlns:rdkit='http://www.rdkit.org/xml'                      xmlns:xlink='http://www.w3.org/1999/xlink'                  xml:space='preserve'width='150px' height='150px' ><!-- END OF HEADER --><rect style='opacity:1.0;fill:#FFFFFF;stroke:none' width='150' height='150' x='0' y='0'> </rect><path class='bond-0' d='M 74.9518,13.764 66.7814,34.1896' style='fill:none;fill-rule:evenodd;stroke:#FF0000;stroke-width:2px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1' /><path class='bond-0' d='M 66.7814,34.1896 58.6109,54.6153' style='fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1' /><path class='bond-0' d='M 84.9096,17.7472 76.7391,38.1728' style='fill:none;fill-rule:evenodd;stroke:#FF0000;stroke-width:2px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1' /><path class='bond-0' d='M 76.7391,38.1728 68.5686,58.5985' style='fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1' /><path class='bond-1' d='M 63.5898,56.6069 75.0627,74.8269' style='fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1' /><path class='bond-1' d='M 75.0627,74.8269 86.5356,93.0469' style='fill:none;fill-rule:evenodd;stroke:#0000FF;stroke-width:2px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1' /><path class='bond-2' d='M 84.7165,110.922 65.2835,134.244' style='fill:none;fill-rule:evenodd;stroke:#0000FF;stroke-width:2px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1' /><text x='75.1585' y='15.7556' style='font-size:17px;font-style:normal;font-weight:normal;fill-opacity:1;stroke:none;font-family:sans-serif;text-anchor:start;fill:#FF0000' ><tspan>O</tspan></text><text x='84.4169' y='110.922' style='font-size:17px;font-style:normal;font-weight:normal;fill-opacity:1;stroke:none;font-family:sans-serif;text-anchor:start;fill:#0000FF' ><tspan>N</tspan></text><text x='50.0902' y='152.119' style='font-size:17px;font-style:normal;font-weight:normal;fill-opacity:1;stroke:none;font-family:sans-serif;text-anchor:start;fill:#0000FF' ><tspan>N</tspan></text></svg></td>
+    </tr>
+    <tr>
+      <th>598589298</th>
+      <td>1.898520e-02</td>
+      <td>22</td>
+      <td>22</td>
       <td>1.000000</td>
-      <td>0.015385</td>
+      <td>0.031700</td>
+      <td>c-cccc[N+](=O)[O-]</td>
+      <td><?xml version='1.0' encoding='iso-8859-1'?><svg version='1.1' baseProfile='full'              xmlns='http://www.w3.org/2000/svg'                      xmlns:rdkit='http://www.rdkit.org/xml'                      xmlns:xlink='http://www.w3.org/1999/xlink'                  xml:space='preserve'width='150px' height='150px' ><!-- END OF HEADER --><rect style='opacity:1.0;fill:#FFFFFF;stroke:none' width='150' height='150' x='0' y='0'> </rect><ellipse cx='143.182' cy='55.5192' rx='6.40015' ry='6.40015' style='fill:#E5E533;fill-rule:evenodd;stroke:#E5E533;stroke-width:2px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1' /><ellipse cx='114.675' cy='70.0585' rx='6.40015' ry='6.40015' style='fill:#E5E533;fill-rule:evenodd;stroke:#E5E533;stroke-width:2px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1' /><ellipse cx='109.681' cy='101.667' rx='6.40015' ry='6.40015' style='fill:#E5E533;fill-rule:evenodd;stroke:#E5E533;stroke-width:2px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1' /><ellipse cx='78.0764' cy='106.686' rx='6.40015' ry='6.40015' style='fill:#E5E533;fill-rule:evenodd;stroke:#E5E533;stroke-width:2px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1' /><ellipse cx='63.5371' cy='78.1786' rx='6.40015' ry='6.40015' style='fill:#E5E533;fill-rule:evenodd;stroke:#E5E533;stroke-width:2px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1' /><path class='bond-0' d='M 143.182,55.5192 114.675,70.0585' style='fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1' /><path class='bond-1' d='M 114.675,70.0585 109.681,101.667' style='fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1' /><path class='bond-1' d='M 120.247,75.7985 116.752,97.9246' style='fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;stroke-dasharray:6,6' /><path class='bond-2' d='M 109.681,101.667 78.0764,106.686' style='fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1' /><path class='bond-2' d='M 103.937,96.099 81.8134,99.612' style='fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;stroke-dasharray:6,6' /><path class='bond-3' d='M 78.0764,106.686 63.5371,78.1786' style='fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1' /><path class='bond-3' d='M 81.5969,99.5018 71.4194,79.5468' style='fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;stroke-dasharray:6,6' /><path class='bond-4' d='M 63.5371,78.1786 50.9789,76.1946' style='fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1' /><path class='bond-4' d='M 50.9789,76.1946 38.4207,74.2107' style='fill:none;fill-rule:evenodd;stroke:#0000FF;stroke-width:2px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1' /><path class='bond-5' d='M 29.6737,67.3182 26.1885,58.2497' style='fill:none;fill-rule:evenodd;stroke:#0000FF;stroke-width:2px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1' /><path class='bond-5' d='M 26.1885,58.2497 22.7033,49.1811' style='fill:none;fill-rule:evenodd;stroke:#FF0000;stroke-width:2px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1' /><path class='bond-6' d='M 24.6937,77.0389 19.1604,83.8774' style='fill:none;fill-rule:evenodd;stroke:#0000FF;stroke-width:2px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1' /><path class='bond-6' d='M 19.1604,83.8774 13.6272,90.7159' style='fill:none;fill-rule:evenodd;stroke:#FF0000;stroke-width:2px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1' /><path class='bond-6' d='M 29.6691,81.0647 24.1359,87.9032' style='fill:none;fill-rule:evenodd;stroke:#0000FF;stroke-width:2px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1' /><path class='bond-6' d='M 24.1359,87.9032 18.6027,94.7416' style='fill:none;fill-rule:evenodd;stroke:#FF0000;stroke-width:2px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1' /><text x='25.436' y='79.0518' style='font-size:10px;font-style:normal;font-weight:normal;fill-opacity:1;stroke:none;font-family:sans-serif;text-anchor:start;fill:#0000FF' ><tspan>N</tspan><tspan style='baseline-shift:super;font-size:7.5px;'>+</tspan><tspan></tspan></text><text x='14.4012' y='49.1811' style='font-size:10px;font-style:normal;font-weight:normal;fill-opacity:1;stroke:none;font-family:sans-serif;text-anchor:start;fill:#FF0000' ><tspan>O</tspan><tspan style='baseline-shift:super;font-size:7.5px;'>-</tspan><tspan></tspan></text><text x='6.81818' y='103.396' style='font-size:10px;font-style:normal;font-weight:normal;fill-opacity:1;stroke:none;font-family:sans-serif;text-anchor:start;fill:#FF0000' ><tspan>O</tspan></text></svg></td>
+    </tr>
+    <tr>
+      <th>477298899</th>
+      <td>2.877871e-02</td>
+      <td>21</td>
+      <td>21</td>
+      <td>1.000000</td>
+      <td>0.030259</td>
+      <td>nc-cccc[N+][O-]</td>
+      <td><?xml version='1.0' encoding='iso-8859-1'?><svg version='1.1' baseProfile='full'              xmlns='http://www.w3.org/2000/svg'                      xmlns:rdkit='http://www.rdkit.org/xml'                      xmlns:xlink='http://www.w3.org/1999/xlink'                  xml:space='preserve'width='150px' height='150px' ><!-- END OF HEADER --><rect style='opacity:1.0;fill:#FFFFFF;stroke:none' width='150' height='150' x='0' y='0'> </rect><ellipse cx='112.193' cy='58.3219' rx='5.23232' ry='5.23232' style='fill:#E5E533;fill-rule:evenodd;stroke:#E5E533;stroke-width:2px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1' /><ellipse cx='135.623' cy='69.9607' rx='5.23232' ry='5.23232' style='fill:#E5E533;fill-rule:evenodd;stroke:#E5E533;stroke-width:2px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1' /><ellipse cx='89.0055' cy='70.4361' rx='5.23232' ry='5.23232' style='fill:#E5E533;fill-rule:evenodd;stroke:#E5E533;stroke-width:2px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1' /><ellipse cx='85.1766' cy='96.316' rx='5.23232' ry='5.23232' style='fill:#E5E533;fill-rule:evenodd;stroke:#E5E533;stroke-width:2px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1' /><ellipse cx='59.3802' cy='100.672' rx='5.23232' ry='5.23232' style='fill:#E5E533;fill-rule:evenodd;stroke:#E5E533;stroke-width:2px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1' /><ellipse cx='47.266' cy='77.4841' rx='5.23232' ry='5.23232' style='fill:#E5E533;fill-rule:evenodd;stroke:#E5E533;stroke-width:2px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1' /><path class='bond-0' d='M 112.193,58.3219 122.019,63.2027' style='fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1' /><path class='bond-0' d='M 122.019,63.2027 131.844,68.0834' style='fill:none;fill-rule:evenodd;stroke:#0000FF;stroke-width:2px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1' /><path class='bond-0' d='M 112.813,64.4722 119.691,67.8887' style='fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;stroke-dasharray:6,6' /><path class='bond-0' d='M 119.691,67.8887 126.569,71.3052' style='fill:none;fill-rule:evenodd;stroke:#0000FF;stroke-width:2px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;stroke-dasharray:6,6' /><path class='bond-1' d='M 112.193,58.3219 89.0055,70.4361' style='fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1' /><path class='bond-2' d='M 89.0055,70.4361 85.1766,96.316' style='fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1' /><path class='bond-2' d='M 93.6071,75.0839 90.9269,93.1998' style='fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;stroke-dasharray:6,6' /><path class='bond-3' d='M 85.1766,96.316 59.3802,100.672' style='fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1' /><path class='bond-3' d='M 80.436,91.8101 62.3785,94.8592' style='fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;stroke-dasharray:6,6' /><path class='bond-4' d='M 59.3802,100.672 47.266,77.4841' style='fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1' /><path class='bond-4' d='M 62.2006,94.7709 53.7207,78.5394' style='fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;stroke-dasharray:6,6' /><path class='bond-5' d='M 47.266,77.4841 36.9799,75.9623' style='fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1' /><path class='bond-5' d='M 36.9799,75.9623 26.6938,74.4405' style='fill:none;fill-rule:evenodd;stroke:#0000FF;stroke-width:2px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1' /><path class='bond-6' d='M 19.4887,68.8589 16.5741,61.4917' style='fill:none;fill-rule:evenodd;stroke:#0000FF;stroke-width:2px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1' /><path class='bond-6' d='M 16.5741,61.4917 13.6595,54.1244' style='fill:none;fill-rule:evenodd;stroke:#FF0000;stroke-width:2px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1' /><text x='131.844' y='74.321' style='font-size:8px;font-style:normal;font-weight:normal;fill-opacity:1;stroke:none;font-family:sans-serif;text-anchor:start;fill:#0000FF' ><tspan>N</tspan></text><text x='16.0784' y='78.4515' style='font-size:8px;font-style:normal;font-weight:normal;fill-opacity:1;stroke:none;font-family:sans-serif;text-anchor:start;fill:#0000FF' ><tspan>N</tspan><tspan style='baseline-shift:super;font-size:6px;'>+</tspan><tspan></tspan></text><text x='6.81818' y='54.1244' style='font-size:8px;font-style:normal;font-weight:normal;fill-opacity:1;stroke:none;font-family:sans-serif;text-anchor:start;fill:#FF0000' ><tspan>O</tspan><tspan style='baseline-shift:super;font-size:6px;'>-</tspan><tspan></tspan></text></svg></td>
+    </tr>
+    <tr>
+      <th>2692575702</th>
+      <td>2.877871e-02</td>
+      <td>21</td>
+      <td>21</td>
+      <td>1.000000</td>
+      <td>0.030259</td>
+      <td>nc-cccc[N+]=O</td>
+      <td><?xml version='1.0' encoding='iso-8859-1'?><svg version='1.1' baseProfile='full'              xmlns='http://www.w3.org/2000/svg'                      xmlns:rdkit='http://www.rdkit.org/xml'                      xmlns:xlink='http://www.w3.org/1999/xlink'                  xml:space='preserve'width='150px' height='150px' ><!-- END OF HEADER --><rect style='opacity:1.0;fill:#FFFFFF;stroke:none' width='150' height='150' x='0' y='0'> </rect><ellipse cx='113.449' cy='54.6833' rx='5.02025' ry='5.02025' style='fill:#E5E533;fill-rule:evenodd;stroke:#E5E533;stroke-width:2px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1' /><ellipse cx='135.93' cy='65.8503' rx='5.02025' ry='5.02025' style='fill:#E5E533;fill-rule:evenodd;stroke:#E5E533;stroke-width:2px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1' /><ellipse cx='91.2012' cy='66.3065' rx='5.02025' ry='5.02025' style='fill:#E5E533;fill-rule:evenodd;stroke:#E5E533;stroke-width:2px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1' /><ellipse cx='87.5276' cy='91.1374' rx='5.02025' ry='5.02025' style='fill:#E5E533;fill-rule:evenodd;stroke:#E5E533;stroke-width:2px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1' /><ellipse cx='62.7767' cy='95.3167' rx='5.02025' ry='5.02025' style='fill:#E5E533;fill-rule:evenodd;stroke:#E5E533;stroke-width:2px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1' /><ellipse cx='51.1535' cy='73.0687' rx='5.02025' ry='5.02025' style='fill:#E5E533;fill-rule:evenodd;stroke:#E5E533;stroke-width:2px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1' /><path class='bond-0' d='M 113.449,54.6833 122.876,59.3662' style='fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1' /><path class='bond-0' d='M 122.876,59.3662 132.304,64.0491' style='fill:none;fill-rule:evenodd;stroke:#0000FF;stroke-width:2px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1' /><path class='bond-0' d='M 114.044,60.5842 120.643,63.8623' style='fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;stroke-dasharray:6,6' /><path class='bond-0' d='M 120.643,63.8623 127.242,67.1403' style='fill:none;fill-rule:evenodd;stroke:#0000FF;stroke-width:2px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;stroke-dasharray:6,6' /><path class='bond-1' d='M 113.449,54.6833 91.2012,66.3065' style='fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1' /><path class='bond-2' d='M 91.2012,66.3065 87.5276,91.1374' style='fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1' /><path class='bond-2' d='M 95.6164,70.7658 93.0448,88.1475' style='fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;stroke-dasharray:6,6' /><path class='bond-3' d='M 87.5276,91.1374 62.7767,95.3167' style='fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1' /><path class='bond-3' d='M 82.9791,86.8142 65.6534,89.7397' style='fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;stroke-dasharray:6,6' /><path class='bond-4' d='M 62.7767,95.3167 51.1535,73.0687' style='fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1' /><path class='bond-4' d='M 65.4828,89.6549 57.3465,74.0813' style='fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;stroke-dasharray:6,6' /><path class='bond-5' d='M 51.1535,73.0687 41.2843,71.6086' style='fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1' /><path class='bond-5' d='M 41.2843,71.6086 31.4151,70.1485' style='fill:none;fill-rule:evenodd;stroke:#0000FF;stroke-width:2px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1' /><path class='bond-6' d='M 20.7063,72.4373 16.3914,77.8782' style='fill:none;fill-rule:evenodd;stroke:#0000FF;stroke-width:2px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1' /><path class='bond-6' d='M 16.3914,77.8782 12.0765,83.3192' style='fill:none;fill-rule:evenodd;stroke:#FF0000;stroke-width:2px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1' /><path class='bond-6' d='M 24.6398,75.5567 20.3248,80.9976' style='fill:none;fill-rule:evenodd;stroke:#0000FF;stroke-width:2px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1' /><path class='bond-6' d='M 20.3248,80.9976 16.0099,86.4386' style='fill:none;fill-rule:evenodd;stroke:#FF0000;stroke-width:2px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1' /><text x='132.304' y='70.0339' style='font-size:8px;font-style:normal;font-weight:normal;fill-opacity:1;stroke:none;font-family:sans-serif;text-anchor:start;fill:#0000FF' ><tspan>N</tspan></text><text x='21.2299' y='73.997' style='font-size:8px;font-style:normal;font-weight:normal;fill-opacity:1;stroke:none;font-family:sans-serif;text-anchor:start;fill:#0000FF' ><tspan>N</tspan><tspan style='baseline-shift:super;font-size:6px;'>+</tspan><tspan></tspan></text><text x='6.81818' y='93.246' style='font-size:8px;font-style:normal;font-weight:normal;fill-opacity:1;stroke:none;font-family:sans-serif;text-anchor:start;fill:#FF0000' ><tspan>O</tspan></text></svg></td>
+    </tr>
+    <tr>
+      <th>2351186654</th>
+      <td>3.541066e-02</td>
+      <td>27</td>
+      <td>26</td>
+      <td>0.962963</td>
+      <td>0.037464</td>
       <td>CN(N=O)C(N)=O</td>
-      <td><?xml version='1.0' encoding='iso-8859-1'?><svg version='1.1' baseProfile='full'              xmlns='http://www.w3.org/2000/svg'                      xmlns:rdkit='http://www.rdkit.org/xml'                      xmlns:xlink='http://www.w3.org/1999/xlink'                  xml:space='preserve'width='150px' height='150px' ><!-- END OF HEADER --><rect style='opacity:1.0;fill:#FFFFFF;stroke:none' width='150' height='150' x='0' y='0'> </rect><path class='bond-0' d='M 143.182,70.1042 128.084,79.7537' style='fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1' /><path class='bond-1' d='M 128.084,79.7537 112.178,71.503' style='fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1' /><path class='bond-2' d='M 112.178,71.503 97.0794,81.1525' style='fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1' /><path class='bond-3' d='M 97.0794,81.1525 81.1736,72.9018' style='fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1' /><path class='bond-4' d='M 81.1736,72.9018 66.0753,82.5513' style='fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1' /><path class='bond-5' d='M 66.0753,82.5513 59.4166,79.0973' style='fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1' /><path class='bond-5' d='M 59.4166,79.0973 52.7579,75.6433' style='fill:none;fill-rule:evenodd;stroke:#0000FF;stroke-width:2px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1' /><path class='bond-6' d='M 47.581,75.9549 41.3261,79.9525' style='fill:none;fill-rule:evenodd;stroke:#0000FF;stroke-width:2px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1' /><path class='bond-6' d='M 41.3261,79.9525 35.0712,83.9501' style='fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1' /><path class='bond-9' d='M 50.0347,71.3142 49.4966,59.3868' style='fill:none;fill-rule:evenodd;stroke:#0000FF;stroke-width:2px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1' /><path class='bond-7' d='M 33.2812,84.0309 33.6176,91.4878' style='fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1' /><path class='bond-7' d='M 33.6176,91.4878 33.954,98.9447' style='fill:none;fill-rule:evenodd;stroke:#FF0000;stroke-width:2px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1' /><path class='bond-7' d='M 36.8612,83.8694 37.1977,91.3263' style='fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1' /><path class='bond-7' d='M 37.1977,91.3263 37.5341,98.7832' style='fill:none;fill-rule:evenodd;stroke:#FF0000;stroke-width:2px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1' /><path class='bond-8' d='M 35.0712,83.9501 30.2051,81.4259' style='fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1' /><path class='bond-8' d='M 30.2051,81.4259 25.3389,78.9018' style='fill:none;fill-rule:evenodd;stroke:#0000FF;stroke-width:2px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1' /><path class='bond-10' d='M 47.5985,53.4671 42.3344,50.7365' style='fill:none;fill-rule:evenodd;stroke:#0000FF;stroke-width:2px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1' /><path class='bond-10' d='M 42.3344,50.7365 37.0703,48.0059' style='fill:none;fill-rule:evenodd;stroke:#FF0000;stroke-width:2px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1' /><path class='bond-10' d='M 45.9483,56.6483 40.6843,53.9177' style='fill:none;fill-rule:evenodd;stroke:#0000FF;stroke-width:2px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1' /><path class='bond-10' d='M 40.6843,53.9177 35.4202,51.1871' style='fill:none;fill-rule:evenodd;stroke:#FF0000;stroke-width:2px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1' /><text x='47.581' y='77.287' style='font-size:5px;font-style:normal;font-weight:normal;fill-opacity:1;stroke:none;font-family:sans-serif;text-anchor:start;fill:#0000FF' ><tspan>N</tspan></text><text x='33.0896' y='104.837' style='font-size:5px;font-style:normal;font-weight:normal;fill-opacity:1;stroke:none;font-family:sans-serif;text-anchor:start;fill:#FF0000' ><tspan>O</tspan></text><text x='12.9918' y='78.9844' style='font-size:5px;font-style:normal;font-weight:normal;fill-opacity:1;stroke:none;font-family:sans-serif;text-anchor:start;fill:#0000FF' ><tspan>H</tspan><tspan style='baseline-shift:sub;font-size:3.75px;'>2</tspan><tspan>N</tspan></text><text x='46.7734' y='59.3868' style='font-size:5px;font-style:normal;font-weight:normal;fill-opacity:1;stroke:none;font-family:sans-serif;text-anchor:start;fill:#0000FF' ><tspan>N</tspan></text><text x='30.6668' y='51.1361' style='font-size:5px;font-style:normal;font-weight:normal;fill-opacity:1;stroke:none;font-family:sans-serif;text-anchor:start;fill:#FF0000' ><tspan>O</tspan></text></svg></td>
+      <td><?xml version='1.0' encoding='iso-8859-1'?><svg version='1.1' baseProfile='full'              xmlns='http://www.w3.org/2000/svg'                      xmlns:rdkit='http://www.rdkit.org/xml'                      xmlns:xlink='http://www.w3.org/1999/xlink'                  xml:space='preserve'width='150px' height='150px' ><!-- END OF HEADER --><rect style='opacity:1.0;fill:#FFFFFF;stroke:none' width='150' height='150' x='0' y='0'> </rect><path class='bond-0' d='M 6.81818,54.2581 21.7849,62.8991' style='fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1' /><path class='bond-0' d='M 21.7849,62.8991 36.7516,71.5401' style='fill:none;fill-rule:evenodd;stroke:#0000FF;stroke-width:2px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1' /><path class='bond-1' d='M 42.7442,81.914 42.7442,109.57' style='fill:none;fill-rule:evenodd;stroke:#0000FF;stroke-width:2px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1' /><path class='bond-3' d='M 48.7369,71.5401 63.7036,62.8991' style='fill:none;fill-rule:evenodd;stroke:#0000FF;stroke-width:2px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1' /><path class='bond-3' d='M 63.7036,62.8991 78.6703,54.2581' style='fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1' /><path class='bond-2' d='M 46.6627,123.536 58.4007,130.313' style='fill:none;fill-rule:evenodd;stroke:#0000FF;stroke-width:2px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1' /><path class='bond-2' d='M 58.4007,130.313 70.1386,137.09' style='fill:none;fill-rule:evenodd;stroke:#FF0000;stroke-width:2px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1' /><path class='bond-2' d='M 50.8111,116.351 62.549,123.128' style='fill:none;fill-rule:evenodd;stroke:#0000FF;stroke-width:2px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1' /><path class='bond-2' d='M 62.549,123.128 74.287,129.905' style='fill:none;fill-rule:evenodd;stroke:#FF0000;stroke-width:2px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1' /><path class='bond-4' d='M 78.6703,54.2581 90.0469,60.8264' style='fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1' /><path class='bond-4' d='M 90.0469,60.8264 101.423,67.3946' style='fill:none;fill-rule:evenodd;stroke:#0000FF;stroke-width:2px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1' /><path class='bond-5' d='M 82.8187,54.2581 82.8187,36.9732' style='fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1' /><path class='bond-5' d='M 82.8187,36.9732 82.8187,19.6882' style='fill:none;fill-rule:evenodd;stroke:#FF0000;stroke-width:2px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1' /><path class='bond-5' d='M 74.5219,54.2581 74.5219,36.9732' style='fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1' /><path class='bond-5' d='M 74.5219,36.9732 74.5219,19.6882' style='fill:none;fill-rule:evenodd;stroke:#FF0000;stroke-width:2px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1' /><text x='36.7516' y='81.914' style='font-size:13px;font-style:normal;font-weight:normal;fill-opacity:1;stroke:none;font-family:sans-serif;text-anchor:start;fill:#0000FF' ><tspan>N</tspan></text><text x='36.7516' y='123.398' style='font-size:13px;font-style:normal;font-weight:normal;fill-opacity:1;stroke:none;font-family:sans-serif;text-anchor:start;fill:#0000FF' ><tspan>N</tspan></text><text x='72.2128' y='144.14' style='font-size:13px;font-style:normal;font-weight:normal;fill-opacity:1;stroke:none;font-family:sans-serif;text-anchor:start;fill:#FF0000' ><tspan>O</tspan></text><text x='100.304' y='82.6054' style='font-size:13px;font-style:normal;font-weight:normal;fill-opacity:1;stroke:none;font-family:sans-serif;text-anchor:start;fill:#0000FF' ><tspan>NH</tspan><tspan style='baseline-shift:sub;font-size:9.75px;'>2</tspan><tspan></tspan></text><text x='72.2128' y='19.6882' style='font-size:13px;font-style:normal;font-weight:normal;fill-opacity:1;stroke:none;font-family:sans-serif;text-anchor:start;fill:#FF0000' ><tspan>O</tspan></text></svg></td>
+    </tr>
+    <tr>
+      <th>1562664461</th>
+      <td>4.116089e-02</td>
+      <td>47</td>
+      <td>42</td>
+      <td>0.893617</td>
+      <td>0.060519</td>
+      <td>CCN(CC)N=O</td>
+      <td><?xml version='1.0' encoding='iso-8859-1'?><svg version='1.1' baseProfile='full'              xmlns='http://www.w3.org/2000/svg'                      xmlns:rdkit='http://www.rdkit.org/xml'                      xmlns:xlink='http://www.w3.org/1999/xlink'                  xml:space='preserve'width='150px' height='150px' ><!-- END OF HEADER --><rect style='opacity:1.0;fill:#FFFFFF;stroke:none' width='150' height='150' x='0' y='0'> </rect><path class='bond-0' d='M 21.5772,72.7249 28.736,80.4808' style='fill:none;fill-rule:evenodd;stroke:#FF0000;stroke-width:2px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1' /><path class='bond-0' d='M 28.736,80.4808 35.8948,88.2366' style='fill:none;fill-rule:evenodd;stroke:#0000FF;stroke-width:2px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1' /><path class='bond-0' d='M 27.1151,67.6134 34.2739,75.3692' style='fill:none;fill-rule:evenodd;stroke:#FF0000;stroke-width:2px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1' /><path class='bond-0' d='M 34.2739,75.3692 41.4327,83.125' style='fill:none;fill-rule:evenodd;stroke:#0000FF;stroke-width:2px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1' /><path class='bond-1' d='M 49.5505,90.3506 75.4222,84.5166' style='fill:none;fill-rule:evenodd;stroke:#0000FF;stroke-width:2px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1' /><path class='bond-2' d='M 86.309,89.1864 96.3662,100.082' style='fill:none;fill-rule:evenodd;stroke:#0000FF;stroke-width:2px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1' /><path class='bond-2' d='M 96.3662,100.082 106.423,110.978' style='fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1' /><path class='bond-4' d='M 82.8207,77.0088 87.4435,62.1598' style='fill:none;fill-rule:evenodd;stroke:#0000FF;stroke-width:2px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1' /><path class='bond-4' d='M 87.4435,62.1598 92.0663,47.3108' style='fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1' /><path class='bond-3' d='M 106.423,110.978 143.182,102.689' style='fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1' /><path class='bond-5' d='M 92.0663,47.3108 128.825,39.0217' style='fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1' /><text x='12.6838' y='70.1692' style='font-size:12px;font-style:normal;font-weight:normal;fill-opacity:1;stroke:none;font-family:sans-serif;text-anchor:start;fill:#FF0000' ><tspan>O</tspan></text><text x='38.6637' y='97.8584' style='font-size:12px;font-style:normal;font-weight:normal;fill-opacity:1;stroke:none;font-family:sans-serif;text-anchor:start;fill:#0000FF' ><tspan>N</tspan></text><text x='75.4222' y='89.5693' style='font-size:12px;font-style:normal;font-weight:normal;fill-opacity:1;stroke:none;font-family:sans-serif;text-anchor:start;fill:#0000FF' ><tspan>N</tspan></text></svg></td>
     </tr>
   </tbody>
 </table></div>
 </div>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[26]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[9]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="c1"># Predicting</span>
-<span class="n">y_pred_cir</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">cir</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">mol_test</span><span class="p">)</span>
-<span class="n">y_pred_path</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">path</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">mol_test</span><span class="p">)</span>
-<span class="n">y_pred_fg</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">fg</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">mol_test</span><span class="p">)</span>
-<span class="n">y_pred_ensemble</span> <span class="o">=</span> <span class="p">((</span><span class="n">y_pred_cir</span> <span class="o">+</span> <span class="n">y_pred_path</span> <span class="o">+</span> <span class="n">y_pred_fg</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="mi">1</span><span class="p">)</span> <span class="o">+</span> <span class="mi">0</span>
-</pre></div>
-</div>
-</div>
-<div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[80]:
-</pre></div>
-</div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="c1">#Measure</span>
-<span class="n">res</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">([</span><span class="n">evaluateModel</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_pred_cir</span><span class="p">),</span> <span class="n">evaluateModel</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_pred_path</span><span class="p">),</span>
-                    <span class="n">evaluateModel</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_pred_fg</span><span class="p">),</span> <span class="n">evaluateModel</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_pred_ensemble</span><span class="p">)],</span>
-                  <span class="n">index</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;Circular&#39;</span><span class="p">,</span> <span class="s1">&#39;Path&#39;</span><span class="p">,</span> <span class="s1">&#39;FG&#39;</span><span class="p">,</span> <span class="s1">&#39;Ensemble&#39;</span><span class="p">])</span>
+<span></span><span class="n">nCir</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">sigCirPvalue</span><span class="p">)</span>
+<span class="n">nFG</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">sigFgPvalue</span><span class="p">)</span>
+<span class="n">nPath</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">sigPathPvalue</span><span class="p">)</span>
+<span class="n">nEnsemble</span> <span class="o">=</span> <span class="n">nCir</span> <span class="o">+</span> <span class="n">nFG</span> <span class="o">+</span> <span class="n">nPath</span>
 
-<span class="n">res</span>
+<span class="n">cirFlagged</span> <span class="o">=</span> <span class="n">sigCirMatrix</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span><span class="o">&gt;</span><span class="mi">0</span>
+<span class="n">cirFlaggedTox</span> <span class="o">=</span> <span class="n">cirFlagged</span><span class="p">[</span><span class="n">labels</span><span class="o">==</span><span class="mi">1</span><span class="p">]</span>
+
+<span class="n">FgFlagged</span> <span class="o">=</span> <span class="n">sigFgMatrix</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span><span class="o">&gt;</span><span class="mi">0</span>
+<span class="n">FgFlaggedTox</span> <span class="o">=</span> <span class="n">FgFlagged</span><span class="p">[</span><span class="n">labels</span><span class="o">==</span><span class="mi">1</span><span class="p">]</span>
+
+<span class="n">PathFlagged</span> <span class="o">=</span> <span class="n">sigPathMatrix</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span><span class="o">&gt;</span><span class="mi">0</span>
+<span class="n">PathFlaggedTox</span> <span class="o">=</span> <span class="n">PathFlagged</span><span class="p">[</span><span class="n">labels</span><span class="o">==</span><span class="mi">1</span><span class="p">]</span>
+
+<span class="n">ensembleFlagged</span> <span class="o">=</span> <span class="n">cirFlagged</span> <span class="o">|</span> <span class="n">FgFlagged</span> <span class="o">|</span> <span class="n">PathFlagged</span>
+<span class="n">ensembleFlaggedTox</span> <span class="o">=</span> <span class="n">ensembleFlagged</span><span class="p">[</span><span class="n">labels</span><span class="o">==</span><span class="mi">1</span><span class="p">]</span>
+
+<span class="n">res</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span>
+    <span class="p">{</span>
+        <span class="s2">&quot;Substructure&quot;</span><span class="p">:</span> <span class="p">[</span><span class="n">nCir</span><span class="p">,</span> <span class="n">nFG</span><span class="p">,</span> <span class="n">nPath</span><span class="p">,</span> <span class="n">nEnsemble</span><span class="p">],</span>
+        <span class="s2">&quot;Flagged compounds&quot;</span><span class="p">:</span> <span class="p">[</span><span class="n">cirFlagged</span><span class="o">.</span><span class="n">sum</span><span class="p">(),</span> <span class="n">FgFlagged</span><span class="o">.</span><span class="n">sum</span><span class="p">(),</span> <span class="n">PathFlagged</span><span class="o">.</span><span class="n">sum</span><span class="p">(),</span> <span class="n">ensembleFlagged</span><span class="o">.</span><span class="n">sum</span><span class="p">()],</span>
+        <span class="s2">&quot;Flagged toxic compounds&quot;</span><span class="p">:</span> <span class="p">[</span><span class="n">cirFlaggedTox</span><span class="o">.</span><span class="n">sum</span><span class="p">(),</span> <span class="n">FgFlaggedTox</span><span class="o">.</span><span class="n">sum</span><span class="p">(),</span> <span class="n">PathFlaggedTox</span><span class="o">.</span><span class="n">sum</span><span class="p">(),</span> <span class="n">ensembleFlaggedTox</span><span class="o">.</span><span class="n">sum</span><span class="p">()],</span>
+    <span class="p">},</span>
+
+    <span class="n">index</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;Circular algorithm&quot;</span><span class="p">,</span> <span class="s2">&quot;Functional group&quot;</span><span class="p">,</span> <span class="s2">&quot;Path algorithm&quot;</span><span class="p">,</span> <span class="s2">&quot;Ensemble&quot;</span><span class="p">]</span>
+
+<span class="p">)</span>
+
+<span class="n">res</span><span class="p">[</span><span class="s2">&quot;Accuracy&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">res</span><span class="p">[</span><span class="s2">&quot;Flagged toxic compounds&quot;</span><span class="p">]</span><span class="o">/</span><span class="n">res</span><span class="p">[</span><span class="s2">&quot;Flagged compounds&quot;</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="Result-1">
+<h3>Result 1<a class="headerlink" href="#Result-1" title="Permalink to this headline">¶</a></h3>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[10]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">res</span>
 </pre></div>
 </div>
 </div>
 <div class="nboutput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[80]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[10]:
 </pre></div>
 </div>
 <div class="output_area rendered_html docutils container">
@@ -698,200 +900,50 @@ FG       Fragment Number: 7
   <thead>
     <tr style="text-align: right;">
       <th></th>
-      <th>Accurary</th>
-      <th>Precision</th>
-      <th>Sensitivity</th>
-      <th>Specificity</th>
+      <th>Substructure</th>
+      <th>Flagged compounds</th>
+      <th>Flagged toxic compounds</th>
+      <th>Accuracy</th>
     </tr>
   </thead>
   <tbody>
     <tr>
-      <th>Circular</th>
-      <td>0.516</td>
-      <td>0.888</td>
-      <td>0.366</td>
-      <td>0.887</td>
+      <th>Circular algorithm</th>
+      <td>7</td>
+      <td>266</td>
+      <td>228</td>
+      <td>0.857143</td>
     </tr>
     <tr>
-      <th>Path</th>
-      <td>0.493</td>
-      <td>0.925</td>
-      <td>0.311</td>
-      <td>0.938</td>
+      <th>Functional group</th>
+      <td>3</td>
+      <td>218</td>
+      <td>183</td>
+      <td>0.839450</td>
     </tr>
     <tr>
-      <th>FG</th>
-      <td>0.406</td>
-      <td>0.719</td>
-      <td>0.269</td>
-      <td>0.742</td>
+      <th>Path algorithm</th>
+      <td>15</td>
+      <td>211</td>
+      <td>186</td>
+      <td>0.881517</td>
     </tr>
     <tr>
       <th>Ensemble</th>
-      <td>0.627</td>
-      <td>0.812</td>
-      <td>0.618</td>
-      <td>0.649</td>
+      <td>25</td>
+      <td>348</td>
+      <td>295</td>
+      <td>0.847701</td>
     </tr>
   </tbody>
 </table>
 </div></div>
 </div>
-<div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[67]:
-</pre></div>
+<p>As shown in <a class="reference external" href="#Result-1">Result 1</a>, for individual substructure algorithm, the correction rates are all higher than 0.83, with the successful detection of more than 180 carcinogenicity toxic compounds. The detection coverage can be wider with the integration of three type substructures, which can accurately detect 326 carcinogenicity toxic compounds by only 26 alerts. These results indicate the advantages of the combination of different substructure algorithms, which can capture the distinct
+substructures and structural features from different viewpoints. Besides, there are also some structural features that have been frequently presented in different types of substructures. For example, 1-nitrocyclopenta-1,3-diene have been detected in 28 carcinogenicity toxic compounds, with accuracy value higher than 0.900. The Metabolic activation of such substructures involves initial one-electron reduction of the nitro group to yield a resonance-stabilized nitroanion radical. Under aerobic
+conditions, the radical can reduce molecular oxygen to form the superoxide anion, which can generate various toxic and DNA-reactive oxygen species (Benigni and Bossa, 2011). Another representative toxicophore 2-nitrosobutane, appeared in 23 carcinogenicity toxic compounds, with accuracy value of 1.00. The mechanism of action of such substructure has not been clearly understood. It is proposed a nonalkylating mechanism, with formaldehyde as the suggested intermediate responsible for mutagenicity,
+after oxidation of N-nitrodimethy-lamine at the methyl group. Such analysis indicated that the credibility and interpretability of the generated substructures.</p>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="c1"># Compare with XGBoost</span>
-
-<span class="kn">from</span> <span class="nn">scopy.ScoRepresent</span> <span class="kn">import</span> <span class="n">CalculateECFP</span>
-
-<span class="n">X_train</span> <span class="o">=</span> <span class="n">CalculateECFP</span><span class="p">(</span><span class="n">mol_train</span><span class="p">,</span> <span class="n">n_jobs</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span>
-<span class="n">X_test</span> <span class="o">=</span> <span class="n">CalculateECFP</span><span class="p">(</span><span class="n">mol_test</span><span class="p">,</span> <span class="n">n_jobs</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span>
-
-<span class="n">model</span> <span class="o">=</span> <span class="n">XGBClassifier</span><span class="p">(</span><span class="n">n_estimators</span><span class="o">=</span><span class="mi">800</span><span class="p">,</span> <span class="n">learning_rate</span><span class="o">=</span><span class="mf">0.02</span><span class="p">,</span>
-                      <span class="n">max_depth</span><span class="o">=</span><span class="mi">6</span><span class="p">,</span> <span class="n">subsample</span><span class="o">=</span><span class="mf">0.8</span><span class="p">,</span> <span class="n">scale_pos_weight</span><span class="o">=</span><span class="mf">0.4</span><span class="p">)</span>
-
-<span class="n">model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="nboutput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[67]:
-</pre></div>
-</div>
-<div class="output_area docutils container">
-<div class="highlight"><pre>
-XGBClassifier(base_score=0.5, booster=&#39;gbtree&#39;, colsample_bylevel=1,
-       colsample_bytree=1, gamma=0, learning_rate=0.02, max_delta_step=0,
-       max_depth=6, min_child_weight=1, missing=None, n_estimators=800,
-       n_jobs=1, nthread=None, objective=&#39;binary:logistic&#39;, random_state=0,
-       reg_alpha=0, reg_lambda=1, scale_pos_weight=0.4, seed=None,
-       silent=True, subsample=0.8)
-</pre></div></div>
-</div>
-<div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[81]:
-</pre></div>
-</div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="n">y_pred_xgb</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_test</span><span class="p">)</span>
-<span class="n">res</span> <span class="o">=</span> <span class="n">res</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="n">evaluateModel</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_pred_xgb</span><span class="p">),</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;XGB&#39;</span><span class="p">))</span>
-<span class="n">res</span>
-</pre></div>
-</div>
-</div>
-<div class="nboutput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[81]:
-</pre></div>
-</div>
-<div class="output_area rendered_html docutils container">
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>Accurary</th>
-      <th>Precision</th>
-      <th>Sensitivity</th>
-      <th>Specificity</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>Circular</th>
-      <td>0.516</td>
-      <td>0.888</td>
-      <td>0.366</td>
-      <td>0.887</td>
-    </tr>
-    <tr>
-      <th>Path</th>
-      <td>0.493</td>
-      <td>0.925</td>
-      <td>0.311</td>
-      <td>0.938</td>
-    </tr>
-    <tr>
-      <th>FG</th>
-      <td>0.406</td>
-      <td>0.719</td>
-      <td>0.269</td>
-      <td>0.742</td>
-    </tr>
-    <tr>
-      <th>Ensemble</th>
-      <td>0.627</td>
-      <td>0.812</td>
-      <td>0.618</td>
-      <td>0.649</td>
-    </tr>
-    <tr>
-      <th>XGB</th>
-      <td>0.630</td>
-      <td>0.806</td>
-      <td>0.630</td>
-      <td>0.629</td>
-    </tr>
-  </tbody>
-</table>
-</div></div>
-</div>
-<div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[135]:
-</pre></div>
-</div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="c1"># Visualizing result</span>
-
-<span class="n">f</span><span class="p">,</span><span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span><span class="mf">4.5</span><span class="p">))</span>
-<span class="n">colors</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;#e5db9c&#39;</span><span class="p">,</span> <span class="s1">&#39;#a1cdec&#39;</span><span class="p">,</span> <span class="s1">&#39;#f5bfd2&#39;</span><span class="p">,</span>
-          <span class="s1">&#39;#92406e&#39;</span><span class="p">,</span> <span class="s1">&#39;#dd546e&#39;</span><span class="p">]</span>
-<span class="n">width</span> <span class="o">=</span> <span class="mf">0.25</span>
-<span class="k">for</span> <span class="n">center</span><span class="p">,</span><span class="n">row</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mf">1.5</span><span class="p">,</span> <span class="mf">1.5</span><span class="o">*</span><span class="n">res</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="mf">1.5</span><span class="p">),</span> <span class="n">res</span><span class="o">.</span><span class="n">iteritems</span><span class="p">()):</span>
-    <span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">center</span><span class="o">-</span><span class="mi">2</span><span class="o">*</span><span class="n">width</span><span class="p">,</span> <span class="n">center</span><span class="o">+</span><span class="mi">2</span><span class="o">*</span><span class="n">width</span><span class="o">+</span><span class="mf">0.01</span><span class="p">,</span> <span class="n">width</span><span class="p">)</span>
-    <span class="n">ax</span><span class="o">.</span><span class="n">bar</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">row</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="n">width</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="n">colors</span><span class="p">)</span>
-
-<span class="n">ax</span><span class="o">.</span><span class="n">spines</span><span class="p">[</span><span class="s1">&#39;bottom&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">set_linewidth</span><span class="p">(</span><span class="mf">1.2</span><span class="p">)</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">spines</span><span class="p">[</span><span class="s1">&#39;left&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">set_linewidth</span><span class="p">(</span><span class="mf">1.2</span><span class="p">)</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">spines</span><span class="p">[</span><span class="s1">&#39;top&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">set_linewidth</span><span class="p">(</span><span class="mf">1.2</span><span class="p">)</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">spines</span><span class="p">[</span><span class="s1">&#39;right&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">set_linewidth</span><span class="p">(</span><span class="mf">1.2</span><span class="p">)</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">tick_params</span><span class="p">(</span><span class="n">direction</span><span class="o">=</span><span class="s1">&#39;in&#39;</span><span class="p">,</span> <span class="n">which</span><span class="o">=</span><span class="s1">&#39;both&#39;</span><span class="p">)</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">set_xticks</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mf">1.5</span><span class="p">,</span> <span class="mf">1.5</span><span class="o">*</span><span class="n">res</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="mf">1.5</span><span class="p">))</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">set_xticklabels</span><span class="p">(</span><span class="n">res</span><span class="o">.</span><span class="n">columns</span><span class="p">,</span> <span class="n">fontdict</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;family&#39;</span><span class="p">:</span> <span class="s1">&#39;Calibri&#39;</span><span class="p">,</span> <span class="s1">&#39;size&#39;</span><span class="p">:</span><span class="mi">15</span><span class="p">})</span>
-
-<span class="n">ax</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="n">ls</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;#caaca8&#39;</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="s2">&quot;y&quot;</span><span class="p">)</span>
-
-<span class="n">legend</span> <span class="o">=</span> <span class="p">[</span><span class="n">mlines</span><span class="o">.</span><span class="n">Line2D</span><span class="p">([</span><span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="n">c</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">8</span><span class="p">)</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">colors</span><span class="p">]</span>
-<span class="n">leg</span> <span class="o">=</span> <span class="n">Legend</span><span class="p">(</span><span class="n">ax</span><span class="p">,</span> <span class="n">legend</span><span class="p">,</span> <span class="n">labels</span><span class="o">=</span><span class="n">res</span><span class="o">.</span><span class="n">index</span><span class="p">,</span> <span class="n">ncol</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
-             <span class="n">edgecolor</span><span class="o">=</span><span class="s1">&#39;white&#39;</span><span class="p">,</span> <span class="n">facecolor</span><span class="o">=</span><span class="s1">&#39;none&#39;</span><span class="p">,</span> <span class="n">borderpad</span><span class="o">=</span><span class="mf">0.6</span><span class="p">)</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">add_artist</span><span class="p">(</span><span class="n">leg</span><span class="p">)</span>
-
-<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
-</pre></div>
-</div>
-</div>
-<div class="nboutput nblast docutils container">
-<div class="prompt empty docutils container">
-</div>
-<div class="output_area docutils container">
-<img alt="_images/Application_14_0.png" src="_images/Application_14_0.png" />
-</div>
-</div>
-<p>The results show that the ensemble significant fragments and XGBoost perform equally on these four evaluation parameters, and the interpretability of ensemble significant fragments is much higher than that of AI model, which will help chemists make structural modifications to toxic molecules to meet safety requirements.</p>
 </div>
 </div>
 
@@ -911,13 +963,16 @@ XGBClassifier(base_score=0.5, booster=&#39;gbtree&#39;, colsample_bylevel=1,
           <a href="py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
         <li class="right" >
+          <a href="modules.html" title="pySmash API"
+             >next</a> |</li>
+        <li class="right" >
           <a href="pysmash_gui.html" title="Getting Started with pySmash GUI"
              >previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="index.html">pySmash v0.1 documentation</a> &#187;</li> 
+        <li class="nav-item nav-item-0"><a href="index.html">PySmash v1.0 documentation</a> &#187;</li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">
-        &#169; Copyright 2020, Kotori_y.
+        &#169; Copyright 2020, Kotori Yang.
       Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.3.0.
     </div>
   </body>

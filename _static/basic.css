@@ -632,10 +632,10 @@ abbr, acronym {
 
 /* -- code displays --------------------------------------------------------- */
 
-/* pre {
+pre {
     overflow: auto;
     overflow-y: hidden;  /* fixes display issues on Chrome browsers */
-} */
+}
 
 span.pre {
     -moz-hyphens: none;
@@ -749,12 +749,6 @@ div.math:hover a.headerlink {
     visibility: visible;
 }
 
-
-pre
-{
-    overflow-y: scroll;
-    max-height: 300px;
-}
 /* -- printout stylesheet --------------------------------------------------- */
 
 @media print {
@@ -771,4 +765,16 @@ pre
     #top-link {
         display: none;
     }
+}
+
+div.nblast.container {
+    overflow-y: scroll;
+    max-height: 800px; 
+}
+
+
+
+div.body {
+    min-width: 450px;
+    max-width: none;
 }

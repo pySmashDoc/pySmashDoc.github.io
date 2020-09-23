@@ -4,8 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta charset="utf-8" />
-    <title>Welcome to pySmash’s documentation! &#8212; pySmash v0.1 documentation</title>
-    <link rel="shortcut icon" href="./image/icon.ico" type="image/x-icon">
+    <title>Welcome to PySmash’s documentation! &#8212; PySmash v1.0 documentation</title>
     <link rel="stylesheet" href="_static/sphinxdoc.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
@@ -18,7 +17,7 @@
     <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true, "ignoreClass": "document", "processClass": "math|output_area"}})</script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Getting Started with pySmash" href="smash_tutorial.html" /> 
+    <link rel="next" title="Overview" href="overview.html" /> 
   </head><body>
     <div class="related" role="navigation" aria-label="related navigation">
       <h3>Navigation</h3>
@@ -30,22 +29,24 @@
           <a href="py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
         <li class="right" >
-          <a href="smash_tutorial.html" title="Getting Started with pySmash"
+          <a href="overview.html" title="Overview"
              accesskey="N">next</a> |</li>
-        <li class="nav-item nav-item-0"><a href="#">pySmash v0.1 documentation</a> &#187;</li> 
+        <li class="nav-item nav-item-0"><a href="#">PySmash v1.0 documentation</a> &#187;</li> 
       </ul>
     </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
   <h3><a href="#">Table of Contents</a></h3>
   <ul>
-<li><a class="reference internal" href="#">Welcome to pySmash’s documentation!</a></li>
+<li><a class="reference internal" href="#">Welcome to PySmash’s documentation!</a><ul>
+</ul>
+</li>
 <li><a class="reference internal" href="#indices-and-tables">Indices and tables</a></li>
 </ul>
 
   <h4>Next topic</h4>
-  <p class="topless"><a href="smash_tutorial.html"
-                        title="next chapter">Getting Started with pySmash</a></p>
+  <p class="topless"><a href="overview.html"
+                        title="next chapter">Overview</a></p>
   <div role="note" aria-label="source link">
     <h3>This Page</h3>
     <ul class="this-page-menu">
@@ -72,35 +73,42 @@
           <div class="body" role="main">
             
   <div class="section" id="welcome-to-pysmash-s-documentation">
-<h1>Welcome to pySmash’s documentation!<a class="headerlink" href="#welcome-to-pysmash-s-documentation" title="Permalink to this headline">¶</a></h1>
-<p>In the field of chemoinformatics, there is a saying that similar structures have similar properties. The main aim of chemoinformatics refers to analyzing the similarity among molecules, searching the molecules in the structural database, finding potential drug molecule and their property. To systematically obtain the relation between structure and property, we developed pySmash, a Python library designed for obtaining fragments, which are highly related to a specific endpoint conveniently and comprehensively. pySmash can smash molecules, which have certein property label, with three different algorithms, including <strong>circular</strong>-, <strong>path</strong>- and <strong>function group</strong>-based, and combined with statistical methods to a set of significant fragments. By using these fragments, the molecule with unknown label can got a predicted label. Besides, pySmash provides functionalities for the easy visualization of the derived fragments. The Python package pySmash is designed by <a class="reference external" href="http://home.scbdd.com/index.php?s=/Home/Index.html&amp;t=english">CBDD Group</a> (Computational Biology &amp; Drug Design Group), Xiangya School of Pharmaceutical Sciences, Central South University.</p>
+<h1>Welcome to PySmash’s documentation!<a class="headerlink" href="#welcome-to-pysmash-s-documentation" title="Permalink to this headline">¶</a></h1>
+<p>Structural alerts are widely applied in drug discovery and have been instrumental in evaluating potency against its intended target, appropriate absorption, distribution, metabolism, and elimination (ADME) properties and an acceptable safety profile. They are also integrated into the application of QSAR model, which can provide wide application domain and clear interpretability. With the increase of the available public domain resources, computational data-driven systems which can draw on large databases, analyze the underlying data, and apply the resulting knowledge automatically with no human intervention get more attention. Here, PySmash is presented, which offers several advantages for the automatic derivation and application of the derived structural alerts: (1) various alert derivation algorithms; (2) simple and convenient operation; (3) easy visualization of the derived structural alerts, (4) substructure anlysis for neither positive or negative set and (5) integration of the alerts extraction and application. It provides both Python package and software, which can meet the different research need. PySmash is designed by <a class="reference external" href="http://home.scbdd.com/index.php?s=/Home/Index.html&amp;t=english">CBDD Group</a> (Computational Biology &amp; Drug Design Group), Xiangya School of Pharmaceutical Sciences, Central South University.</p>
 <div class="toctree-wrapper compound">
 <ul>
+<li class="toctree-l1"><a class="reference internal" href="overview.html">Overview</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="overview.html#who-uses-pysmash">Who uses pySmash?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="overview.html#motivation">Motivation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="overview.html#the-python-programming-language">The Python programming language</a></li>
+</ul>
+</li>
 <li class="toctree-l1"><a class="reference internal" href="smash_tutorial.html">Getting Started with pySmash</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="smash_tutorial.html#Installing-the-pySmash-package">Installing the pySmash package</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="smash_tutorial.html#Dependencies">Dependencies</a></li>
 <li class="toctree-l3"><a class="reference internal" href="smash_tutorial.html#Install-with-source">Install with source</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="smash_tutorial.html#Overview">Overview</a></li>
-<li class="toctree-l2"><a class="reference internal" href="smash_tutorial.html#Implementation">Implementation</a></li>
 <li class="toctree-l2"><a class="reference internal" href="smash_tutorial.html#pySmash-Tutorial">pySmash Tutorial</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="smash_tutorial.html#Generating-Fragments-for-single-molecule">Generating Fragments for single molecule</a></li>
-<li class="toctree-l3"><a class="reference internal" href="smash_tutorial.html#Generating-Fragments-Matrix">Generating Fragments Matrix</a></li>
-<li class="toctree-l3"><a class="reference internal" href="smash_tutorial.html#Obtain-significant-fragments">Obtain significant fragments</a></li>
-<li class="toctree-l3"><a class="reference internal" href="smash_tutorial.html#Predicting-with-Significant-Fragments">Predicting with Significant Fragments</a></li>
+<li class="toctree-l3"><a class="reference internal" href="smash_tutorial.html#Generating-Significant-Fragments">Generating Significant Fragments</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="smash_tutorial.html#Circular-Fragment">Circular Fragment</a></li>
+<li class="toctree-l4"><a class="reference internal" href="smash_tutorial.html#Path-Fragment">Path Fragment</a></li>
+<li class="toctree-l4"><a class="reference internal" href="smash_tutorial.html#Functional-Group-Fragments">Functional Group Fragments</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="smash_tutorial.html#Predicting-no-Label-molecules">Predicting no-Label molecules</a></li>
 </ul>
 </li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="pysmash_gui.html">Getting Started with pySmash GUI</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="pysmash_gui.html#The-Main-Interface-of-pySmash">The Main Interface of pySmash</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pysmash_gui.html#The-Main-Programs-of-PySmash">The Main Programs of PySmash</a></li>
 <li class="toctree-l2"><a class="reference internal" href="pysmash_gui.html#Generating-Significant-Fragments">Generating Significant Fragments</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="pysmash_gui.html#Selecting-and-Loading-File">Selecting and Loading File</a></li>
 <li class="toctree-l3"><a class="reference internal" href="pysmash_gui.html#Selecting-the-corresponding-field">Selecting the corresponding field</a></li>
-<li class="toctree-l3"><a class="reference internal" href="pysmash_gui.html#Adjusting-the-parameters-of-fragment-to-be-generated">Adjusting the parameters of fragment to be generated</a></li>
+<li class="toctree-l3"><a class="reference internal" href="pysmash_gui.html#Calculating-the-representative-substructures">Calculating the representative substructures</a></li>
 <li class="toctree-l3"><a class="reference internal" href="pysmash_gui.html#Adjusting-the-program-running-parameters">Adjusting the program running parameters</a></li>
-<li class="toctree-l3"><a class="reference internal" href="pysmash_gui.html#Running">Running</a></li>
+<li class="toctree-l3"><a class="reference internal" href="pysmash_gui.html#Previewing-and-Saving-Results">Previewing and Saving Results</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="pysmash_gui.html#Predicting-molecules-with-significant-fragments-model">Predicting molecules with significant fragments model</a><ul>
@@ -110,7 +118,30 @@
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="Application.html">Application</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="Application.html#Generating-Significant-Fragment-for-Chemical-Carcinogens">Generating Significant Fragment for Chemical Carcinogens</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Application.html#Example-of-toxicophore-analysis-on-a-carcinogenicity-dataset">Example of toxicophore analysis on a carcinogenicity dataset</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="Application.html#Result-1">Result 1</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="modules.html">pySmash API</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="modules/smash.html">smash package</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="modules/smash.html#subpackages">Subpackages</a></li>
+<li class="toctree-l3"><a class="reference internal" href="modules/smash.html#module-smash">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="modules/smash.fragments.html">smash.fragments package</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="modules/smash.fragments.html#submodules">Submodules</a></li>
+<li class="toctree-l3"><a class="reference internal" href="modules/smash.fragments.html#module-smash.fragments.circular">smash.fragments.circular module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="modules/smash.fragments.html#module-smash.fragments.functionGroup">smash.fragments.functionGroup module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="modules/smash.fragments.html#module-smash.fragments.path">smash.fragments.path module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="modules/smash.fragments.html#module-smash.fragments">Module contents</a></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -141,13 +172,13 @@
           <a href="py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
         <li class="right" >
-          <a href="smash_tutorial.html" title="Getting Started with pySmash"
+          <a href="overview.html" title="Overview"
              >next</a> |</li>
-        <li class="nav-item nav-item-0"><a href="#">pySmash v0.1 documentation</a> &#187;</li> 
+        <li class="nav-item nav-item-0"><a href="#">PySmash v1.0 documentation</a> &#187;</li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">
-        &#169; Copyright 2020, Kotori_y.
+        &#169; Copyright 2020, Kotori Yang.
       Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.3.0.
     </div>
   </body>

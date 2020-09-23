@@ -4,7 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta charset="utf-8" />
-    <title>smash.fragments.circular &#8212; pySmash v0.1 documentation</title>
+    <title>smash.fragments.circular &#8212; PySmash v1.0 documentation</title>
     <link rel="stylesheet" href="../../../_static/sphinxdoc.css" type="text/css" />
     <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
     <script type="text/javascript" id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
@@ -27,7 +27,7 @@
         <li class="right" >
           <a href="../../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../../index.html">pySmash v0.1 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../../index.html">PySmash v1.0 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="../../index.html" >Module code</a> &#187;</li>
           <li class="nav-item nav-item-2"><a href="../../smash.html" >smash</a> &#187;</li>
           <li class="nav-item nav-item-3"><a href="../fragments.html" accesskey="U">smash.fragments</a> &#187;</li> 
@@ -64,7 +64,6 @@
 <span class="sd">@Mail: yzjkid9@gmail.com; oriental-cds@163.com</span>
 <span class="sd">@Blog: https://blog.iamkotori.com</span>
 
-<span class="sd">♥I love Princess Zelda forever♥</span>
 <span class="sd">&quot;&quot;&quot;</span>
 
 
@@ -78,42 +77,30 @@
 
 <span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;GetFoldedCircularFragment&#39;</span><span class="p">,</span>
            <span class="s1">&#39;GetUnfoldedCircularFragment&#39;</span><span class="p">,</span>
-           <span class="s1">&#39;GetCircularFragment&#39;</span><span class="p">]</span>
+           <span class="s1">&#39;GetCircularFragment&#39;</span><span class="p">,</span>
+           <span class="s1">&#39;DrawMorganEnv&#39;</span><span class="p">]</span>
 
 
-<span class="k">def</span> <span class="nf">_DisposeCircularBitInfo</span><span class="p">(</span><span class="n">mol</span><span class="p">,</span> <span class="n">bitInfo</span><span class="p">,</span> <span class="n">minRadius</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">maxFragment</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">svg</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+<span class="k">def</span> <span class="nf">_DisposeCircularBitInfo</span><span class="p">(</span><span class="n">bitInfo</span><span class="p">,</span> <span class="n">minRadius</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">maxFragment</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Dispose the bitinfo retrived from GetFoldedCircularFragment() or GetUnfoldedCircularFragment()</span>
 <span class="sd">    *internal only*</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">idxAll</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">bitInfo</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
+    <span class="n">allFragments</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">bitInfo</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
 
-    <span class="k">if</span> <span class="n">maxFragment</span><span class="p">:</span>
-        <span class="n">bitInfo</span> <span class="o">=</span> <span class="p">[[</span><span class="n">atom</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">atom</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">idx</span><span class="p">]</span>
-                   <span class="k">for</span> <span class="n">idx</span><span class="p">,</span> <span class="n">atomInfo</span> <span class="ow">in</span> <span class="n">bitInfo</span><span class="o">.</span><span class="n">items</span><span class="p">()</span> <span class="k">for</span> <span class="n">atom</span> <span class="ow">in</span> <span class="n">atomInfo</span><span class="p">]</span>
-        <span class="n">bitInfo</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">bitInfo</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;atom&#39;</span><span class="p">,</span> <span class="s1">&#39;radius&#39;</span><span class="p">,</span> <span class="s1">&#39;idx&#39;</span><span class="p">])</span>
-        <span class="n">bitInfo</span> <span class="o">=</span> <span class="n">bitInfo</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">bitInfo</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;atom&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">radius</span><span class="o">.</span><span class="n">idxmax</span><span class="p">()]</span>
-        <span class="n">idxFrag</span> <span class="o">=</span> <span class="n">bitInfo</span><span class="p">[</span><span class="s1">&#39;idx&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">to_list</span><span class="p">()</span>
-        <span class="n">bitInfo</span> <span class="o">=</span> <span class="nb">tuple</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="n">bitInfo</span><span class="o">.</span><span class="n">atom</span><span class="o">.</span><span class="n">to_list</span><span class="p">(),</span> <span class="n">bitInfo</span><span class="o">.</span><span class="n">radius</span><span class="o">.</span><span class="n">to_list</span><span class="p">()))</span>
+    <span class="n">station</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="c1"># maxFragments = []</span>
+    <span class="k">for</span> <span class="n">idx</span><span class="p">,</span> <span class="n">pairs</span> <span class="ow">in</span> <span class="n">bitInfo</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+        <span class="k">for</span> <span class="p">(</span><span class="n">atom</span><span class="p">,</span> <span class="n">radius</span><span class="p">)</span> <span class="ow">in</span> <span class="n">pairs</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">radius</span> <span class="o">&gt;=</span> <span class="n">minRadius</span> <span class="ow">and</span> <span class="p">(</span><span class="ow">not</span> <span class="n">maxFragment</span> <span class="ow">or</span> \
+                <span class="n">atom</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">station</span> <span class="ow">or</span> \
+                    <span class="n">station</span><span class="p">[</span><span class="n">atom</span><span class="p">][</span><span class="s1">&#39;radius&#39;</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">radius</span><span class="p">):</span>
+                <span class="n">station</span><span class="p">[</span><span class="n">atom</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;idx&#39;</span><span class="p">:</span><span class="n">idx</span><span class="p">,</span> <span class="s1">&#39;radius&#39;</span><span class="p">:</span><span class="n">radius</span><span class="p">}</span>
 
-    <span class="k">else</span><span class="p">:</span>
-        <span class="n">idxFrag</span> <span class="o">=</span> <span class="n">idxAll</span>
-        <span class="n">bitInfo</span> <span class="o">=</span> <span class="nb">tuple</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">bitInfo</span><span class="o">.</span><span class="n">values</span><span class="p">()))</span>
-
-    <span class="n">fragments</span> <span class="o">=</span> <span class="p">{}</span>
-    <span class="k">for</span> <span class="n">info</span><span class="p">,</span> <span class="n">idx</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">bitInfo</span><span class="p">,</span> <span class="n">idxFrag</span><span class="p">):</span>
-        <span class="n">a</span><span class="p">,</span> <span class="n">r</span> <span class="o">=</span> <span class="n">info</span>
-
-        <span class="k">if</span> <span class="n">r</span> <span class="o">&gt;=</span> <span class="n">minRadius</span><span class="p">:</span>
-            <span class="n">smi</span><span class="p">,</span> <span class="n">svgImg</span> <span class="o">=</span> <span class="n">DrawMorganEnv</span><span class="p">(</span><span class="n">mol</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">r</span><span class="p">)</span>
-            <span class="n">fragments</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">smi</span><span class="p">,</span> <span class="n">svgImg</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span>
-                <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">))</span> <span class="k">if</span> <span class="n">svg</span> <span class="k">else</span> <span class="p">(</span><span class="n">smi</span><span class="p">,</span> <span class="p">)</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="k">pass</span>
-
-    <span class="k">return</span> <span class="p">(</span><span class="n">idxAll</span><span class="p">,</span> <span class="n">fragments</span><span class="p">)</span>
+    <span class="n">maxFragments</span> <span class="o">=</span> <span class="p">[</span><span class="n">vals</span><span class="p">[</span><span class="s1">&#39;idx&#39;</span><span class="p">]</span> <span class="k">for</span> <span class="n">vals</span> <span class="ow">in</span> <span class="n">station</span><span class="o">.</span><span class="n">values</span><span class="p">()]</span>
+    <span class="k">return</span> <span class="p">(</span><span class="n">allFragments</span><span class="p">,</span> <span class="n">maxFragments</span><span class="p">)</span>
 
 
-<span class="k">def</span> <span class="nf">DrawMorganEnv</span><span class="p">(</span><span class="n">mol</span><span class="p">,</span> <span class="n">atomId</span><span class="p">,</span> <span class="n">radius</span><span class="p">,</span> <span class="n">molSize</span><span class="o">=</span><span class="p">(</span><span class="mi">150</span><span class="p">,</span> <span class="mi">150</span><span class="p">),</span> <span class="n">baseRad</span><span class="o">=</span><span class="mf">0.3</span><span class="p">,</span> <span class="n">useSVG</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+<div class="viewcode-block" id="DrawMorganEnv"><a class="viewcode-back" href="../../../modules/smash.fragments.html#smash.fragments.circular.DrawMorganEnv">[docs]</a><span class="k">def</span> <span class="nf">DrawMorganEnv</span><span class="p">(</span><span class="n">mol</span><span class="p">,</span> <span class="n">atomId</span><span class="p">,</span> <span class="n">radius</span><span class="p">,</span> <span class="n">molSize</span><span class="o">=</span><span class="p">(</span><span class="mi">150</span><span class="p">,</span> <span class="mi">150</span><span class="p">),</span> <span class="n">baseRad</span><span class="o">=</span><span class="mf">0.3</span><span class="p">,</span> <span class="n">useSVG</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
                   <span class="n">aromaticColor</span><span class="o">=</span><span class="p">(</span><span class="mf">0.9</span><span class="p">,</span> <span class="mf">0.9</span><span class="p">,</span> <span class="mf">0.2</span><span class="p">),</span> <span class="n">ringColor</span><span class="o">=</span><span class="p">(</span><span class="mf">0.8</span><span class="p">,</span> <span class="mf">0.8</span><span class="p">,</span> <span class="mf">0.8</span><span class="p">),</span>
                   <span class="n">centerColor</span><span class="o">=</span><span class="p">(</span><span class="mf">0.6</span><span class="p">,</span> <span class="mf">0.6</span><span class="p">,</span> <span class="mf">0.9</span><span class="p">),</span> <span class="n">extraColor</span><span class="o">=</span><span class="p">(</span><span class="mf">0.9</span><span class="p">,</span> <span class="mf">0.9</span><span class="p">,</span> <span class="mf">0.9</span><span class="p">),</span> <span class="n">drawOptions</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
                   <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
@@ -124,7 +111,7 @@
                          <span class="n">extraColor</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
 
     <span class="n">submol</span> <span class="o">=</span> <span class="n">menv</span><span class="o">.</span><span class="n">submol</span>
-    <span class="n">subMol</span> <span class="o">=</span> <span class="n">Chem</span><span class="o">.</span><span class="n">MolToSmiles</span><span class="p">(</span><span class="n">submol</span><span class="p">,</span> <span class="n">canonical</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">isomericSmiles</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+    <span class="n">subMol</span> <span class="o">=</span> <span class="n">Chem</span><span class="o">.</span><span class="n">MolToSmiles</span><span class="p">(</span><span class="n">submol</span><span class="p">,</span> <span class="n">isomericSmiles</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">allBondsExplicit</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">allHsExplicit</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
     <span class="c1"># Drawing</span>
     <span class="k">if</span> <span class="n">useSVG</span><span class="p">:</span>
         <span class="n">drawer</span> <span class="o">=</span> <span class="n">rdMolDraw2D</span><span class="o">.</span><span class="n">MolDraw2DSVG</span><span class="p">(</span><span class="n">molSize</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">molSize</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
@@ -143,12 +130,12 @@
                         <span class="n">highlightBondColors</span><span class="o">=</span><span class="n">menv</span><span class="o">.</span><span class="n">bondColors</span><span class="p">,</span> <span class="n">highlightAtomRadii</span><span class="o">=</span><span class="n">menv</span><span class="o">.</span><span class="n">highlightRadii</span><span class="p">,</span>
                         <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
     <span class="n">drawer</span><span class="o">.</span><span class="n">FinishDrawing</span><span class="p">()</span>
-    <span class="k">return</span> <span class="n">subMol</span><span class="p">,</span> <span class="n">drawer</span><span class="o">.</span><span class="n">GetDrawingText</span><span class="p">()</span>
+    <span class="k">return</span> <span class="n">subMol</span><span class="p">,</span> <span class="n">drawer</span><span class="o">.</span><span class="n">GetDrawingText</span><span class="p">()</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">)</span></div>
 
 
 <div class="viewcode-block" id="GetFoldedCircularFragment"><a class="viewcode-back" href="../../../modules/smash.fragments.html#smash.fragments.circular.GetFoldedCircularFragment">[docs]</a><span class="k">def</span> <span class="nf">GetFoldedCircularFragment</span><span class="p">(</span><span class="n">mol</span><span class="p">,</span> <span class="n">minRadius</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">maxRadius</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
                               <span class="n">nBits</span><span class="o">=</span><span class="mi">1024</span><span class="p">,</span> <span class="n">maxFragment</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
-                              <span class="n">svg</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+                              <span class="n">disposed</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Get folded circular fragment</span>
 
 <span class="sd">    Parameters</span>
@@ -163,15 +150,14 @@
 <span class="sd">        the number of bit of morgan, by default 1014</span>
 <span class="sd">    maxFragment : bool, optional</span>
 <span class="sd">        Whether only return the maximum fragment at a center atom, by default True</span>
-<span class="sd">    svg : bool, optional</span>
-<span class="sd">        Whether output with a svg image, by default False</span>
+<span class="sd">    disposed : bool, optional</span>
+<span class="sd">        Whether dispose the original bitinfo, by default True</span>
 
 <span class="sd">    Returns</span>
 <span class="sd">    -------</span>
-<span class="sd">    fragments : tuple</span>
-<span class="sd">        The first element is the ID of all fragments generated,</span>
-<span class="sd">        and the second one is a dict whose key is the ID of output fragments,</span>
-<span class="sd">        value is corresponding SMARTS and svg string (is svg set as True)</span>
+<span class="sd">    fragments : list of list</span>
+<span class="sd">        The first element is the ID of all fragments generated</span>
+<span class="sd">        the second one is the ID of output fragments</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">bitInfo</span> <span class="o">=</span> <span class="p">{}</span>
     <span class="n">fp</span> <span class="o">=</span> <span class="n">GetMorganFingerprintAsBitVect</span><span class="p">(</span><span class="n">mol</span><span class="p">,</span>
@@ -180,12 +166,13 @@
                                        <span class="n">bitInfo</span><span class="o">=</span><span class="n">bitInfo</span><span class="p">)</span>
 
     <span class="n">fragments</span> <span class="o">=</span> <span class="n">_DisposeCircularBitInfo</span><span class="p">(</span>
-        <span class="n">mol</span><span class="p">,</span> <span class="n">bitInfo</span><span class="p">,</span> <span class="n">minRadius</span><span class="p">,</span> <span class="n">maxFragment</span><span class="p">,</span> <span class="n">svg</span><span class="p">)</span>
+            <span class="n">bitInfo</span><span class="p">,</span> <span class="n">minRadius</span><span class="p">,</span> <span class="n">maxFragment</span>
+        <span class="p">)</span> <span class="k">if</span> <span class="n">disposed</span> <span class="k">else</span> <span class="n">bitInfo</span>
     <span class="k">return</span> <span class="n">fragments</span></div>
 
 
 <div class="viewcode-block" id="GetUnfoldedCircularFragment"><a class="viewcode-back" href="../../../modules/smash.fragments.html#smash.fragments.circular.GetUnfoldedCircularFragment">[docs]</a><span class="k">def</span> <span class="nf">GetUnfoldedCircularFragment</span><span class="p">(</span><span class="n">mol</span><span class="p">,</span> <span class="n">minRadius</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">maxRadius</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
-                                <span class="n">maxFragment</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">svg</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+                                <span class="n">maxFragment</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">disposed</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Get unfolded circular fragment</span>
 
 <span class="sd">    Parameters</span>
@@ -198,15 +185,14 @@
 <span class="sd">        The probable maximum radius of circular fragment, by default 2</span>
 <span class="sd">    maxFragment : bool, optional</span>
 <span class="sd">        Whether only return the maximum fragment at a center atom, by default True</span>
-<span class="sd">    svg : bool, optional</span>
-<span class="sd">        Whether output with a svg image, by default False</span>
+<span class="sd">    disposed : bool, optional</span>
+<span class="sd">        Whether dispose the original bitinfo, by default True</span>
 
 <span class="sd">    Returns</span>
 <span class="sd">    -------</span>
-<span class="sd">    fragments : tuple</span>
-<span class="sd">        The first element is the ID of all fragments generated,</span>
-<span class="sd">        and the second one is a dict whose key is the ID of output fragments,</span>
-<span class="sd">        value is corresponding SMARTS and svg string (is svg set as True)</span>
+<span class="sd">    fragments : list of list</span>
+<span class="sd">        The first element is the ID of all fragments generated</span>
+<span class="sd">        the second one is the ID of output fragments</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">bitInfo</span> <span class="o">=</span> <span class="p">{}</span>
     <span class="n">fp</span> <span class="o">=</span> <span class="n">GetMorganFingerprint</span><span class="p">(</span><span class="n">mol</span><span class="p">,</span>
@@ -214,13 +200,14 @@
                               <span class="n">bitInfo</span><span class="o">=</span><span class="n">bitInfo</span><span class="p">)</span>
 
     <span class="n">fragments</span> <span class="o">=</span> <span class="n">_DisposeCircularBitInfo</span><span class="p">(</span>
-        <span class="n">mol</span><span class="p">,</span> <span class="n">bitInfo</span><span class="p">,</span> <span class="n">minRadius</span><span class="p">,</span> <span class="n">maxFragment</span><span class="p">,</span> <span class="n">svg</span><span class="p">)</span>
+            <span class="n">bitInfo</span><span class="p">,</span> <span class="n">minRadius</span><span class="p">,</span> <span class="n">maxFragment</span>
+        <span class="p">)</span> <span class="k">if</span> <span class="n">disposed</span> <span class="k">else</span> <span class="n">bitInfo</span>
     <span class="k">return</span> <span class="n">fragments</span></div>
 
 
 <div class="viewcode-block" id="GetCircularFragment"><a class="viewcode-back" href="../../../modules/smash.fragments.html#smash.fragments.circular.GetCircularFragment">[docs]</a><span class="k">def</span> <span class="nf">GetCircularFragment</span><span class="p">(</span><span class="n">mol</span><span class="p">,</span> <span class="n">minRadius</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">maxRadius</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
                         <span class="n">nBits</span><span class="o">=</span><span class="mi">1024</span><span class="p">,</span> <span class="n">folded</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
-                        <span class="n">maxFragment</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">svg</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+                        <span class="n">maxFragment</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">disposed</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Get circular fragment</span>
 
 <span class="sd">    Parameters</span>
@@ -240,32 +227,35 @@
 <span class="sd">        Whether only return the maximum fragment at a center atom, by default True</span>
 <span class="sd">    nJobs : int, optional</span>
 <span class="sd">        The number of CPUs to use to do the computation, by default 1</span>
+<span class="sd">    disposed : bool, optional</span>
+<span class="sd">        Whether dispose the original bitinfo, by default True</span>
 
 <span class="sd">    Returns</span>
 <span class="sd">    -------</span>
-<span class="sd">    fragments : tuple</span>
-<span class="sd">        The first element is the ID of all fragments generated,</span>
-<span class="sd">        and the second one is a dict whose key is the ID of output fragments,</span>
-<span class="sd">        value is corresponding SMARTS and svg string (is svg set as True)</span>
+<span class="sd">    fragments : list of list</span>
+<span class="sd">        The first element is the ID of all fragments generated</span>
+<span class="sd">        the second one is the ID of output fragments</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">if</span> <span class="n">folded</span><span class="p">:</span>
         <span class="n">fragments</span> <span class="o">=</span> <span class="n">GetFoldedCircularFragment</span><span class="p">(</span><span class="n">mol</span><span class="p">,</span>
                                               <span class="n">minRadius</span><span class="o">=</span><span class="n">minRadius</span><span class="p">,</span> <span class="n">maxRadius</span><span class="o">=</span><span class="n">maxRadius</span><span class="p">,</span>
                                               <span class="n">nBits</span><span class="o">=</span><span class="n">nBits</span><span class="p">,</span> <span class="n">maxFragment</span><span class="o">=</span><span class="n">maxFragment</span><span class="p">,</span>
-                                              <span class="n">svg</span><span class="o">=</span><span class="n">svg</span><span class="p">)</span>
+                                              <span class="n">disposed</span><span class="o">=</span><span class="n">disposed</span><span class="p">)</span>
     <span class="k">else</span><span class="p">:</span>
         <span class="n">fragments</span> <span class="o">=</span> <span class="n">GetUnfoldedCircularFragment</span><span class="p">(</span><span class="n">mol</span><span class="p">,</span>
                                                 <span class="n">minRadius</span><span class="o">=</span><span class="n">minRadius</span><span class="p">,</span> <span class="n">maxRadius</span><span class="o">=</span><span class="n">maxRadius</span><span class="p">,</span>
-                                                <span class="n">maxFragment</span><span class="o">=</span><span class="n">maxFragment</span><span class="p">,</span> <span class="n">svg</span><span class="o">=</span><span class="n">svg</span><span class="p">)</span>
+                                                <span class="n">maxFragment</span><span class="o">=</span><span class="n">maxFragment</span><span class="p">,</span> <span class="n">disposed</span><span class="o">=</span><span class="n">disposed</span><span class="p">)</span>
 
     <span class="k">return</span> <span class="n">fragments</span></div>
 
 
+
 <span class="k">if</span> <span class="s1">&#39;__main__&#39;</span> <span class="o">==</span> <span class="vm">__name__</span><span class="p">:</span>
+
     <span class="n">mol</span> <span class="o">=</span> <span class="n">Chem</span><span class="o">.</span><span class="n">MolFromSmiles</span><span class="p">(</span><span class="s1">&#39;C1=CC2NC(=O)CC3C=2C(C(=O)C2C=CC=CC=23)=C1&#39;</span><span class="p">)</span>
 
     <span class="n">fragments</span> <span class="o">=</span> <span class="n">GetCircularFragment</span><span class="p">(</span>
-        <span class="n">mol</span><span class="p">,</span> <span class="n">maxRadius</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">minRadius</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">maxFragment</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">svg</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="n">mol</span><span class="p">,</span> <span class="n">maxRadius</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">minRadius</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">maxFragment</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
     <span class="nb">print</span><span class="p">(</span><span class="n">fragments</span><span class="p">)</span>
 </pre></div>
 
@@ -283,14 +273,14 @@
         <li class="right" >
           <a href="../../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../../index.html">pySmash v0.1 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../../index.html">PySmash v1.0 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="../../index.html" >Module code</a> &#187;</li>
           <li class="nav-item nav-item-2"><a href="../../smash.html" >smash</a> &#187;</li>
           <li class="nav-item nav-item-3"><a href="../fragments.html" >smash.fragments</a> &#187;</li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">
-        &#169; Copyright 2020, Kotori_y.
+        &#169; Copyright 2020, Kotori Yang.
       Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.3.0.
     </div>
   </body>

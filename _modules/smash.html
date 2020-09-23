@@ -4,7 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta charset="utf-8" />
-    <title>smash &#8212; pySmash v0.1 documentation</title>
+    <title>smash &#8212; PySmash v1.0 documentation</title>
     <link rel="stylesheet" href="../_static/sphinxdoc.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
     <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
@@ -27,7 +27,7 @@
         <li class="right" >
           <a href="../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../index.html">pySmash v0.1 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">PySmash v1.0 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="index.html" accesskey="U">Module code</a> &#187;</li> 
       </ul>
     </div>
@@ -62,12 +62,12 @@
 <span class="sd">@Mail: yzjkid9@gmail.com; oriental-cds@163.com</span>
 <span class="sd">@Blog: https://blog.iamkotori.com</span>
 
-<span class="sd">♥I love Princess Zelda forever♥</span>
 <span class="sd">&quot;&quot;&quot;</span>
 
 
 <span class="kn">from</span> <span class="nn">decimal</span> <span class="kn">import</span> <span class="n">Decimal</span>
 <span class="kn">import</span> <span class="nn">multiprocessing</span> <span class="k">as</span> <span class="nn">mp</span>
+<span class="kn">from</span> <span class="nn">collections.abc</span> <span class="kn">import</span> <span class="n">Iterable</span>
 
 <span class="kn">import</span> <span class="nn">os</span>
 <span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
@@ -90,6 +90,8 @@
     <span class="n">pd</span><span class="o">.</span><span class="n">set_option</span><span class="p">(</span><span class="s1">&#39;display.max_colwidth&#39;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
 <span class="k">except</span><span class="p">:</span>
     <span class="n">pd</span><span class="o">.</span><span class="n">set_option</span><span class="p">(</span><span class="s1">&#39;display.max_colwidth&#39;</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="kn">from</span> <span class="nn">scipy.stats</span> <span class="kn">import</span> <span class="n">binom</span>
 
 
 <div class="viewcode-block" id="NotFittedError"><a class="viewcode-back" href="../modules/smash.html#smash.NotFittedError">[docs]</a><span class="k">class</span> <span class="nc">NotFittedError</span><span class="p">(</span><span class="ne">Exception</span><span class="p">):</span>
@@ -116,14 +118,17 @@
 <span class="sd">        use sum() function to get the pvalue.</span>
 
 <span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">p_value</span> <span class="o">=</span> <span class="mi">0</span>
     <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">ms</span><span class="p">,</span> <span class="n">ns</span><span class="o">+</span><span class="mi">1</span><span class="p">):</span>
         <span class="n">numerator</span> <span class="o">=</span> <span class="n">Decimal</span><span class="p">(</span><span class="n">sc</span><span class="o">.</span><span class="n">math</span><span class="o">.</span><span class="n">factorial</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">ns</span><span class="p">)))</span>
         <span class="n">denominatorA</span> <span class="o">=</span> <span class="n">Decimal</span><span class="p">(</span><span class="n">sc</span><span class="o">.</span><span class="n">math</span><span class="o">.</span><span class="n">factorial</span><span class="p">(</span>
             <span class="nb">float</span><span class="p">(</span><span class="n">i</span><span class="p">)))</span> <span class="o">*</span> <span class="n">Decimal</span><span class="p">(</span><span class="n">sc</span><span class="o">.</span><span class="n">math</span><span class="o">.</span><span class="n">factorial</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">ns</span><span class="o">-</span><span class="n">i</span><span class="p">)))</span>
         <span class="n">denominatorB</span> <span class="o">=</span> <span class="p">(</span><span class="n">m</span><span class="o">/</span><span class="n">n</span><span class="p">)</span><span class="o">**</span><span class="nb">float</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
         <span class="n">denominatorC</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="p">(</span><span class="n">m</span><span class="o">/</span><span class="n">n</span><span class="p">))</span><span class="o">**</span><span class="p">(</span><span class="n">ns</span><span class="o">-</span><span class="n">i</span><span class="p">)</span>
-        <span class="n">p_value</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">numerator</span><span class="o">/</span><span class="n">denominatorA</span><span class="p">)</span> <span class="o">*</span> <span class="n">denominatorB</span> <span class="o">*</span> <span class="n">denominatorC</span>
-        <span class="k">yield</span> <span class="n">p_value</span></div>
+        <span class="n">val</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">numerator</span><span class="o">/</span><span class="n">denominatorA</span><span class="p">)</span> <span class="o">*</span> <span class="n">denominatorB</span> <span class="o">*</span> <span class="n">denominatorC</span>
+        <span class="n">p_value</span> <span class="o">+=</span> <span class="n">val</span>
+
+    <span class="k">return</span> <span class="n">p_value</span></div>
 
 
 <div class="viewcode-block" id="BaseLearner"><a class="viewcode-back" href="../modules/smash.html#smash.BaseLearner">[docs]</a><span class="k">class</span> <span class="nc">BaseLearner</span><span class="p">:</span>
@@ -133,8 +138,7 @@
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Initialization.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">sigPvalue</span> <span class="o">=</span> <span class="kc">None</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">sigMatrix</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">sigFragments</span> <span class="o">=</span> <span class="kc">None</span>
 
 <div class="viewcode-block" id="BaseLearner.GetMatrix"><a class="viewcode-back" href="../modules/smash.html#smash.BaseLearner.GetMatrix">[docs]</a>    <span class="k">def</span> <span class="nf">GetMatrix</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mols</span><span class="p">,</span> <span class="o">**</span><span class="n">kwgrs</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Get the matrix of fragment of mol library.</span>
@@ -144,11 +148,21 @@
 <span class="sd">        mols : Iterable object, and each element is a rdkit.Chem.rdchem.Mol object.</span>
 <span class="sd">            compounds, which have aspecific endpoint label, used to obtain significant fragments.</span>
 <span class="sd">        &quot;&quot;&quot;</span></div>
+    
+<div class="viewcode-block" id="BaseLearner.ShowFragment"><a class="viewcode-back" href="../modules/smash.html#smash.BaseLearner.ShowFragment">[docs]</a>    <span class="k">def</span> <span class="nf">ShowFragment</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mol</span><span class="p">,</span> <span class="o">**</span><span class="n">kwgrs</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Visulaizing fragments.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        mols : Iterable object, and each element is a rdkit.Chem.rdchem.Mol object.</span>
+<span class="sd">            compounds, which have aspecific endpoint label, used to obtain significant fragments.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">pass</span></div>
 
 <div class="viewcode-block" id="BaseLearner.fit"><a class="viewcode-back" href="../modules/smash.html#smash.BaseLearner.fit">[docs]</a>    <span class="k">def</span> <span class="nf">fit</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mols</span><span class="p">,</span>
             <span class="n">labels</span><span class="p">,</span> <span class="n">aimLabel</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
             <span class="n">minNum</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">pCutoff</span><span class="o">=</span><span class="mf">0.05</span><span class="p">,</span>
-            <span class="n">accCutoff</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">Bonferroni</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">svg</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+            <span class="n">accCutoff</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">Bonferroni</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Learning from given database which have aspecific endpoint label.</span>
 
 <span class="sd">        Parameters</span>
@@ -175,25 +189,27 @@
 <span class="sd">        smash.BaseLearner</span>
 <span class="sd">            A fitted learner, used predict() method can predict molecules without known label </span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">matrix</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">GetMatrix</span><span class="p">(</span><span class="n">mols</span><span class="p">,</span> <span class="n">svg</span><span class="o">=</span><span class="n">svg</span><span class="p">)</span>
-        <span class="n">bo</span> <span class="o">=</span> <span class="p">(</span><span class="n">matrix</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="n">minNum</span><span class="p">)</span><span class="o">.</span><span class="n">values</span>
-        <span class="n">matrix</span> <span class="o">=</span> <span class="n">matrix</span><span class="o">.</span><span class="n">loc</span><span class="p">[:,</span> <span class="n">bo</span><span class="p">]</span>
+        <span class="n">mols</span> <span class="o">=</span> <span class="nb">tuple</span><span class="p">(</span><span class="n">mols</span><span class="p">)</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">mols</span><span class="p">,</span> <span class="n">Iterable</span><span class="p">)</span> <span class="k">else</span> <span class="p">(</span><span class="n">mols</span><span class="p">,</span> <span class="p">)</span>
+
+        <span class="n">matrix</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">GetMatrix</span><span class="p">(</span><span class="n">mols</span><span class="p">,</span> <span class="n">minNum</span><span class="o">=</span><span class="n">minNum</span><span class="p">)</span>
 
         <span class="n">n</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">labels</span><span class="p">)</span>
         <span class="n">m</span> <span class="o">=</span> <span class="p">(</span><span class="n">labels</span> <span class="o">==</span> <span class="n">aimLabel</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+        <span class="n">p</span> <span class="o">=</span> <span class="n">m</span><span class="o">/</span><span class="n">n</span>
 
-        <span class="n">sigPvalue</span> <span class="o">=</span> <span class="p">{}</span>
-        <span class="k">for</span> <span class="n">col</span><span class="p">,</span> <span class="n">val</span> <span class="ow">in</span> <span class="n">matrix</span><span class="o">.</span><span class="n">iteritems</span><span class="p">():</span>
+        <span class="n">sigPvalue</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span>
+            <span class="p">{</span><span class="s2">&quot;ns&quot;</span><span class="p">:</span> <span class="n">matrix</span><span class="o">.</span><span class="n">sum</span><span class="p">(),</span>
+             <span class="s2">&quot;ms&quot;</span><span class="p">:</span> <span class="n">matrix</span><span class="p">[</span><span class="n">labels</span> <span class="o">==</span> <span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">sum</span><span class="p">()}</span>
+        <span class="p">)</span>
+        <span class="n">sigPvalue</span> <span class="o">=</span> <span class="n">sigPvalue</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span>
+            <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="nb">sum</span><span class="p">(</span>
+                <span class="n">binom</span><span class="o">.</span><span class="n">pmf</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="s1">&#39;ms&#39;</span><span class="p">],</span> <span class="n">x</span><span class="p">[</span><span class="s1">&#39;ns&#39;</span><span class="p">]</span><span class="o">+</span><span class="mi">1</span><span class="p">),</span> <span class="n">x</span><span class="p">[</span><span class="s1">&#39;ns&#39;</span><span class="p">],</span> <span class="n">p</span><span class="p">)</span>
+            <span class="p">),</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span>
+        <span class="p">)</span>
 
-            <span class="n">ns</span> <span class="o">=</span> <span class="n">val</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
-            <span class="n">ms</span> <span class="o">=</span> <span class="p">(</span><span class="n">val</span><span class="p">[</span><span class="n">labels</span> <span class="o">==</span> <span class="n">aimLabel</span><span class="p">]</span> <span class="o">==</span> <span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+        <span class="n">sigPvalue</span> <span class="o">=</span> <span class="n">sigPvalue</span><span class="p">[</span><span class="n">sigPvalue</span> <span class="o">&lt;=</span> <span class="n">pCutoff</span><span class="p">]</span>
 
-            <span class="n">pvalue</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="n">Pvalue</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">m</span><span class="p">,</span> <span class="n">ns</span><span class="p">,</span> <span class="n">ms</span><span class="p">))</span>
-            <span class="k">if</span> <span class="n">pvalue</span> <span class="o">&lt;=</span> <span class="n">pCutoff</span><span class="p">:</span>
-                <span class="n">sigPvalue</span><span class="p">[</span><span class="n">col</span><span class="p">]</span> <span class="o">=</span> <span class="n">pvalue</span>
-
-        <span class="n">sigPvalue</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">sigPvalue</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;Pvalue&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">T</span>
-
+        <span class="n">sigPvalue</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">sigPvalue</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;Pvalue&#39;</span><span class="p">])</span>
         <span class="n">sigMatrix</span> <span class="o">=</span> <span class="n">matrix</span><span class="o">.</span><span class="n">reindex</span><span class="p">(</span><span class="n">sigPvalue</span><span class="o">.</span><span class="n">index</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
         <span class="n">sigPvalue</span><span class="p">[</span><span class="s1">&#39;Total&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">sigMatrix</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
         <span class="n">sigPvalue</span><span class="p">[</span><span class="s1">&#39;Hitted&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">sigMatrix</span><span class="p">[</span><span class="n">labels</span> <span class="o">==</span> <span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
@@ -211,15 +227,23 @@
         <span class="k">else</span><span class="p">:</span>
             <span class="k">pass</span>
 
-        <span class="bp">self</span><span class="o">.</span><span class="n">substructure</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">substructure</span><span class="o">.</span><span class="n">reindex</span><span class="p">(</span><span class="n">sigPvalue</span><span class="o">.</span><span class="n">index</span><span class="p">)</span>
-        <span class="n">sigPvalue</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">(</span>
-            <span class="p">(</span><span class="n">sigPvalue</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">substructure</span><span class="p">),</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">sort</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+        <span class="n">substructure</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="k">for</span> <span class="n">idx</span><span class="p">,</span><span class="n">vals</span> <span class="ow">in</span> <span class="n">sigMatrix</span><span class="o">.</span><span class="n">iteritems</span><span class="p">():</span>
+            <span class="n">mol</span> <span class="o">=</span> <span class="n">mols</span><span class="p">[</span><span class="n">vals</span><span class="p">[</span><span class="n">vals</span><span class="o">==</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">index</span><span class="p">[</span><span class="mi">0</span><span class="p">]]</span>
+            <span class="n">smarts</span><span class="p">,</span> <span class="n">svg</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">ShowFragment</span><span class="p">(</span><span class="n">mol</span><span class="p">,</span> <span class="n">idx</span><span class="p">)</span>
+            <span class="n">substructure</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;SMARTS&quot;</span><span class="p">:</span><span class="n">smarts</span><span class="p">,</span> <span class="s2">&quot;Substructure&quot;</span><span class="p">:</span><span class="n">svg</span><span class="p">}</span>
+        <span class="n">substructure</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">substructure</span><span class="p">)</span><span class="o">.</span><span class="n">T</span>
+        
+        <span class="n">sigPvalue</span> <span class="o">=</span> <span class="n">sigPvalue</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">substructure</span><span class="p">,</span> <span class="n">left_index</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">right_index</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        
 
         <span class="n">sigPvalue</span> <span class="o">=</span> <span class="n">sigPvalue</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="s1">&#39;Pvalue&#39;</span><span class="p">)</span>
-        <span class="n">sigMatrix</span> <span class="o">=</span> <span class="n">matrix</span><span class="o">.</span><span class="n">reindex</span><span class="p">(</span><span class="n">sigPvalue</span><span class="o">.</span><span class="n">index</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+        <span class="c1"># print(type(sigPvalue))</span>
+        <span class="n">sigMatrix</span> <span class="o">=</span> <span class="n">sigMatrix</span><span class="o">.</span><span class="n">reindex</span><span class="p">(</span><span class="n">sigPvalue</span><span class="o">.</span><span class="n">index</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
 
-        <span class="bp">self</span><span class="o">.</span><span class="n">sigPvalue</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">sigMatrix</span> <span class="o">=</span> <span class="n">sigPvalue</span><span class="p">,</span> <span class="n">sigMatrix</span>
-        <span class="k">return</span> <span class="bp">self</span></div>
+        <span class="bp">self</span><span class="o">.</span><span class="n">sigFragments</span> <span class="o">=</span> <span class="n">sigPvalue</span><span class="o">.</span><span class="n">SMARTS</span><span class="o">.</span><span class="n">to_dict</span><span class="p">()</span>
+
+        <span class="k">return</span> <span class="n">sigPvalue</span><span class="p">,</span> <span class="n">sigMatrix</span></div>
 
 <div class="viewcode-block" id="BaseLearner.predict"><a class="viewcode-back" href="../modules/smash.html#smash.BaseLearner.predict">[docs]</a>    <span class="k">def</span> <span class="nf">predict</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mols</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Predict molecules without known label </span>
@@ -241,19 +265,19 @@
 <span class="sd">        NotFittedError</span>
 <span class="sd">            Judge a learner whether was fitted</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">sigPvalue</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">sigMatrix</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">sigFragments</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
             <span class="k">raise</span> <span class="n">NotFittedError</span><span class="p">(</span>
                 <span class="s2">&quot;This instance is not fitted yet. Call &#39;fit&#39; with appropriate arguments before using this method.&quot;</span><span class="p">)</span>
 
-        <span class="n">predMatrix</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">GetMatrix</span><span class="p">(</span><span class="n">mols</span><span class="p">,</span> <span class="n">svg</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="n">predMatrix</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">GetMatrix</span><span class="p">(</span><span class="n">mols</span><span class="p">)</span>
         <span class="c1"># cols = set(predMatrix.columns) &amp; set(self.sigPvalue.index)</span>
         <span class="n">predMatrix</span> <span class="o">=</span> <span class="n">predMatrix</span><span class="o">.</span><span class="n">reindex</span><span class="p">(</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">sigPvalue</span><span class="o">.</span><span class="n">index</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">reset_index</span><span class="p">(</span><span class="n">drop</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">sigFragments</span><span class="o">.</span><span class="n">keys</span><span class="p">(),</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">reset_index</span><span class="p">(</span><span class="n">drop</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
         <span class="n">y_pred</span> <span class="o">=</span> <span class="p">((</span><span class="n">predMatrix</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span> <span class="o">+</span> <span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">values</span>
 
         <span class="k">return</span> <span class="n">y_pred</span><span class="p">,</span> <span class="n">predMatrix</span></div>
 
-<div class="viewcode-block" id="BaseLearner.savePvalue"><a class="viewcode-back" href="../modules/smash.html#smash.BaseLearner.savePvalue">[docs]</a>    <span class="k">def</span> <span class="nf">savePvalue</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">file</span><span class="o">=</span><span class="s1">&#39;./pvalue.html&#39;</span><span class="p">):</span>
+<div class="viewcode-block" id="BaseLearner.savePvalue"><a class="viewcode-back" href="../modules/smash.html#smash.BaseLearner.savePvalue">[docs]</a>    <span class="k">def</span> <span class="nf">savePvalue</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">sigPvalue</span><span class="p">,</span> <span class="n">file</span><span class="o">=</span><span class="s1">&#39;./pvalue.html&#39;</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Save pvalue result</span>
 
 <span class="sd">        Parameters</span>
@@ -293,7 +317,7 @@
 <span class="s2">            </span><span class="si">%s</span><span class="s2"></span>
 <span class="s2">        &lt;/body&gt;</span>
 <span class="s2">    &lt;/html&gt;&quot;&quot;&quot;</span>
-        <span class="n">html</span> <span class="o">=</span> <span class="n">html_string</span> <span class="o">%</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">sigPvalue</span><span class="o">.</span><span class="n">to_html</span><span class="p">(</span>
+        <span class="n">html</span> <span class="o">=</span> <span class="n">html_string</span> <span class="o">%</span> <span class="p">(</span><span class="n">sigPvalue</span><span class="o">.</span><span class="n">to_html</span><span class="p">(</span>
             <span class="n">classes</span><span class="o">=</span><span class="s1">&#39;mystyle&#39;</span><span class="p">,</span> <span class="n">escape</span><span class="o">=</span><span class="kc">False</span><span class="p">))</span>
         <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">file</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
             <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">html</span><span class="p">)</span>
@@ -345,6 +369,7 @@
 <span class="sd">        nJobs : int, optional</span>
 <span class="sd">            The number of CPUs to use to do the computation, by default 1</span>
 <span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">BaseLearner</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
         <span class="n">Circular</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">minRadius</span><span class="o">=</span><span class="n">minRadius</span><span class="p">,</span> <span class="n">maxRadius</span><span class="o">=</span><span class="n">maxRadius</span><span class="p">,</span>
                           <span class="n">nBits</span><span class="o">=</span><span class="n">nBits</span><span class="p">,</span> <span class="n">folded</span><span class="o">=</span><span class="n">folded</span><span class="p">,</span>
                           <span class="n">maxFragment</span><span class="o">=</span><span class="n">maxFragment</span><span class="p">,</span> <span class="n">nJobs</span><span class="o">=</span><span class="n">nJobs</span><span class="p">)</span>
@@ -363,10 +388,29 @@
 <span class="sd">            The calculated fragment matrix</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">matrix</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">GetCircularMatrix</span><span class="p">(</span><span class="n">mols</span><span class="p">,</span> <span class="o">**</span><span class="n">kwgrs</span><span class="p">)</span>
-        <span class="k">return</span> <span class="n">matrix</span></div></div>
+        <span class="k">return</span> <span class="n">matrix</span></div>
 
+<div class="viewcode-block" id="CircularLearner.ShowFragment"><a class="viewcode-back" href="../modules/smash.html#smash.CircularLearner.ShowFragment">[docs]</a>    <span class="k">def</span> <span class="nf">ShowFragment</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mol</span><span class="p">,</span> <span class="n">fragmentIndex</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Get the SMARTS and SVG image of circular fragment</span>
 
-<div class="viewcode-block" id="PathLeanrner"><a class="viewcode-back" href="../modules/smash.html#smash.PathLeanrner">[docs]</a><span class="k">class</span> <span class="nc">PathLeanrner</span><span class="p">(</span><span class="n">BaseLearner</span><span class="p">,</span> <span class="n">Path</span><span class="p">):</span>
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        mol : rdkit.Chem.rdchem.Mol</span>
+<span class="sd">            The molecule which contain the aim fragment</span>
+<span class="sd">        fragmentIndex : int</span>
+<span class="sd">            The index of aim fragment</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        smarts : str</span>
+<span class="sd">            The SMARTS of fragment, which could be used for screening molecules</span>
+<span class="sd">        svg : str</span>
+<span class="sd">            The svg string of fragment</span>
+<span class="sd">        &quot;&quot;&quot;</span> 
+        <span class="n">smarts</span><span class="p">,</span> <span class="n">svg</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">ShowCircularFragment</span><span class="p">(</span><span class="n">mol</span><span class="p">,</span> <span class="n">fragmentIndex</span><span class="p">)</span>
+        <span class="k">return</span> <span class="p">(</span><span class="n">smarts</span><span class="p">,</span> <span class="n">svg</span><span class="p">)</span></div></div>
+
+<div class="viewcode-block" id="PathLearner"><a class="viewcode-back" href="../modules/smash.html#smash.PathLearner">[docs]</a><span class="k">class</span> <span class="nc">PathLearner</span><span class="p">(</span><span class="n">BaseLearner</span><span class="p">,</span> <span class="n">Path</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Path-Based fragment leanrner</span>
 
 <span class="sd">    Parameters</span>
@@ -399,10 +443,11 @@
 <span class="sd">        nJobs : int, optional</span>
 <span class="sd">            The number of CPUs to use to do the computation, by default 1</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">Path</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">minPath</span><span class="p">,</span> <span class="n">maxPath</span><span class="p">,</span>
-                      <span class="n">nBits</span><span class="p">,</span> <span class="n">folded</span><span class="p">,</span> <span class="n">nJobs</span><span class="p">,</span> <span class="n">maxFragment</span><span class="p">)</span>
+        <span class="n">BaseLearner</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+        <span class="n">Path</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">minPath</span><span class="o">=</span><span class="n">minPath</span><span class="p">,</span> <span class="n">maxPath</span><span class="o">=</span><span class="n">maxPath</span><span class="p">,</span>
+                      <span class="n">nBits</span><span class="o">=</span><span class="n">nBits</span><span class="p">,</span> <span class="n">folded</span><span class="o">=</span><span class="n">folded</span><span class="p">,</span> <span class="n">nJobs</span><span class="o">=</span><span class="n">nJobs</span><span class="p">,</span> <span class="n">maxFragment</span><span class="o">=</span><span class="n">maxFragment</span><span class="p">)</span>
 
-<div class="viewcode-block" id="PathLeanrner.GetMatrix"><a class="viewcode-back" href="../modules/smash.html#smash.PathLeanrner.GetMatrix">[docs]</a>    <span class="k">def</span> <span class="nf">GetMatrix</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mols</span><span class="p">,</span> <span class="o">**</span><span class="n">kwgrs</span><span class="p">):</span>
+<div class="viewcode-block" id="PathLearner.GetMatrix"><a class="viewcode-back" href="../modules/smash.html#smash.PathLearner.GetMatrix">[docs]</a>    <span class="k">def</span> <span class="nf">GetMatrix</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mols</span><span class="p">,</span> <span class="o">**</span><span class="n">kwgrs</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Rewrite method</span>
 
 <span class="sd">        Parameters</span>
@@ -416,7 +461,27 @@
 <span class="sd">            The calculated fragment matrix</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">matrix</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">GetPathMatrix</span><span class="p">(</span><span class="n">mols</span><span class="p">,</span> <span class="o">**</span><span class="n">kwgrs</span><span class="p">)</span>
-        <span class="k">return</span> <span class="n">matrix</span></div></div>
+        <span class="k">return</span> <span class="n">matrix</span></div>
+
+<div class="viewcode-block" id="PathLearner.ShowFragment"><a class="viewcode-back" href="../modules/smash.html#smash.PathLearner.ShowFragment">[docs]</a>    <span class="k">def</span> <span class="nf">ShowFragment</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mol</span><span class="p">,</span> <span class="n">fragmentIndex</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Get the SMARTS and SVG image of Path fragment</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        mol : rdkit.Chem.rdchem.Mol</span>
+<span class="sd">            The molecule which contain the aim fragment</span>
+<span class="sd">        fragmentIndex : int</span>
+<span class="sd">            The index of aim fragment</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        smarts : str</span>
+<span class="sd">            The SMARTS of fragment, which could be used for screening molecules</span>
+<span class="sd">        svg : str</span>
+<span class="sd">            The svg string of fragment</span>
+<span class="sd">        &quot;&quot;&quot;</span>     
+        <span class="n">smarts</span><span class="p">,</span> <span class="n">svg</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">ShowPathFragment</span><span class="p">(</span><span class="n">mol</span><span class="p">,</span> <span class="n">fragmentIndex</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">smarts</span><span class="p">,</span> <span class="n">svg</span></div></div>
 
 
 <div class="viewcode-block" id="FunctionGroupLearner"><a class="viewcode-back" href="../modules/smash.html#smash.FunctionGroupLearner">[docs]</a><span class="k">class</span> <span class="nc">FunctionGroupLearner</span><span class="p">(</span><span class="n">BaseLearner</span><span class="p">,</span> <span class="n">FunctionGroup</span><span class="p">):</span>
@@ -438,6 +503,7 @@
 <span class="sd">        nJobs : int, optional</span>
 <span class="sd">            The number of CPUs to use to do the computation, by default 1</span>
 <span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">BaseLearner</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
         <span class="n">FunctionGroup</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">nJobs</span><span class="p">)</span>
 
 <div class="viewcode-block" id="FunctionGroupLearner.GetMatrix"><a class="viewcode-back" href="../modules/smash.html#smash.FunctionGroupLearner.GetMatrix">[docs]</a>    <span class="k">def</span> <span class="nf">GetMatrix</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mols</span><span class="p">,</span> <span class="o">**</span><span class="n">kwgrs</span><span class="p">):</span>
@@ -454,15 +520,21 @@
 <span class="sd">            The calculated fragment matrix</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">matrix</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">GetFunctionGroupsMatrix</span><span class="p">(</span><span class="n">mols</span><span class="p">,</span> <span class="o">**</span><span class="n">kwgrs</span><span class="p">)</span>
-        <span class="k">return</span> <span class="n">matrix</span></div></div>
+        <span class="k">return</span> <span class="n">matrix</span></div>
 
+<div class="viewcode-block" id="FunctionGroupLearner.ShowFragment"><a class="viewcode-back" href="../modules/smash.html#smash.FunctionGroupLearner.ShowFragment">[docs]</a>    <span class="k">def</span> <span class="nf">ShowFragment</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mol</span><span class="p">,</span> <span class="n">fragment</span><span class="p">):</span>
+
+        <span class="n">smarts</span><span class="p">,</span> <span class="n">svg</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">ShowFgFragment</span><span class="p">(</span><span class="n">mol</span><span class="p">,</span> <span class="n">fragment</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">smarts</span><span class="p">,</span> <span class="n">svg</span></div></div>
 
 <span class="k">if</span> <span class="s1">&#39;__main__&#39;</span> <span class="o">==</span> <span class="vm">__name__</span><span class="p">:</span>
     <span class="kn">from</span> <span class="nn">rdkit</span> <span class="kn">import</span> <span class="n">Chem</span>
     <span class="kn">from</span> <span class="nn">itertools</span> <span class="kn">import</span> <span class="n">compress</span>
+    <span class="kn">import</span> <span class="nn">time</span>
 
-    <span class="n">data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;tests\Carc\Carc.txt&#39;</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s1">&#39;</span><span class="se">\t</span><span class="s1">&#39;</span><span class="p">)</span>
-    <span class="c1"># data = data.sample(n=100)</span>
+    <span class="n">data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;..\tests\carc\carc.txt&#39;</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s1">&#39;</span><span class="se">\t</span><span class="s1">&#39;</span><span class="p">)</span>
+    <span class="c1"># data = pd.read_csv(r&#39;..\tests\agg\agg.csv&#39;, sep=&#39;,&#39;)</span>
+<span class="c1">#    data = data.sample(n=10000, replace=False)</span>
 
     <span class="n">mols</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">SMILES</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">Chem</span><span class="o">.</span><span class="n">MolFromSmiles</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
     <span class="n">bo</span> <span class="o">=</span> <span class="n">mols</span><span class="o">.</span><span class="n">notna</span><span class="p">()</span><span class="o">.</span><span class="n">values</span>
@@ -470,26 +542,38 @@
     <span class="n">mols</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">compress</span><span class="p">(</span><span class="n">mols</span><span class="p">,</span> <span class="n">bo</span><span class="p">))</span>
     <span class="n">y_true</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">Label</span><span class="o">.</span><span class="n">values</span><span class="p">[</span><span class="n">bo</span><span class="p">]</span>
 
-    <span class="n">circular</span> <span class="o">=</span> <span class="n">CircularLearner</span><span class="p">(</span><span class="n">minRadius</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">maxRadius</span><span class="o">=</span><span class="mi">6</span><span class="p">,</span>
-                               <span class="n">maxFragment</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">nJobs</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span>
+    <span class="c1"># start = time.clock()</span>
+    <span class="c1"># circular = CircularLearner(minRadius=1, maxRadius=6,</span>
+    <span class="c1">#                            maxFragment=True, nJobs=20)</span>
 
-    <span class="n">circular</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">mols</span><span class="p">,</span> <span class="n">y_true</span><span class="p">)</span>
-    <span class="n">y_pred</span><span class="p">,</span> <span class="n">predMatrix</span> <span class="o">=</span> <span class="n">circular</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">mols</span><span class="p">)</span>
-    <span class="c1"># print(circular.sigMatrix)</span>
-    <span class="c1"># print(type(y_pred))</span>
-    <span class="nb">print</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">predMatrix</span><span class="p">))</span>
+    <span class="c1"># sigPvalue, sigMatrix = circular.fit(mols, y_true)</span>
+    <span class="c1"># sigPvalue.to_html(&#39;././092220_1.html&#39;, escape=False)</span>
+    <span class="c1"># print(type(sigPvalue))</span>
+    <span class="c1"># circular.savePvalue(sigPvalue, &#39;./092220.html&#39;)</span>
+    <span class="c1"># end = time.clock()</span>
+    <span class="c1"># print(end-start)</span>
 
-    <span class="c1"># path = PathLeanrner(minPath=1,</span>
-    <span class="c1">#                     maxPath=7, nJobs=4,</span>
-    <span class="c1">#                     maxFragment=True)</span>
-    <span class="c1"># path.fit(mols, y_true, svg=True)</span>
-    <span class="c1"># print(path.sigPvalue)</span>
+    <span class="c1"># start = time.clock()</span>
+    <span class="c1"># pa = PathLearner(</span>
+    <span class="c1">#     minPath=1, maxPath=7,</span>
+    <span class="c1">#     maxFragment=True, nJobs=20</span>
+    <span class="c1"># )</span>
 
-    <span class="c1"># fg = FunctionGroupLearner(nJobs=4)</span>
+    <span class="c1"># sigPvalue, sigMatrix = pa.fit(mols, y_true)</span>
+    <span class="c1"># print(type(sigPvalue))</span>
+    <span class="c1"># pa.savePvalue(sigPvalue, &#39;./092220.html&#39;)</span>
+    <span class="c1"># end = time.clock()</span>
+    <span class="c1"># print(end-start)</span>
 
-    <span class="c1"># fg.fit(mols, y_true)</span>
-    <span class="c1"># print(fg.predict(mols)[-1])</span>
-    <span class="c1"># print(&#39;Done !!!&#39;)</span>
+    <span class="n">start</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">clock</span><span class="p">()</span>
+    <span class="n">fg</span> <span class="o">=</span> <span class="n">FunctionGroupLearner</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
+
+    <span class="n">sigPvalue</span><span class="p">,</span> <span class="n">sigMatrix</span> <span class="o">=</span> <span class="n">fg</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">mols</span><span class="p">,</span> <span class="n">y_true</span><span class="p">)</span>
+    <span class="c1"># print(type(sigPvalue))</span>
+    <span class="n">fg</span><span class="o">.</span><span class="n">savePvalue</span><span class="p">(</span><span class="n">sigPvalue</span><span class="p">,</span> <span class="s1">&#39;./092220.html&#39;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">fg</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">mols</span><span class="p">))</span>
+    <span class="n">end</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">clock</span><span class="p">()</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">end</span><span class="o">-</span><span class="n">start</span><span class="p">)</span>
 </pre></div>
 
           </div>
@@ -506,12 +590,12 @@
         <li class="right" >
           <a href="../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../index.html">pySmash v0.1 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">PySmash v1.0 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="index.html" >Module code</a> &#187;</li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">
-        &#169; Copyright 2020, Kotori_y.
+        &#169; Copyright 2020, Kotori Yang.
       Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.3.0.
     </div>
   </body>
